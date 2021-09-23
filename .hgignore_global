@@ -1,0 +1,11 @@
+syntax: glob
+
+*~
+*.orig
+.DS_Store
+build_dir/**
+build_dir_old/**
+*.log
+
+# YouCompleteMe project specific config files
+.ycm_extra*
