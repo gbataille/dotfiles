@@ -28,8 +28,6 @@ Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular'
 Plug 'kchmck/vim-coffee-script'
 Plug 'tomtom/tcomment_vim'
-Plug 'altercation/vim-colors-solarized'
-Plug 'chriskempson/base16-vim'
 Plug 'vim-scripts/bufkill.vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'dense-analysis/ale'   " Async syntastic
@@ -110,6 +108,8 @@ Plug 'cespare/vim-toml'
 Plug 'stevearc/vim-arduino'
 " cursor location
 Plug 'edluffy/specs.nvim'
+" colorscheme
+Plug 'EdenEast/nightfox.nvim'
 
 call plug#end()
 
@@ -225,16 +225,7 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 
-" colorscheme jellybeans
-let g:solarized_diffmode="high"
-let g:solarized_visibility = "low"
-let g:solarized_contrast = "high"
-let g:solarized_termcolors=16
-let g:solarized_termtrans = 1
-" colorscheme solarized
-colorscheme base16-solarized-dark
-let base16colorspace=256
-set background=dark
+colorscheme nightfox
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
@@ -386,15 +377,6 @@ endif
 " Set it as autocmd to override the ft autocmd from some plugins
 au FileType ruby,haskell,go,java,markdown set textwidth=100
 au FileType javascript,html,text set textwidth=0
-
-if $TERM == 'xterm-256color'
-  "works with a terminal configured with base16 solarized colors.
-  highlight ColorColumn ctermbg=238
-  highlight SignColumn ctermbg=19
-else
-  highlight ColorColumn ctermbg=8
-  highlight SignColumn ctermbg=8
-end
 
 "################################
 "####### :Sw - Sudo save ########

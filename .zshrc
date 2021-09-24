@@ -67,9 +67,6 @@ source $ZSH/oh-my-zsh.sh
 
 set -o vi
 
-BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-solarized-dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-
 export EDITOR="vi"
 export CC=clang
 export TZ=Europe/Paris
