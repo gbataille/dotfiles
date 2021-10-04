@@ -33,7 +33,9 @@ Plug 'tpope/vim-unimpaired'
 Plug 'dense-analysis/ale'   " Async syntastic
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
-Plug 'ciaranm/detectindent'
+" Auto indent dectection
+" Plug 'ciaranm/detectindent'
+Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-eunuch'
 Plug 'mattn/calendar-vim'
@@ -86,7 +88,6 @@ Plug 'junegunn/fzf.vim'
 " Autocompletion
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 else
   Plug 'Shougo/deoplete.nvim'
   Plug 'roxma/nvim-yarp'
@@ -104,12 +105,20 @@ Plug 'honza/vim-snippets'
 Plug 'liuchengxu/vim-which-key'
 " TOML
 Plug 'cespare/vim-toml'
-" Arduino
-Plug 'stevearc/vim-arduino'
 " cursor location
 Plug 'edluffy/specs.nvim'
 " colorscheme
 Plug 'EdenEast/nightfox.nvim'
+" Preview content of registers
+Plug 'junegunn/vim-peekaboo'
+" Docker
+Plug 'ekalinin/Dockerfile.vim'
+" Debugging
+Plug 'puremourning/vimspector'
+" Maximize a window
+Plug 'szw/vim-maximizer'
+
+
 
 call plug#end()
 
@@ -261,14 +270,116 @@ set laststatus=2  " Always show status line.
 
 set cul   " cursor line highlight
 
+
+fun GoToWindow(id)
+  call win_gotoid(a:id)
+  MaximizerToggle
+endfun
+
+
+"#############################
+"######### KEY MAPS ##########
+"#############################
+
 let mapleader = ","
+
+" Plugin to see available remaps
 nnoremap <silent> <leader> :WhichKey ','<CR>
 set timeoutlen=1000
 
+"Remap Tcomment
+nmap <leader>c <c-_><c-_>
+vmap <leader>c <c-_><c-_>
+
+" Shortcuts for vimspector
+nnoremap <leader>dbp :call vimspector#ToggleBreakpoint()<CR>
+nnoremap <leader>dc :call vimspector#Continue()<CR>
+nnoremap <leader>dd :call vimspector#Launch()<CR>
+nnoremap <leader>dfd :call vimspector#DownFrame()<CR>
+nnoremap <leader>dfu :call vimspector#UpFrame()<CR>
+nnoremap <leader>di <Plug>VimspectorBalloonEval
+xnoremap <leader>di <Plug>VimspectorBalloonEval
+nnoremap <leader>dn :call vimspector#StepInto()<CR>
+nnoremap <leader>dq :call vimspector#Reset()<CR>
+nnoremap <leader>dr :call vimspector#Restart()<CR>
+nnoremap <leader>drc :call vimspector#RunToCursor()<CR>
+nnoremap <leader>dsi :call vimspector#StepInto()<CR>
+nnoremap <leader>dso :call vimspector#StepOver()<CR>
+nnoremap <leader>dsu :call vimspector#StepOut()<CR>
+nnoremap <leader>dx :call vimspector#Stop()<CR>
+nnoremap <leader>dgc :call GoToWindow(g:vimspector_session_windows.code)<CR>
+nnoremap <leader>dgt :call GoToWindow(g:vimspector_session_windows.tagpage)<CR>
+nnoremap <leader>dgv :call GoToWindow(g:vimspector_session_windows.variables)<CR>
+nnoremap <leader>dgw :call GoToWindow(g:vimspector_session_windows.watches)<CR>
+nnoremap <leader>dgs :call GoToWindow(g:vimspector_session_windows.stack_trace)<CR>
+nnoremap <leader>dgo :call GoToWindow(g:vimspector_session_windows.output)<CR>
+
+" remap fzf
+nnoremap <leader>e :FZF<CR>
+nnoremap <C-e> :GFiles<CR>
+map <leader>ff :BLines<CR>
+
+" RipGrep word under cursor
+nnoremap <leader>f :Rg <C-R><C-W><CR>
+
+
+"Shortcuts for Git actions
+nnoremap <leader>gg :Git<CR>
+nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gp :Git push<CR>
+nnoremap <leader>gpf :Git push -f<CR>
+
+" Go to definition
+nnoremap <leader>g :ALEGoToDefinition<CR>
+nnoremap <leader>h :ALEFindReferences<CR>
+
+" location list
 map <leader>lo :lopen<CR>
 map <leader>lc :lclose<CR>
+
+"map a buffer cycling shortcut
+nnoremap <leader>l :ls<CR>:b<Space>
+nnoremap <leader>n :bnext<CR>
+nnoremap <leader>p :bprevious<CR>
+
+map <leader>m :MaximizerToggle!<CR>
+
+"map a quick buffer close key
+nnoremap <leader>q :BD<CR>
+nnoremap <leader>Q :bufdo BD<CR>
+
+"shortcut for replace with preview
+nnoremap <leader>r :OverCommandLine<CR>:%s/
+
+" spelling
 nmap <silent> <leader>s :set spell!<CR>
 
+"shortcut for Tabularize
+vnoremap <leader>t :Tabularize /
+
+"Remove spaces on empty lines
+nnoremap <leader><Space> mz:%s/ *$//g<CR>:nohlsearch<CR>`z
+
+"remove current highlighted text
+nnoremap <silent> <leader>/ :nohlsearch<CR>
+
+"reindent the entire buffer
+nnoremap <leader>= gg=G
+
+" Move between splits with <c-hjkl>
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+"#############################
+"######## VIMSPECTOR #########
+"#############################
+let g:vimspector_install_gadgets = [ 'debugpy' ]
+" packadd! vimspector
+
+"#############################
+"######## FUGITIVE ###########
+"#############################
 if has("autocmd")
   "Automatically close fugitive buffer when browsing Git objects
   autocmd BufRead fugitive://* set bufhidden=delete
@@ -279,11 +390,6 @@ set wildmenu
 set wildmode=full
 set wildignore+=*.swp,*.back,*.class,*/tmp/*,*.o
 
-"Shortcuts for Git actions
-nnoremap <leader>gg :Gstatus<CR>
-nnoremap <leader>gc :Gcommit<CR>
-nnoremap <leader>gp :Git push<CR>
-nnoremap <leader>gpf :Git push -f<CR>
 
 "Folding setup
 set foldmethod=manual
@@ -323,48 +429,6 @@ inoremap <C-a> <C-x><C-u>
 
 " Tags
 " set tags+=gems.tags
-
-"Remove spaces on empty lines
-nnoremap <leader><Space> mz:%s/ *$//g<CR>:nohlsearch<CR>`z
-"remove current highlighted text
-nnoremap <silent> <leader>/ :nohlsearch<CR>
-"reindent the entire buffer
-nnoremap <leader>= gg=G
-"Bufdo quick access
-nnoremap <leader>b :bufdo
-"Remap Tcomment
-nmap <leader>c <c-_><c-_>
-vmap <leader>c <c-_><c-_>
-" remap fzf
-nnoremap <leader>e :FZF<CR>
-nnoremap <C-e> :GFiles<CR>
-map <leader>ff :BLines<CR>
-"Remap CtrlP
-nnoremap <C-t> :CtrlPTag<CR>
-"map a buffer cycling shortcut
-nnoremap <leader>l :ls<CR>:b<Space>
-nnoremap <leader>n :bnext<CR>
-nnoremap <leader>p :bprevious<CR>
-"shortcut for replace with preview
-nnoremap <leader>r :OverCommandLine<CR>:%s/
-"shortcut for Tabularize
-vnoremap <leader>t :Tabularize /
-"map a quick buffer close key
-nnoremap <leader>q :BD<CR>
-nnoremap <leader>Q :bufdo BD<CR>
-"map a quick window cycle key
-nnoremap <leader>w <C-w><C-w>
-" Go to definition
-nnoremap <leader>g :ALEGoToDefinition<CR>
-nnoremap <leader>h :ALEFindReferences<CR>
-" RipGrep word under cursor
-nnoremap <leader>f :Rg <C-R><C-W><CR>
-
-" Move between splits with <c-hjkl>
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
 
 " Displays the 100 columns in color for wrapping indication
 if exists('+colorcolumn')
@@ -427,8 +491,8 @@ au FileType gitrebase au! BufEnter git-rebase-todo call setpos('.', [0, 1, 1, 0]
 "############################################
 "########## DetectIndent setup ##############
 "############################################
-let g:detectindent_preferred_expandtab = 1
-let g:detectindent_preferred_indent = 2
+" let g:detectindent_preferred_expandtab = 1
+" let g:detectindent_preferred_indent = 2
 
 " See the vim-ormolu plugin
 function! s:OverwriteBuffer(output)
@@ -549,7 +613,7 @@ function! s:Prettier()
 endfunction
 
 if has('autocmd')
-  autocmd BufRead * :DetectIndent
+  " autocmd BufRead * :DetectIndent
   autocmd BufRead *.nasm set ft=nasm
 
   " Python special setup
@@ -783,7 +847,6 @@ let g:EditorConfig_exec_path = '/usr/local/bin/editorconfig'
 "############################################
 
 command Greview :Git! diff --staged
-nnoremap <leader>gr :Greview<cr>
 
 "############################################
 "############### tsuquyomi ##################
@@ -849,56 +912,6 @@ call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 au BufNewFile,BufRead,BufWinEnter * set completeopt+=noinsert,noselect
 " Tab completion in pmenu
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-"############################################
-"################# DENITE ###################
-"############################################
-autocmd FileType denite call s:denite_my_settings()
-function! s:denite_my_settings() abort
-  nnoremap <silent><buffer><expr> <CR>
-  \ denite#do_map('do_action')
-  nnoremap <silent><buffer><expr> d
-  \ denite#do_map('do_action', 'delete')
-  nnoremap <silent><buffer><expr> p
-  \ denite#do_map('do_action', 'preview')
-  nnoremap <silent><buffer><expr> q
-  \ denite#do_map('quit')
-  nnoremap <silent><buffer><expr> i
-  \ denite#do_map('open_filter_buffer')
-  nnoremap <silent><buffer><expr> <Space>
-  \ denite#do_map('toggle_select').'j'
-endfunction
-call denite#custom#var('file/rec', 'command', ['rg', '--files', '--glob', '!.git', '--color', 'never'])
-call denite#custom#var('grep', {
-  \ 'command': ['rg'],
-  \ 'default_opts': ['-i', '--vimgrep', '--no-heading'],
-  \ 'recursive_opts': [],
-  \ 'pattern_opt': ['--regexp'],
-  \ 'separator': ['--'],
-  \ 'final_opts': [],
-  \ })
-call denite#custom#source( 'line', 'matchers', ['matcher/fuzzy'])
-map <leader>bl :Denite buffer<CR>
-
-"#############################################
-"################# ARDUINO ###################
-"#############################################
-function! ArduinoStatusLine()
-  let port = arduino#GetPort()
-  let line = '[' . g:arduino_board . '] [' . g:arduino_programmer . ']'
-  if !empty(port)
-    let line = line . ' (' . port . ':' . g:arduino_serial_baud . ')'
-  endif
-  return line
-endfunction
-
-autocmd BufNewFile,BufRead *.ino let g:airline_section_x='%{ArduinoStatusLine()}'
-
-nnoremap <buffer> <leader>ab :ArduinoChooseBoard<CR>
-nnoremap <buffer> <leader>ap :ArduinoChoosePort<CR>
-nnoremap <buffer> <leader>am :ArduinoVerify<CR>
-nnoremap <buffer> <leader>au :ArduinoUpload<CR>
-nnoremap <buffer> <leader>ad :ArduinoUploadAndSerial<CR>
 
 "#############################################
 "################## SPECS ####################
