@@ -1,3 +1,5 @@
+1. install 1password
+1. Get backups from base station
 1. Install XCode
 1. Install brew
 1. Install iTerm2
