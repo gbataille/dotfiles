@@ -73,6 +73,8 @@ export TZ=Europe/Paris
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export WORKON_HOME=$HOME/.virtualenvs
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
 export PYTHONPATH=$HOME/Documents/Prog/Perso/pytoolkit:$PYTHONPATH
 export PYTHONBREAKPOINT=ipdb.set_trace
 export AWS_ASSUME_ROLE_TTL=4h
@@ -174,7 +176,7 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 # Init SSH keys
-init_ssh_keys.sh
+# init_ssh_keys.sh
 # Setup local DNS
 # setup_host_file.sh
 
@@ -209,3 +211,6 @@ vpn_up()
 # . $HOME/.nix-profile/etc/profile.d/nix.sh
 
 eval "$(direnv hook zsh)"
+
+# grc colouring of standard commands
+[[ -s "/usr/local/etc/grc.zsh" ]] && source /usr/local/etc/grc.zsh

@@ -18,7 +18,6 @@ call plug#begin()
 " My Plugins here:
 "
 " original repos on github
-" Plug 'neovim/nvim-lspconfig'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rbenv'
 Plug 'vim-ruby/vim-ruby'
@@ -26,15 +25,11 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular'
-Plug 'kchmck/vim-coffee-script'
 Plug 'tomtom/tcomment_vim'
 Plug 'vim-scripts/bufkill.vim'
 Plug 'tpope/vim-unimpaired'
-Plug 'dense-analysis/ale'   " Async syntastic
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
-" Auto indent dectection
-" Plug 'ciaranm/detectindent'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-eunuch'
@@ -45,7 +40,6 @@ Plug 'airblade/vim-rooter'
 Plug 'airblade/vim-gitgutter'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-Plug 'mileszs/ack.vim'
 Plug 'vim-scripts/gitignore'
 Plug 'majutsushi/tagbar'
 Plug 'vim-airline/vim-airline'
@@ -61,7 +55,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'tmhedberg/SimpylFold'
 " Python
 Plug 'hynek/vim-python-pep8-indent'
-Plug 'davidhalter/jedi-vim'
 " RGB
 Plug 'lilydjwg/colorizer'
 " Terraform
@@ -73,11 +66,6 @@ Plug 'derekwyatt/vim-scala'
 " Nix
 Plug 'LnL7/vim-nix'
 " Haskell
-" Plug 'Shougo/vimproc.vim'
-" Plug 'eagletmt/ghcmod-vim'
-" Plug 'eagletmt/neco-ghc'
-" Plug 'bitc/vim-hdevtools'
-Plug 'raichoo/haskell-vim'
 Plug 'enomsg/vim-haskellConcealPlus'
 Plug 'sdiehl/vim-ormolu'    " Formatting
 " Graphql
@@ -85,22 +73,11 @@ Plug 'jparise/vim-graphql'
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-" Autocompletion
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-Plug 'deoplete-plugins/deoplete-jedi'
-let g:deoplete#enable_at_startup = 1
 " Dash integration
 Plug 'rizzatti/dash.vim'
 " Debugger
 Plug 'vim-vdebug/vdebug'
 " Snippets
-" Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'liuchengxu/vim-which-key'
 " TOML
@@ -117,10 +94,19 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'puremourning/vimspector'
 " Maximize a window
 Plug 'szw/vim-maximizer'
-
-
+" Treeview
+Plug 'preservim/nerdtree'
+Plug 'ryanoasis/vim-devicons'
+" Generic Nvim LSP
+Plug 'neovim/nvim-lspconfig'
+" Go tools
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
 call plug#end()
+
+lua require("lsp_config")
+
+set encoding=UTF-8
 
 " Mac specific config
 if has("unix")
@@ -170,6 +156,10 @@ autocmd FileType netrw setl bufhidden=wipe
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 set previewheight=20
+
+" Small updatetime for CursorHold events to trigger "fast". Used by LSP for
+" document_highlight
+set updatetime=1000
 
 " https://www.youtube.com/watch?v=XA2WjJbmmoM
 set path+=**
@@ -270,6 +260,8 @@ set laststatus=2  " Always show status line.
 
 set cul   " cursor line highlight
 
+" " Tab completion in pmenu
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 fun GoToWindow(id)
   call win_gotoid(a:id)
@@ -282,6 +274,34 @@ endfun
 "#############################
 
 let mapleader = ","
+
+function! Nerd()
+  " Opens NERDTree when not opened
+  " Focus to NERDTree when opened but not focused
+  " Closes NERDTree when opened and focused
+  if exists('t:NERDTreeBufName')
+    if bufwinnr(t:NERDTreeBufName) == winnr()
+      NERDTreeToggle
+    else
+      NERDTreeFocus
+    end
+  else
+    NERDTreeToggle
+  endif
+endfunction
+nnoremap <C-n> :call Nerd()<CR>
+
+" run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#test#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
+autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 
 " Plugin to see available remaps
 nnoremap <silent> <leader> :WhichKey ','<CR>
@@ -322,12 +342,14 @@ map <leader>ff :BLines<CR>
 " RipGrep word under cursor
 nnoremap <leader>f :Rg <C-R><C-W><CR>
 
+" vim-go move between source and test
+if has("autocmd")
+  "Automatically close fugitive buffer when browsing Git objects
+  autocmd FileType go nnoremap <leader>gt :GoAlternate<CR>
+endif
 
 "Shortcuts for Git actions
 nnoremap <leader>gg :Git<CR>
-nnoremap <leader>gc :Gcommit<CR>
-nnoremap <leader>gp :Git push<CR>
-nnoremap <leader>gpf :Git push -f<CR>
 
 " Go to definition
 nnoremap <leader>g :ALEGoToDefinition<CR>
@@ -336,6 +358,12 @@ nnoremap <leader>h :ALEFindReferences<CR>
 " location list
 map <leader>lo :lopen<CR>
 map <leader>lc :lclose<CR>
+
+" quickfix list
+map <leader>co :copen<CR>
+map <leader>cc :cclose<CR>
+map <leader>cn :cnext<CR>
+map <leader>cp :cprevious<CR>
 
 "map a buffer cycling shortcut
 nnoremap <leader>l :ls<CR>:b<Space>
@@ -482,21 +510,6 @@ endif
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 au FileType gitrebase au! BufEnter git-rebase-todo call setpos('.', [0, 1, 1, 0])
 
-"############################################
-"##############    Deoplete    ##############
-"############################################
-
-"############################################
-"##############    Neco-GHC    ##############
-"############################################
-" autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-
-"############################################
-"########## DetectIndent setup ##############
-"############################################
-" let g:detectindent_preferred_expandtab = 1
-" let g:detectindent_preferred_indent = 2
-
 " See the vim-ormolu plugin
 function! s:OverwriteBuffer(output)
   let winview = winsaveview()
@@ -616,7 +629,6 @@ function! s:Prettier()
 endfunction
 
 if has('autocmd')
-  " autocmd BufRead * :DetectIndent
   autocmd BufRead *.nasm set ft=nasm
 
   " Python special setup
@@ -633,6 +645,11 @@ if has('autocmd')
   if exists('+colorcolumn')
     au FileType python set colorcolumn=120
   endif
+
+
+  " on go file save, format and fix imports
+  au BufWritePre *.go lua vim.lsp.buf.formatting()
+  au BufWritePre *.go lua goimports(1000)
 
   " The preview pane annoyingly stays open on autocompletion
   au InsertLeave * :pc
@@ -657,14 +674,6 @@ if has('autocmd')
   au FileType haskell set autoindent
   au FileType haskell set fileformat=unix
 endif
-
-"############################################
-"############ UltiSnips setup ###############
-"############################################
-let g:UltiSnipsExpandTrigger="<leader>s"
-let g:UltiSnipsJumpForwardTrigger="<leader>n"
-let g:UltiSnipsJumpBackwardTrigger="<leader>p"
-let g:UltiSnipsSnippetDirectories=["snips", "UltiSnips"]
 
 "############################################
 "############ Org-mode setup ################
@@ -698,13 +707,6 @@ if has('autocmd')
           \*.hs
           \ :Rooter
   augroup END
-endif
-
-"############################################
-"########### coffeescript setup ##############
-"############################################
-if has('autocmd')
-  autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent
 endif
 
 "############################################
@@ -761,25 +763,6 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=235
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=8
 
 "############################################
-"########### haskell-vim setup ##############
-"############################################
-let g:haskell_enable_quantification = 1
-let g:haskell_enable_recursivedo = 1
-let g:haskell_enable_arrowsyntax = 1
-let g:haskell_enable_pattern_synonyms = 1
-let g:haskell_enable_typeroles = 1
-
-let g:haskell_indent_if = 2
-let g:haskell_indent_case = 4
-let g:haskell_indent_let = 4
-let g:haskell_indent_where = 6
-let g:haskell_indent_do = 2
-let g:haskell_indent_in = 2
-
-" To let NecoGHC run the omnifunc
-let g:haskellmode_completion_ghc = 0
-
-"############################################
 "################# tagbar ###################
 "############################################
 nmap <F8> :TagbarToggle<CR>
@@ -816,27 +799,11 @@ let g:tagbar_type_haskell = {
 \ }
 
 "############################################
-"############### CoffeeTags #################
-"############################################
-" let g:CoffeeAutoTagDisabled=0     " Disables autotaging on save (Default: 0 [false])
-" let g:CoffeeAutoTagFile=<filename>       " Name of the generated tag file (Default: ./tags)
-" let g:CoffeeAutoTagIncludeVars=<0 or 1>  " Includes variables (Default: 0 [false])
-" let g:CoffeeAutoTagTagRelative=<0 or 1>  " Sets file names to the relative path from the tag file location to the tag file location (Default: 1 [true])
-
-"############################################
 "################# airline ##################
 "############################################
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
-
-"############################################
-"############### hdevtools ##################
-"############################################
-
-au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
-au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
-au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsInfo<CR>
 
 "############################################
 "############## editorconfig ################
@@ -851,27 +818,10 @@ let g:EditorConfig_exec_path = '/usr/local/bin/editorconfig'
 
 command Greview :Git! diff --staged
 
-"############################################
-"############### tsuquyomi ##################
-"############################################
-let g:tsuquyomi_disable_quickfix = 1
-
 "########################
 "####### Python #########
 "########################
-" " python with virtualenv support
-" py << EOF
-" import os
-" import sys
-" if 'VIRTUAL_ENV' in os.environ:
-"   project_base_dir = os.environ['VIRTUAL_ENV']
-"   activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-"   execfile(activate_this, dict(__file__=activate_this))
-" EOF
-
 let python_highlight_all=1
-let g:jedi#usages_command = "<leader>u"
-let g:jedi#popup_select_first = 0
 
 "############################################
 "############### gitgutter ##################
@@ -888,33 +838,6 @@ let g:jsx_ext_required = 0
 "################## Scala ###################
 "############################################
 let g:scala_scaladoc_indent = 1
-
-"############################################
-"################### ALE ####################
-"############################################
-let g:ale_sign_error = '✘✘'
-let g:ale_sign_warning = '⚠⚠'
-let g:ale_completion_enabled = 0
-let g:ale_completion_delay = 500
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 0
-let g:ale_set_highlights = 0
-let g:ale_linters = {
-\   'haskell': ['cabal_ghc','stack_build','stack_ghc','hlint'],
-\   'cpp': ['ccls'],
-\}
-" ghc needs the source of the program
-let b:ale_haskell_stack_ghc_options = '-fno-code -v0 -i' . getcwd() . '/src'
-" configure nasm to use elf64
-let g:ale_nasm_nasm_options = '-f elf64'
-
-"############################################
-"################# DEOPLETE #################
-"############################################
-call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
-au BufNewFile,BufRead,BufWinEnter * set completeopt+=noinsert,noselect
-" Tab completion in pmenu
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 "#############################################
 "################## SPECS ####################
@@ -938,3 +861,50 @@ require('specs').setup{
     },
 }
 EOF
+
+
+"#############################################
+"################ NERDTree ###################
+"#############################################
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+
+
+"#############################################
+"################# VIM-GO ####################
+"#############################################
+let g:go_list_type = "quickfix"
+
+
+"#############################################
+"############### OMNICOMPLETE ################
+"#############################################
+" Autocomplete to trigger automatically on insert
+" Since moving to LSPConfig fully, was missing for token completion
+set completeopt=menu,noinsert,noselect,menuone
+
+function! Complete()
+    let chars = 2  " chars before triggering
+    let pattern = '\(\w\|\d\)\{' . chars . '}'
+    let col = col('.') - 1
+    let line = getline('.')
+    let last_chars = line[col-chars:col-1]
+    " prevent keyword completion from making nvim unresponsive
+    " check th[es]e| chars for previous attempts
+    let before_match = line[col-chars-1:col-2]
+    if len(before_match) && before_match =~# pattern
+        return ''
+    endif
+    call feedkeys("\<c-n>")  " keyword completion
+    if &omnifunc == 'v:lua.vim.lsp.omnifunc'  " lsp
+        execute 'call' &omnifunc . '(0, "")'
+    endif
+    return ''
+endfunction
+
+" automatic completion
+autocmd TextChangedI * call Complete()
