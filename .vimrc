@@ -75,8 +75,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " Dash integration
 Plug 'rizzatti/dash.vim'
-" Debugger
-Plug 'vim-vdebug/vdebug'
 " Snippets
 Plug 'honza/vim-snippets'
 Plug 'liuchengxu/vim-which-key'
@@ -317,8 +315,9 @@ nnoremap <leader>dc :call vimspector#Continue()<CR>
 nnoremap <leader>dd :call vimspector#Launch()<CR>
 nnoremap <leader>dfd :call vimspector#DownFrame()<CR>
 nnoremap <leader>dfu :call vimspector#UpFrame()<CR>
-nnoremap <leader>di <Plug>VimspectorBalloonEval
-xnoremap <leader>di <Plug>VimspectorBalloonEval
+nnoremap <leader>de :VimspectorEval 
+nmap <leader>di <Plug>VimspectorBalloonEval
+xmap <leader>di <Plug>VimspectorBalloonEval
 nnoremap <leader>dn :call vimspector#StepInto()<CR>
 nnoremap <leader>dq :call vimspector#Reset()<CR>
 nnoremap <leader>dr :call vimspector#Restart()<CR>
@@ -326,6 +325,7 @@ nnoremap <leader>drc :call vimspector#RunToCursor()<CR>
 nnoremap <leader>dsi :call vimspector#StepInto()<CR>
 nnoremap <leader>dso :call vimspector#StepOver()<CR>
 nnoremap <leader>dsu :call vimspector#StepOut()<CR>
+nnoremap <leader>dw :VimspectorWatch 
 nnoremap <leader>dx :call vimspector#Stop()<CR>
 nnoremap <leader>dgc :call GoToWindow(g:vimspector_session_windows.code)<CR>
 nnoremap <leader>dgt :call GoToWindow(g:vimspector_session_windows.tagpage)<CR>
@@ -405,8 +405,8 @@ vnoremap Y yy
 "#############################
 "######## VIMSPECTOR #########
 "#############################
-let g:vimspector_install_gadgets = [ 'debugpy' ]
-" packadd! vimspector
+let g:vimspector_install_gadgets = [ 'debugpy', 'delve' ]
+let g:vimspector_sidebar_width = 200
 
 "#############################
 "######## FUGITIVE ###########
