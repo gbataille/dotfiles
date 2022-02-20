@@ -311,6 +311,7 @@ vmap <leader>c <c-_><c-_>
 
 " Shortcuts for vimspector
 nnoremap <leader>dbp :call vimspector#ToggleBreakpoint()<CR>
+nnoremap <leader>dlbp :call vimspector#ListBreakpoints()<CR>
 nnoremap <leader>dc :call vimspector#Continue()<CR>
 nnoremap <leader>dd :call vimspector#Launch()<CR>
 nnoremap <leader>dfd :call vimspector#DownFrame()<CR>
@@ -350,10 +351,6 @@ endif
 
 "Shortcuts for Git actions
 nnoremap <leader>gg :Git<CR>
-
-" Go to definition
-nnoremap <leader>g :ALEGoToDefinition<CR>
-nnoremap <leader>h :ALEFindReferences<CR>
 
 " location list
 map <leader>lo :lopen<CR>
@@ -648,8 +645,8 @@ if has('autocmd')
 
 
   " on go file save, format and fix imports
-  au BufWritePre *.go lua vim.lsp.buf.formatting()
-  au BufWritePre *.go lua goimports(1000)
+  au BufWritePost *.go lua vim.lsp.buf.formatting()
+  au BufWritePost *.go lua goimports(1000)
 
   " The preview pane annoyingly stays open on autocompletion
   au InsertLeave * :pc
@@ -899,9 +896,8 @@ function! Complete()
     if len(before_match) && before_match =~# pattern
         return ''
     endif
-    call feedkeys("\<c-n>")  " keyword completion
-    if &omnifunc == 'v:lua.vim.lsp.omnifunc'  " lsp
-        execute 'call' &omnifunc . '(0, "")'
+    if &omnifunc != ''
+      call feedkeys("\<c-x>\<c-o>", 'tn')  " keyword completion
     endif
     return ''
 endfunction
