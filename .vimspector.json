@@ -1,6 +1,6 @@
 {
   "configurations": {
-    "run": {
+    "go": {
       "adapter": "delve",
       "filetypes": [ "go" ],
       "variables": {
@@ -9,6 +9,18 @@
         "request": "launch",
         "program": "${fileDirname}",
         "mode": "debug"
+      }
+    },
+    "go-test": {
+      "adapter": "delve",
+      "filetypes": [ "go" ],
+      "variables": {
+      },
+      "configuration": {
+        "request": "launch",
+        "program": "${fileDirname}",
+        "mode": "test",
+        "showLog": true
       }
     }
   }
