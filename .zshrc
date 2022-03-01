@@ -3,14 +3,6 @@ TRAPWINCH() {
   zle && { zle reset-prompt; zle -R }
 }
 
-bindkey -v 
-
-# vi style incremental search
-bindkey '^S' history-incremental-search-forward
-bindkey '^P' history-search-backward
-bindkey '^N' history-search-forward 
-bindkey '^R' fzf-history-widget
-
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
@@ -62,10 +54,19 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(autojump nix-shell zsh-syntax-highlighting)
+plugins=(autojump nix-shell)
 source $ZSH/oh-my-zsh.sh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 set -o vi
+
+bindkey -v 
+
+# vi style incremental search
+bindkey '^S' history-incremental-search-forward
+bindkey '^P' history-search-backward
+bindkey '^N' history-search-forward 
+bindkey '^R' fzf-history-widget
 
 export EDITOR="vi"
 export CC=clang
