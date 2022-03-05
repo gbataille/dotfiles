@@ -20,8 +20,8 @@
 	g = grep -W
 	clb = clean_local_branches
 [core]
-	excludesfile = /Users/gbataille/.gitignore_global
-	hooksPath = /Users/gbataille/Documents/Prog/MyConfig/dotfiles/.git_hooks
+	excludesfile = ~/.gitignore_global
+	hooksPath = ~/Documents/Prog/MyConfig/dotfiles/.git_hooks
 [push]
 	default = simple
 [github]
@@ -36,24 +36,24 @@
 [rerere]
 	enabled = true
 [diff]
-	tool = vimdiff
+	tool = nvimdiff
 	indentHeuristic = true
 	algorithm = patience
 	colorMoved = zebra
 [difftool]
 	prompt = false
-	tool = vimdiff
+	tool = nvimdiff
 	trustExitCode = true
 [merge]
 	ff = false
-	tool = vimdiff
+	tool = nvimdiff
 [mergetool]
-	tool = vimdiff
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	tool = nvimdiff
+	prompt = false
+[difftool "nvimdiff"]
+	path = nvim
+[mergetool "nvimdiff"]
+	path = nvim
 	trustExitCode = true
 [pager]
 	log = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
@@ -71,3 +71,10 @@
 	required = true
 [user]
 	name = Grégory Bataille
+	signingkey = 1D2DF15BF8DA7B8D
+[commit]
+	gpgsign = true
+[url "git@github.com:taurusgroup"]
+	insteadOf = https://github.com/taurusgroup
+[url "git@github.com:t-dx"]
+	insteadOf = https://github.com/t-dx
