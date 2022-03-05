@@ -49,14 +49,13 @@ COMPLETION_WAITING_DOTS="true"
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # HIST_STAMPS="mm/dd/yyyy"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(autojump nix-shell)
 source $ZSH/oh-my-zsh.sh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 set -o vi
 
@@ -68,7 +67,7 @@ bindkey '^P' history-search-backward
 bindkey '^N' history-search-forward 
 bindkey '^R' fzf-history-widget
 
-export EDITOR="vi"
+export EDITOR=nvim
 export CC=clang
 export TZ=Europe/Paris
 export LANG=en_US.UTF-8
@@ -99,6 +98,7 @@ alias cdm='cd ~/Documents/Prog/MyConfig'
 alias cdp='cd ~/Documents/Prog/'
 alias gitk='gitk --all'
 alias ls='ls -Gh'
+alias logj='jq -R -r ". as \$line | try (fromjson | \"[\" + .ts + \"][\" + (.level | ascii_upcase) + \"] \" + (if has(\"error\") then (.error + \" - \") else \"\" end)  + .msg + \" \" + (.block_number? | tostring) + \" (\" + .caller + \")\" + \"\\n\\t\" + (\$line|fromjson|del(.msg)|del(.ts)|del(.caller)|del(.level)|del(.block_number)|tostring)) catch \$line"'
 alias mergeclean='rm $(find . -name "*BACKUP*");rm $(find . -name "*REMOTE*");rm $(find . -name "*LOCAL*");rm $(find . -name "*BASE*")'
 alias mergedremotebranch='git branch -r --merged | grep origin | grep -v ">" | grep -v master | grep -v staging | grep -v "rc-" | xargs -L1'
 alias npmr='npm run'
@@ -215,3 +215,7 @@ eval "$(direnv hook zsh)"
 
 # grc colouring of standard commands
 [[ -s "/usr/local/etc/grc.zsh" ]] && source /usr/local/etc/grc.zsh
+export GPG_TTY=$(tty)
+
+# TG
+alias roachup='cockroach start-single-node --insecure --http-addr=localhost:26258 --store=path=$HOME/Documents/Prog/Data/Cockroach'
