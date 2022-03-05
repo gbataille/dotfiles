@@ -399,6 +399,9 @@ nnoremap <c-l> <c-w>l
 
 nnoremap Y yy
 vnoremap Y yy
+" Disable ex mode
+nnoremap Q <nop>
+
 "#############################
 "######## VIMSPECTOR #########
 "#############################
@@ -886,18 +889,18 @@ set completeopt=menu,noinsert,noselect,menuone
 
 function! Complete()
     let chars = 2  " chars before triggering
-    let pattern = '(\.)|(\(\w\|\d\)\{' . chars . '})'
+    " let pattern = '(\.)|(\(\w\|\d\)\{' . chars . '})'
+    let pattern = '\(\w\|\d\)\{' . chars . '}'
     let col = col('.') - 1
     let line = getline('.')
+    let last_char = line[col-1]
     let last_chars = line[col-chars:col-1]
-    " prevent keyword completion from making nvim unresponsive
-    " check th[es]e| chars for previous attempts
-    let before_match = line[col-chars-1:col-2]
-    if len(before_match) && before_match =~# pattern
+    if len(last_chars) < chars
         return ''
-    endif
-    if &omnifunc != ''
-      call feedkeys("\<c-x>\<c-o>", 'tn')  " keyword completion
+    end
+    if (last_char == '.' || last_chars =~# pattern) && &omnifunc != ''
+        call feedkeys("\<c-x>\<c-o>", 'tn')  " keyword completion
+        return ''
     endif
     return ''
 endfunction
