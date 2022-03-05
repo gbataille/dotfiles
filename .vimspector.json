@@ -2,9 +2,8 @@
   "configurations": {
     "go": {
       "adapter": "delve",
-      "filetypes": [ "go" ],
-      "variables": {
-      },
+      "filetypes": ["go"],
+      "variables": {},
       "configuration": {
         "request": "launch",
         "program": "${fileDirname}",
@@ -13,14 +12,23 @@
     },
     "go-test": {
       "adapter": "delve",
-      "filetypes": [ "go" ],
-      "variables": {
-      },
+      "filetypes": ["go"],
+      "variables": {},
       "configuration": {
         "request": "launch",
         "program": "${fileDirname}",
         "mode": "test",
         "showLog": true
+      }
+    },
+    "blocksd": {
+      "adapter": "delve",
+      "filetypes": ["go"],
+      "variables": {},
+      "configuration": {
+        "request": "launch",
+        "program": "${fileDirname}/cmd/tg-blocksd/main.go",
+        "mode": "debug"
       }
     }
   }

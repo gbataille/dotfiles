@@ -319,10 +319,10 @@ nnoremap <leader>dfu :call vimspector#UpFrame()<CR>
 nnoremap <leader>de :VimspectorEval 
 nmap <leader>di <Plug>VimspectorBalloonEval
 xmap <leader>di <Plug>VimspectorBalloonEval
-nnoremap <leader>dn :call vimspector#StepInto()<CR>
+nnoremap <leader>dn :call vimspector#StepOver()<CR>
 nnoremap <leader>dq :call vimspector#Reset()<CR>
 nnoremap <leader>dr :call vimspector#Restart()<CR>
-nnoremap <leader>drc :call vimspector#RunToCursor()<CR>
+nnoremap <leader>dtc :call vimspector#RunToCursor()<CR>
 nnoremap <leader>dsi :call vimspector#StepInto()<CR>
 nnoremap <leader>dso :call vimspector#StepOver()<CR>
 nnoremap <leader>dsu :call vimspector#StepOut()<CR>
@@ -646,7 +646,7 @@ if has('autocmd')
 
   " on go file save, format and fix imports
   au BufWritePost *.go lua vim.lsp.buf.formatting()
-  au BufWritePost *.go lua goimports(1000)
+  au BufWritePost *.go lua OrgImports(1000)
 
   " The preview pane annoyingly stays open on autocompletion
   au InsertLeave * :pc
@@ -886,7 +886,7 @@ set completeopt=menu,noinsert,noselect,menuone
 
 function! Complete()
     let chars = 2  " chars before triggering
-    let pattern = '\(\w\|\d\)\{' . chars . '}'
+    let pattern = '(\.)|(\(\w\|\d\)\{' . chars . '})'
     let col = col('.') - 1
     let line = getline('.')
     let last_chars = line[col-chars:col-1]
