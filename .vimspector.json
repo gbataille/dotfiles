@@ -10,6 +10,19 @@
         "mode": "debug"
       }
     },
+    "go-single-test": {
+      "adapter": "delve",
+      "filetypes": ["go"],
+      "variables": {},
+      "configuration": {
+        "request": "launch",
+        "program": "${fileDirname}",
+        "args": ["-test.run", "${regex}"],
+        "buildFlags": "-tags=integration",
+        "mode": "test",
+        "showLog": true
+      }
+    },
     "go-test": {
       "adapter": "delve",
       "filetypes": ["go"],
@@ -17,6 +30,7 @@
       "configuration": {
         "request": "launch",
         "program": "${fileDirname}",
+        "buildFlags": "-tags=integration",
         "mode": "test",
         "showLog": true
       }
@@ -27,8 +41,10 @@
       "variables": {},
       "configuration": {
         "request": "launch",
-        "program": "${fileDirname}/cmd/tg-blocksd/main.go",
-        "mode": "debug"
+        "program": "${cwd}/cmd/tg-blocksd",
+        "args": ["start", "--config", "./configs/local/tg-blocksd.yml"],
+        "mode": "debug",
+        "trace": "log"
       }
     }
   }

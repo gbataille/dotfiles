@@ -31,7 +31,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
 Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-eunuch'
 Plug 'mattn/calendar-vim'
 Plug 'vim-scripts/utl.vim'
@@ -45,7 +44,6 @@ Plug 'majutsushi/tagbar'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mustache/vim-mustache-handlebars'
-Plug 'osyo-manga/vim-over'
 Plug 'Konfekt/FastFold'
 " Typescript
 Plug 'leafgarland/typescript-vim'
@@ -99,6 +97,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'neovim/nvim-lspconfig'
 " Go tools
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+" Test launcher
+Plug 'vim-test/vim-test'
 
 call plug#end()
 
@@ -263,7 +263,6 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 fun GoToWindow(id)
   call win_gotoid(a:id)
-  MaximizerToggle
 endfun
 
 
@@ -311,6 +310,7 @@ vmap <leader>c <c-_><c-_>
 
 " Shortcuts for vimspector
 nnoremap <leader>dbp :call vimspector#ToggleBreakpoint()<CR>
+nnoremap <leader>dbc :call vimspector#ClearBreakpoints()<CR>
 nnoremap <leader>dlbp :call vimspector#ListBreakpoints()<CR>
 nnoremap <leader>dc :call vimspector#Continue()<CR>
 nnoremap <leader>dd :call vimspector#Launch()<CR>
@@ -320,7 +320,7 @@ nnoremap <leader>de :VimspectorEval
 nmap <leader>di <Plug>VimspectorBalloonEval
 xmap <leader>di <Plug>VimspectorBalloonEval
 nnoremap <leader>dn :call vimspector#StepOver()<CR>
-nnoremap <leader>dq :call vimspector#Reset()<CR>
+nnoremap <leader>dq :call GoToWindow(win_getid(5))<CR>:BD!<CR>:call vimspector#Reset()<CR>
 nnoremap <leader>dr :call vimspector#Restart()<CR>
 nnoremap <leader>dtc :call vimspector#RunToCursor()<CR>
 nnoremap <leader>dsi :call vimspector#StepInto()<CR>
@@ -367,20 +367,20 @@ nnoremap <leader>l :ls<CR>:b<Space>
 nnoremap <leader>n :bnext<CR>
 nnoremap <leader>p :bprevious<CR>
 
-map <leader>m :MaximizerToggle!<CR>
+map <leader>wm :MaximizerToggle!<CR>
 
 "map a quick buffer close key
 nnoremap <leader>q :BD<CR>
 nnoremap <leader>Q :bufdo BD<CR>
 
-"shortcut for replace with preview
-nnoremap <leader>r :OverCommandLine<CR>:%s/
-
 " spelling
 nmap <silent> <leader>s :set spell!<CR>
 
-"shortcut for Tabularize
-vnoremap <leader>t :Tabularize /
+"Test launcher (vim-test)
+nnoremap <leader>tt :TestNearest<CR>
+nnoremap <leader>tf :TestFile<CR>
+nnoremap <leader>tl :TestLast<CR>
+nnoremap <leader>tv :TestVisit<CR>
 
 "Remove spaces on empty lines
 nnoremap <leader><Space> mz:%s/ *$//g<CR>:nohlsearch<CR>`z
@@ -907,3 +907,17 @@ endfunction
 
 " automatic completion
 autocmd TextChangedI * call Complete()
+
+"#############################################
+"################# VIM-TEST ##################
+"#############################################
+let test#strategy = "neovim"
+let g:test#basic#start_normal = 1
+let g:test#preserve_screen = 1
+let test#go#gotest#options = '-v -tags integration'
+let test#go#gotest#executable = 'grc go test'
+let test#neovim#term_position = "bel"
+
+if has('nvim')
+  tmap <C-o> <C-\><C-n>
+endif
