@@ -21,7 +21,7 @@
 	clb = clean_local_branches
 [core]
 	excludesfile = ~/.gitignore_global
-	hooksPath = ~/Documents/Prog/MyConfig/dotfiles/.git_hooks
+	hooksPath = /Users/gbataille/.git_hooks
 [push]
 	default = simple
 [github]

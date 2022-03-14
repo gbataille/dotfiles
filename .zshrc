@@ -219,3 +219,4 @@ export GPG_TTY=$(tty)
 
 # TG
 alias roachup='cockroach start-single-node --insecure --http-addr=localhost:26258 --store=path=$HOME/Documents/Prog/Data/Cockroach'
+alias roachdown='pkill cockroach'

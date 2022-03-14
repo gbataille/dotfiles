@@ -496,7 +496,7 @@ nnoremap Q <nop>
 "######## VIMSPECTOR #########
 "#############################
 let g:vimspector_install_gadgets = [ 'debugpy', 'delve' ]
-let g:vimspector_sidebar_width = 200
+let g:vimspector_sidebar_width = 120
 
 "#############################
 "######## FUGITIVE ###########

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 . "$(dirname "$0")/common.sh"
 
 if git rev-parse --verify HEAD >/dev/null 2>&1
@@ -11,6 +11,18 @@ fi
 
 # Redirect output to stderr.
 exec 1>&2
+
+for f in $(git diff --cached --name-only --diff-filter=M -z $against);
+do
+  if [[ "$f" =~ ".*configs/dev/.*" ]]; then
+    echo "HERE"
+    cat <<\EOF
+Error: Attempt to commit a dev config file
+Aborting commit
+EOF
+    exit 1
+  fi
+done
 
 for f in $(git diff --cached --name-only --diff-filter=A -z $against);
 do
