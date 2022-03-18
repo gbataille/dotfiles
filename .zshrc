@@ -220,3 +220,7 @@ export GPG_TTY=$(tty)
 # TG
 alias roachup='cockroach start-single-node --insecure --http-addr=localhost:26258 --store=path=$HOME/Documents/Prog/Data/Cockroach'
 alias roachdown='pkill cockroach'
+alias int_db_tunnel='sudo cloudflared access tcp --hostname cockroach-exo-zrh-tg-db.int.t-dx.com --url 127.0.0.1:26259 --loglevel=debug'
+
+alias gotest='grc go test ./... -v'
+alias gobuild='grc go build ./...'

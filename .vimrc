@@ -560,8 +560,8 @@ if exists('+colorcolumn')
   endif
 endif
 " Set it as autocmd to override the ft autocmd from some plugins
-au FileType ruby,haskell,go,java,markdown set textwidth=100
-au FileType javascript,html,text set textwidth=0
+au FileType ruby,haskell,java,markdown set textwidth=100
+au FileType javascript,html,text,proto,go,json set textwidth=0
 
 "################################
 "####### :Sw - Sudo save ########
@@ -1004,7 +1004,7 @@ let g:go_list_type = "quickfix"
 let test#strategy = "neovim"
 let g:test#basic#start_normal = 1
 let g:test#preserve_screen = 1
-let test#go#gotest#options = '-v -tags integration'
+let test#go#gotest#options = '-v -tags integration -count 1'
 let test#go#gotest#executable = 'grc go test'
 let test#neovim#term_position = "bel"
 
