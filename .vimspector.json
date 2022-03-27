@@ -1,6 +1,6 @@
 {
   "configurations": {
-    "go": {
+    "1_go": {
       "adapter": "delve",
       "filetypes": ["go"],
       "variables": {},
@@ -10,7 +10,7 @@
         "mode": "debug"
       }
     },
-    "go-single-test": {
+    "3_go-single-test": {
       "adapter": "delve",
       "filetypes": ["go"],
       "variables": {},
@@ -23,7 +23,7 @@
         "showLog": true
       }
     },
-    "go-test": {
+    "2_go-test": {
       "adapter": "delve",
       "filetypes": ["go"],
       "variables": {},
@@ -42,7 +42,19 @@
       "configuration": {
         "request": "launch",
         "program": "${cwd}/cmd/tg-blocksd",
-        "args": ["start", "--config", "./configs/local/tg-blocksd.yml"],
+        "args": ["start"],
+        "mode": "debug",
+        "trace": "log"
+      }
+    },
+    "validatord": {
+      "adapter": "delve",
+      "filetypes": ["go"],
+      "variables": {},
+      "configuration": {
+        "request": "launch",
+        "program": "${cwd}/cmd/tg-validatord",
+        "args": ["start"],
         "mode": "debug",
         "trace": "log"
       }
