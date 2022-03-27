@@ -15,9 +15,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin()
-" My Plugins here:
-"
-" original repos on github
+
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rbenv'
 Plug 'vim-ruby/vim-ruby'
@@ -50,8 +48,8 @@ Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 " Editorconfig
 Plug 'editorconfig/editorconfig-vim'
-Plug 'tmhedberg/SimpylFold'
 " Python
+Plug 'tmhedberg/SimpylFold'
 Plug 'hynek/vim-python-pep8-indent'
 " RGB
 Plug 'lilydjwg/colorizer'
@@ -74,7 +72,6 @@ Plug 'junegunn/fzf.vim'
 " Dash integration
 Plug 'rizzatti/dash.vim'
 " Snippets
-Plug 'honza/vim-snippets'
 Plug 'liuchengxu/vim-which-key'
 " TOML
 Plug 'cespare/vim-toml'
@@ -83,7 +80,8 @@ Plug 'edluffy/specs.nvim'
 " colorscheme
 Plug 'EdenEast/nightfox.nvim'
 " Preview content of registers
-Plug 'junegunn/vim-peekaboo'
+" https://github.com/junegunn/vim-peekaboo/issues/63
+" Plug 'junegunn/vim-peekaboo'
 " Docker
 Plug 'ekalinin/Dockerfile.vim'
 " Debugging
@@ -112,6 +110,8 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 " Test launcher
 Plug 'vim-test/vim-test'
+" Go collapse of errors
+Plug 'Snyssfx/goerr-nvim'
 
 call plug#end()
 
@@ -511,20 +511,11 @@ set wildmenu
 set wildmode=full
 set wildignore+=*.swp,*.back,*.class,*/tmp/*,*.o
 
-
-"Folding setup
-set foldmethod=manual
+" "Folding setup
+set foldmethod=syntax
 set foldcolumn=3
+set foldlevel=99
 set nofoldenable
-" Intelligently set the fold to syntax before opening a buffer to compute the
-" syntax folds and then revert to manual to allow custom folds creation
-" Also expands all the folds at the start
-if has('autocmd')
-  au BufReadPre * setlocal foldmethod=syntax
-  au BufRead * set foldlevel=99
-  au BufRead * set foldlevelstart=99
-  au BufWinEnter * if &fdm == 'syntax' | setlocal foldmethod=manual | endif
-endif
 
 function! MyFoldText()
   let line = getline(v:foldstart)
@@ -807,7 +798,7 @@ function! DoPrettyJson()
   badd %
   setlocal buftype=nofile bufhidden=wipe nobuflisted
   noswapfile nowrap
-  silent %!python -m json.tool
+  silent %!python3 -m json.tool
   silent %<
 endfunction
 command! Json call DoPrettyJson()
@@ -1004,7 +995,7 @@ let g:go_list_type = "quickfix"
 let test#strategy = "neovim"
 let g:test#basic#start_normal = 1
 let g:test#preserve_screen = 1
-let test#go#gotest#options = '-v -tags integration -count 1'
+let test#go#gotest#options = '-v -tags integration,acceptance -count 1'
 let test#go#gotest#executable = 'grc go test'
 let test#neovim#term_position = "bel"
 
