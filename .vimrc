@@ -960,35 +960,6 @@ autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_
 "#############################################
 let g:go_list_type = "quickfix"
 
-
-"#############################################
-"############### OMNICOMPLETE ################
-"#############################################
-" " Autocomplete to trigger automatically on insert
-" " Since moving to LSPConfig fully, was missing for token completion
-" set completeopt=menu,noinsert,noselect,menuone
-"
-" function! Complete()
-"     let chars = 2  " chars before triggering
-"     " let pattern = '(\.)|(\(\w\|\d\)\{' . chars . '})'
-"     let pattern = '\(\w\|\d\)\{' . chars . '}'
-"     let col = col('.') - 1
-"     let line = getline('.')
-"     let last_char = line[col-1]
-"     let last_chars = line[col-chars:col-1]
-"     if len(last_chars) < chars
-"         return ''
-"     end
-"     if (last_char == '.' || last_chars =~# pattern) && &omnifunc != ''
-"         call feedkeys("\<c-x>\<c-o>", 'tn')  " keyword completion
-"         return ''
-"     endif
-"     return ''
-" endfunction
-"
-" " automatic completion
-" autocmd TextChangedI * call Complete()
-
 "#############################################
 "################# VIM-TEST ##################
 "#############################################
@@ -1019,3 +990,8 @@ imap <expr> <S-TAB>   vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S
 smap <expr> <S-TAB>   vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-TAB>'
 imap <expr> <C-s>   vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-s>'
 smap <expr> <C-s>   vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-s>'
+
+"#############################################
+"################ GOERR_NVIM #################
+"#############################################
+autocmd BufWritePost *.go silent! execute 'g/if err != nil {/silent execute("normal zozc")'
