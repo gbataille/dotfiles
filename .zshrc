@@ -218,4 +218,4 @@ eval "$(direnv hook zsh)"
 export GPG_TTY=$(tty)
 
 # TG
-[[ -s '~/.tgrc' ]] && source ~/.tgrc
+[[ -s "$HOME/.tgrc" ]] && source $HOME/.tgrc
