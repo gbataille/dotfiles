@@ -61,7 +61,7 @@ nvim_lsp.gopls.setup{
           experimentalPostfixCompletions = true,
           analyses = {
             unusedparams = true,
-            shadow = true,
+            shadow = false,
          },
          staticcheck = true,
          buildFlags = {"-tags=unit,integration,acceptance"},
@@ -75,9 +75,9 @@ nvim_lsp.golangci_lint_ls.setup{
     cmd = { "golangci-lint-langserver" },
     filetypes = { "go", "gomod" },
     init_options = {
-      command = { "golangci-lint", "run", "--out-format", "json" },
+      command = { "golangci-lint", "run", "--out-format", "json"},
     },
-    root_dir = nvim_lsp.util.root_pattern('go.mod', '.golangci.yaml', '.git'),
+    root_dir = nvim_lsp.util.root_pattern('go.mod', '.golangci.yml', '.golangci.yaml', '.git'),
 }
 
 require'lspconfig'.pyright.setup{
