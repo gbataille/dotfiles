@@ -75,6 +75,7 @@ export LC_CTYPE=en_US.UTF-8
 export WORKON_HOME=$HOME/.virtualenvs
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
+export GOPRIVATE=github.com/t-dx/*,github.com/taurusgroup/*
 export PYTHONPATH=$HOME/Documents/Prog/Perso/pytoolkit:$PYTHONPATH
 export PYTHONBREAKPOINT=ipdb.set_trace
 export AWS_ASSUME_ROLE_TTL=4h
