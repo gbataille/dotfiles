@@ -110,10 +110,14 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 " Test launcher
 Plug 'vim-test/vim-test'
-" Go collapse of errors
-Plug 'Snyssfx/goerr-nvim'
+" Performance issues on large file. The technique used might be a bit brutal
+" " Go collapse of errors
+" Plug 'Snyssfx/goerr-nvim'
 
 call plug#end()
+
+" maxmemory for regex, in KiB (default to 1000)
+set mmp=10000
 
 "#############################################
 "################# VIM-CMP ###################
@@ -847,6 +851,10 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=8
 "################# tagbar ###################
 "############################################
 nmap <F8> :TagbarToggle<CR>
+let g:tagbar_width = max([25, winwidth(0) / 5])
+let g:tagbar_autofocus = 1
+let g:tagbar_sort = 1
+
 let g:tagbar_type_haskell = {
     \ 'ctagsbin'  : 'hasktags',
     \ 'ctagsargs' : '-x -c -o-',
@@ -966,7 +974,7 @@ let g:go_list_type = "quickfix"
 let test#strategy = "neovim"
 let g:test#basic#start_normal = 1
 let g:test#preserve_screen = 1
-let test#go#gotest#options = '-v -tags integration,acceptance -count 1'
+let test#go#gotest#options = '-v -tags integration,acceptance,manual -count 1'
 let test#go#gotest#executable = 'grc go test'
 let test#neovim#term_position = "bel"
 
@@ -991,7 +999,8 @@ smap <expr> <S-TAB>   vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S
 imap <expr> <C-s>   vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-s>'
 smap <expr> <C-s>   vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-s>'
 
-"#############################################
-"################ GOERR_NVIM #################
-"#############################################
-autocmd BufWritePost *.go silent! execute 'g/if err != nil {/silent execute("normal zozc")'
+" "#############################################
+" "################ GOERR_NVIM #################
+" "#############################################
+" " Saves the current cursor and window position and returns to that later
+" autocmd BufWritePost *.go silent! execute "normal mrMmm" | silent! execute 'g/if err != nil {/silent execute("normal zozc")' | silent! execute "normal 'mzz'r"
