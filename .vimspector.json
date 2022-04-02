@@ -10,19 +10,6 @@
         "mode": "debug"
       }
     },
-    "3_go-single-test": {
-      "adapter": "delve",
-      "filetypes": ["go"],
-      "variables": {},
-      "configuration": {
-        "request": "launch",
-        "program": "${fileDirname}",
-        "args": ["-test.run", "${regex}"],
-        "buildFlags": "-tags=integration",
-        "mode": "test",
-        "showLog": true
-      }
-    },
     "2_go-test": {
       "adapter": "delve",
       "filetypes": ["go"],
@@ -30,9 +17,25 @@
       "configuration": {
         "request": "launch",
         "program": "${fileDirname}",
-        "buildFlags": "-tags=integration",
+        "buildFlags": "-tags=integration,acceptance",
         "mode": "test",
-        "showLog": true
+        "showLog": true,
+        "trace": "log"
+      }
+    },
+    "3_go-single-test": {
+      "adapter": "delve",
+      "filetypes": ["go"],
+      "variables": {},
+      "configuration": {
+        "request": "launch",
+        "program": "${fileDirname}",
+        "cwd": "${fileDirname}",
+        "args": ["-test.run", "${regex}"],
+        "buildFlags": "-tags=integration,acceptance",
+        "mode": "test",
+        "showLog": true,
+        "trace": "log"
       }
     },
     "blocksd": {
@@ -54,7 +57,7 @@
       "configuration": {
         "request": "launch",
         "program": "${cwd}/cmd/tg-validatord",
-        "args": ["start"],
+        "args": ["start", "*${params}"],
         "mode": "debug",
         "trace": "log"
       }
