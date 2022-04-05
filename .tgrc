@@ -35,6 +35,7 @@ alias gotest='grc go test ./... -v'
 alias gobuild='grc go build ./...'
 alias govet='grc go vet ./...'
 
-source ~/Documents/Prog/Taurus/taurus-scripts/git_helpers.sh
+
+[[ -s "~/Documents/Prog/Taurus/taurus-scripts/git_helpers.sh" ]] && source ~/Documents/Prog/Taurus/taurus-scripts/git_helpers.sh
 
 # vim: set ft=zsh:
