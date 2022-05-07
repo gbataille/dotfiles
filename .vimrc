@@ -1,205 +1,3 @@
-" When started as "evim", evim.vim will already have done these settings.
-if v:progname =~? "evim"
-  finish
-endif
-
-" Use Vim settings, rather than Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
-filetype off      "mandatory for vundle init
-
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-call plug#begin()
-
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rbenv'
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-surround'
-Plug 'godlygeek/tabular'
-Plug 'tomtom/tcomment_vim'
-Plug 'vim-scripts/bufkill.vim'
-Plug 'tpope/vim-unimpaired'
-Plug 'mattn/webapi-vim'
-Plug 'mattn/gist-vim'
-Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-eunuch'
-Plug 'mattn/calendar-vim'
-Plug 'vim-scripts/utl.vim'
-Plug 'jnwhiteh/vim-golang'
-Plug 'airblade/vim-rooter'
-Plug 'airblade/vim-gitgutter'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'vim-scripts/gitignore'
-Plug 'majutsushi/tagbar'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'Konfekt/FastFold'
-" Typescript
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
-" Editorconfig
-Plug 'editorconfig/editorconfig-vim'
-" Python
-Plug 'tmhedberg/SimpylFold'
-Plug 'hynek/vim-python-pep8-indent'
-" RGB
-Plug 'lilydjwg/colorizer'
-" Terraform
-Plug 'hashivim/vim-terraform'
-" Plantuml
-Plug 'aklt/plantuml-syntax'
-" Scala
-Plug 'derekwyatt/vim-scala'
-" Nix
-Plug 'LnL7/vim-nix'
-" Haskell
-Plug 'enomsg/vim-haskellConcealPlus'
-Plug 'sdiehl/vim-ormolu'    " Formatting
-" Graphql
-Plug 'jparise/vim-graphql'
-" FZF
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-" Dash integration
-Plug 'rizzatti/dash.vim'
-" Snippets
-Plug 'liuchengxu/vim-which-key'
-" TOML
-Plug 'cespare/vim-toml'
-" cursor location
-Plug 'edluffy/specs.nvim'
-" colorscheme
-Plug 'EdenEast/nightfox.nvim'
-" Preview content of registers
-" https://github.com/junegunn/vim-peekaboo/issues/63
-" Plug 'junegunn/vim-peekaboo'
-" Docker
-Plug 'ekalinin/Dockerfile.vim'
-" Debugging
-Plug 'puremourning/vimspector'
-" Maximize a window
-Plug 'szw/vim-maximizer'
-" Treeview
-Plug 'preservim/nerdtree'
-Plug 'ryanoasis/vim-devicons'
-" Generic Nvim LSP
-Plug 'neovim/nvim-lspconfig'
-" Snippets
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
-" Snippets library
-Plug 'rafamadriz/friendly-snippets'
-" Completion plugin
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
-" Go tools
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-" Test launcher
-Plug 'vim-test/vim-test'
-" Performance issues on large file. The technique used might be a bit brutal
-" " Go collapse of errors
-" Plug 'Snyssfx/goerr-nvim'
-
-call plug#end()
-
-" maxmemory for regex, in KiB (default to 1000)
-set mmp=10000
-
-"#############################################
-"################# VIM-CMP ###################
-"#############################################
-lua <<EOF
-  -- Setup nvim-cmp.
-  local cmp = require'cmp'
-
-  cmp.setup({
-    snippet = {
-      -- REQUIRED - you must specify a snippet engine
-      expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-      end,
-    },
-    preselect = cmp.PreselectMode.None,
-    mapping = {
-      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-      ['<C-e>'] = cmp.mapping({
-        i = cmp.mapping.abort(),
-        c = cmp.mapping.close(),
-      }),
-      ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-      ['<Tab>'] = function(fallback)
-        if cmp.visible() then
-          cmp.select_next_item()
-        else
-          fallback()
-        end
-      end,
-      ['<S-Tab>'] = function(fallback)
-        if cmp.visible() then
-          cmp.select_prev_item()
-        else
-          fallback()
-        end
-      end,
-    },
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = 'vsnip' }, -- For vsnip users.
-    }, {
-      { name = 'buffer' },
-    })
-  })
-
-  -- Set configuration for specific filetype.
-  cmp.setup.filetype('gitcommit', {
-    sources = cmp.config.sources({
-      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it. 
-    }, {
-      { name = 'buffer' },
-    })
-  })
-
-  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline('/', {
-    sources = {
-      { name = 'buffer' }
-    }
-  })
-
-  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline(':', {
-    sources = cmp.config.sources({
-      { name = 'path' }
-    }, {
-      { name = 'cmdline' }
-    })
-  })
-
-  -- Setup lspconfig.
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-EOF
-
-lua require("lsp_config")
-
-set encoding=UTF-8
-
 " Mac specific config
 if has("unix")
   let s:uname = system("uname")
@@ -241,20 +39,8 @@ else
 
 endif " has("autocmd")
 
-" Allows unsaved buffer to exist
-set hidden
 autocmd FileType netrw setl bufhidden=wipe
 
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-set previewheight=20
-
-" Small updatetime for CursorHold events to trigger "fast". Used by LSP for
-" document_highlight
-set updatetime=1000
-
-" https://www.youtube.com/watch?v=XA2WjJbmmoM
-set path+=**
 let g:netrw_banner=0
 let g:netrw_liststyle=3
 
@@ -264,27 +50,6 @@ else
   set backup		" keep a backup file
 endif
 
-set directory=~/.vim_swap//
-set backupdir=~/.vim_backup//
-
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
-set number		" show line number
-
-if exists('+relativenumber')
-  set relativenumber  "show line number relative to cursor position
-endif
-
-set ts=2		" set tabstop size
-set shiftwidth=2
-set softtabstop=2
-set smarttab
-set expandtab
-set nowrap
-set smartcase
-set autowrite  " Writes on make/shell commands
-set timeoutlen=500  " Time to wait after ESC (default causes an annoying delay)
 
 " Load matchit (% to bounce from do to end, etc.)
 runtime! macros/matchit.vim
@@ -298,11 +63,6 @@ map Q gq
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
-
-" In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-  set mouse=a
-endif
 
 if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
   set t_Co=256
@@ -325,32 +85,6 @@ if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
     \ | wincmd p | diffthis
 endif
-
-" Add recently accessed projects menu (project plugin)
-set viminfo^=!
-
-" Don't redraw while executing macros (good performance config)
-set lazyredraw
-
-" Regexp magic by default
-set magic
-
-set cf  " Enable error files & error jumping.
-" tmux
-set history=256  " Number of things to remember in history.
-
-" Visual
-set showmatch  " Show matching brackets.
-set mat=5  " Bracket blinking.
-set list
-
-" Show $ at end of line and trailing space as ~
-set lcs=tab:¬\ ,trail:~,extends:>,precedes:<
-set novisualbell  " No blinking .
-set noerrorbells  " No noise.
-set laststatus=2  " Always show status line.
-
-set cul   " cursor line highlight
 
 " " Tab completion in pmenu
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -396,7 +130,6 @@ autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 
 " Plugin to see available remaps
 nnoremap <silent> <leader> :WhichKey ','<CR>
-set timeoutlen=1000
 
 "Remap Tcomment
 nmap <leader>c <c-_><c-_>
@@ -509,17 +242,6 @@ if has("autocmd")
   "Automatically close fugitive buffer when browsing Git objects
   autocmd BufRead fugitive://* set bufhidden=delete
 endif
-"Show branch name in the status bar
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
-set wildmenu
-set wildmode=full
-set wildignore+=*.swp,*.back,*.class,*/tmp/*,*.o
-
-" "Folding setup
-set foldmethod=syntax
-set foldcolumn=3
-set foldlevel=99
-set nofoldenable
 
 function! MyFoldText()
   let line = getline(v:foldstart)
