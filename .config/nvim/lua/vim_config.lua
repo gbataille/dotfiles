@@ -2,14 +2,15 @@ local o = vim.opt
 
 o.encoding='UTF-8'
 
-o.shiftwidth = 4
-o.ts=2		-- set tabstop size
+o.ts=2
 o.shiftwidth=2
+o.shiftround=true
 o.softtabstop=2
 o.smarttab=true
 o.expandtab=true
 o.wrap=false
 o.smartcase=true
+
 -- Allows unsaved buffer to exist
 o.hidden=true
 -- allow backspacing over everything in insert mode
@@ -38,16 +39,16 @@ o.magic=true
 -- Confirm on unsaved files
 o.cf=true
 -- Number of things to remember in history.
-o.history=256  
+o.history=256
 
 -- Show matching brackets.
 o.showmatch=true
 -- Bracket blinking.
-o.mat=5  
--- Invisible characters
-o.list=true
+o.mat=5
 -- Show $ at end of line and trailing space as ~
-o.lcs={tab='¬\\',trail='~',extends='>',precedes='<'}
+o.listchars={tab='¬ ',trail='~',extends='>',precedes='<'}
+o.list=true
+-- o.lcs={tab='¬\\',trail='~',extends='>',precedes='<'}
 -- No blinking .
 o.visualbell=false
 -- No noise.
@@ -75,3 +76,23 @@ o.foldmethod='syntax'
 o.foldcolumn='3'
 o.foldlevel=99
 o.foldenable=false
+
+-- Scroll offset
+o.scrolloff=15
+o.sidescrolloff=15
+
+-- Experimental
+o.signcolumn='number'
+-- o.signcolumn='yes:1'
+
+-- popup config
+o.pumheight = 25
+o.pumblend = 0
+
+-- shared info across vim sessions
+o.shada = "!,'100,<50,s10,h,:1000,/1000"
+o.shadafile = os.getenv('HOME') .. '/.local/share/nvim/shada/main.shada'
+
+vim.cmd([[
+    filetype indent plugin on
+]])
