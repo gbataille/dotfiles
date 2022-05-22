@@ -84,6 +84,7 @@ o.sidescrolloff=15
 -- Experimental
 o.signcolumn='number'
 -- o.signcolumn='yes:1'
+o.colorcolumn='120'
 
 -- popup config
 o.pumheight = 25
@@ -93,6 +94,38 @@ o.pumblend = 0
 o.shada = "!,'100,<50,s10,h,:1000,/1000"
 o.shadafile = os.getenv('HOME') .. '/.local/share/nvim/shada/main.shada'
 
+-- coloring
+o.hlsearch = true
 vim.cmd([[
-    filetype indent plugin on
+  syntax on
+  colorscheme nightfox
 ]])
+
+-- filetype recognition
+vim.cmd([[
+    filetype plugin indent on
+]])
+
+-- When editing a file, always jump to the last known cursor position.
+-- Don't do it when the position is invalid or when inside an event handler
+-- (happens when dropping a file on gvim).
+-- Also don't do it when the mark is in the first line, that is the default
+-- position when opening a file.
+vim.api.nvim_create_autocmd('BufRead', {
+  pattern = '*',
+  command = [[
+    if line("'\"") > 1 && line("'\"") <= line("$") |
+      exe "normal! g`\"" |
+    endif
+  ]]
+})
+
+-- Set it as autocmd to override the ft autocmd from some plugins
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'ruby,haskell,java,markdown',
+  command = 'set textwidth=100'
+})
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'javascript,html,text,proto,go,json',
+  command = 'set textwidth=0'
+})
