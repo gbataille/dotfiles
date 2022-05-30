@@ -1,8 +1,18 @@
-alias roachup='cockroach start-single-node --insecure --http-addr=localhost:26258 --store=path=$HOME/Documents/Prog/Data/Cockroach'
-alias roachdown='pkill cockroach'
+alias roachcreate='docker run -d --name=crdb --hostname=crdb  -p 26257:26257 -p 8080:8080 -v "${HOME}/Documents/Prog/Data/Cockroach:/cockroach/cockroach-data" cockroachdb/cockroach:v21.2.9 start-single-node --insecure'
+alias roachup='docker start crdb'
+alias roachdown='docker stop crdb'
+
+alias mssqlcreate='docker run -d --name sqlserver -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=StrongPa!!w0rd" -p 1433:1433 -v $HOME/Documents/Prog/Data/SqlServer:/var/opt/mssql  -v $HOME/Documents/Prog/Data/SqlServer/log:/var/opt/mssql/log -v $HOME/Documents/Prog/Data/SqlServer/secrets:/var/opt/mssql/secrets mcr.microsoft.com/mssql/server:2019-latest'
+alias mssqlup='docker start sqlserver'
+alias mssqldown='docker stop sqlserver'
 
 alias int_db_tunnel='cloudflared access tcp --hostname cockroach-exo-zrh-tg-db.int.t-dx.com --url 127.0.0.1:26259 --loglevel=debug'
-alias int_vaultd_tunnel='cloudflared access tcp --hostname tg-vaultd-exo-zrh-tg.int.t-dx.com --url 127.0.0.1:7783 --loglevel=debug'
+alias int_vaultd_tunnel='cloudflared access tcp --hostname tg-vaultd-exo-zrh-tg.int.t-dx.com --url 127.0.0.1:7777 --loglevel=debug'
+alias int_opensearch='cloudflared access tcp --hostname int-exo-zrh-opensearch-dashboard-tunnel.int.t-dx.com --url 127.0.0.1:44444'
+alias int_oc_ingress='sudo cloudflared access ssh --hostname prod-exo-zrh-osme-oc-ingress-https-01.prod.t-dx.com --url 127.0.0.1:443'
+alias int_openshift_tunnel_cli='cloudflared access ssh --hostname prod-exo-zrh-osme-oc-master-01.prod.t-dx.com --url 127.0.0.1:6443'
+
+alias acc_db_tunnel='cloudflared access tcp --hostname sqlserver-exo-zrh-tg-db.acc.t-dx.com --url 127.0.0.1:13000 --loglevel=debug'
 
 alias prod_ada_zrh_tunnel='cloudflared access tcp --hostname ada-vshn-zrh-tg-nodes.nodes.prod.t-dx.com --url 127.0.0.1:23001 --loglevel=debug'
 alias prod_ada_gva_tunnel='cloudflared access tcp --hostname ada-vshn-gva-tg-nodes.nodes.prod.t-dx.com --url 127.0.0.1:23101 --loglevel=debug'
@@ -29,7 +39,7 @@ alias prod_algo_gva_tunnel='cloudflared access tcp --hostname algo-vshn-gva-tg-n
 alias prod_all_nodes_zrh_tunnel='prod_algo_zrh_tunnel & prod_ada_zrh_tunnel & prod_bch_zrh_tunnel & prod_btc_zrh_tunnel & prod_eth_zrh_tunnel & prod_ltc_zrh_tunnel & prod_xlm_zrh_tunnel & prod_xrp_zrh_tunnel & prod_xtz_zrh_tunnel & prod_dot_zrh_tunnel & prod_ftm_zrh_tunnel &'
 alias prod_all_nodes_gva_tunnel='prod_algo_gva_tunnel & prod_ada_gva_tunnel & prod_bch_gva_tunnel & prod_btc_gva_tunnel & prod_eth_gva_tunnel & prod_ltc_gva_tunnel & prod_xlm_gva_tunnel & prod_xrp_gva_tunnel & prod_xtz_gva_tunnel & prod_dot_gva_tunnel & prod_ftm_gva_tunnel &'
 
-alias local_gated='cd ~/Documents/Prog/Taurus/tg-gated; go run ./cmd/tg-gated start | zap_log_prettier'
+alias local_gated='cd ~/Documents/Prog/Taurus/tg-gated; go run ./cmd/tg-gated start | logs_for_humans'
 
 alias gotest='grc go test ./... -v'
 alias gobuild='grc go build ./...'

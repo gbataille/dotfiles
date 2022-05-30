@@ -1,7 +1,7 @@
 vim.g.mapleader = ','
 
 -- remap toggle folding to the space bar
-vim.keymap.set('n', '<Space>', 'za')
+vim.keymap.set('n', '<Space>', 'zA')
 -- Tab completion in pmenu
 vim.keymap.set('i', '<expr><TAB>', 'pumvisible() ? "\\<C-n>" : "\\<TAB>"')
 
@@ -127,9 +127,6 @@ vim.keymap.set('n', '<leader>wm', ':MaximizerToggle!<CR>')
 -- ################
 -- #     CTRL     #
 -- ################
--- ### C ###
--- Remap Ctrl-C to go back to normal mode
-vim.keymap.set('i', '<C-c>', '<Esc>')
 
 -- ### N ###
 -- <C-e> -- see FZF above

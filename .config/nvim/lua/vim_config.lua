@@ -19,9 +19,9 @@ o.previewheight=20
 -- file search recursively
 o.path:append({'**'})
 -- swap files dir
-o.directory='~/.vim_swap//'
+o.directory = os.getenv('HOME') .. '/.vim_swap//'
 -- backup files dir
-o.backupdir='~/.vim_backup//'
+o.backupdir = os.getenv('HOME') .. '/.vim_backup//'
 -- show the cursor position all the time
 o.ruler=true
 -- display incomplete commands
@@ -82,13 +82,14 @@ o.scrolloff=15
 o.sidescrolloff=15
 
 -- Experimental
-o.signcolumn='number'
--- o.signcolumn='yes:1'
+o.signcolumn='auto'
 o.colorcolumn='120'
 
 -- popup config
 o.pumheight = 25
 o.pumblend = 0
+
+o.winblend = 0
 
 -- shared info across vim sessions
 o.shada = "!,'100,<50,s10,h,:1000,/1000"

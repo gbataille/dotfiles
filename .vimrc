@@ -73,7 +73,6 @@ endfunction
 
 if has('autocmd')
   autocmd BufRead *.nasm set ft=nasm
-"DONE"
 
   " The preview pane annoyingly stays open on autocompletion
   au InsertLeave * :pc
@@ -306,14 +305,14 @@ let test#go#gotest#options = '-v -tags integration,acceptance,manual -count 1'
 let test#go#gotest#executable = 'grc go test'
 let test#neovim#term_position = "bel"
 
-" "#############################################
-" "################ VIM-VSNIP ##################
-" "#############################################
-" " Expand
+"#############################################
+"################ VIM-VSNIP ##################
+"#############################################
+" Expand
 " imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
 " smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
-"
-" " Jump forward or backward
+" 
+" Jump forward or backward
 " imap <expr> <TAB>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<TAB>'
 " smap <expr> <TAB>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<TAB>'
 " imap <expr> <C-l>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<C-l>'
