@@ -44,13 +44,16 @@ EOF
   fi
 done
 
-for i in $(git status --short | grep -E '(^A)|(^M)' | sed 's/...//' | grep -E '_enc\.|_enc$');
-do
-  if [[ !(`file $i` =~ ".*GPG.*") ]]; then
-    cat <<\EOF
+if [[ ("${FORCE_COMMIT:-false}" != "true") ]];
+then
+  for i in $(git status --short | grep -E '(^A)|(^M)' | sed 's/...//' | grep -E '_enc\.|_enc$');
+  do
+    if [[ !(`file $i` =~ ".*GPG.*") ]]; then
+      cat <<\EOF
 Please encrypt protected files (*_enc*)
 Aborting commit
 EOF
-    exit 1
-  fi
-done
+      exit 1
+    fi
+  done
+fi
