@@ -1,18 +1,20 @@
-alias roachcreate='docker run -d --name=crdb --hostname=crdb  -p 26257:26257 -p 8080:8080 -v "${HOME}/Documents/Prog/Data/Cockroach:/cockroach/cockroach-data" cockroachdb/cockroach:v21.2.9 start-single-node --insecure'
+alias roachcreate='docker run -d --name=crdb --hostname=crdb -e COCKROACH_RAFT_CLOSEDTS_ASSERTIONS_ENABLED=false -p 26257:26257 -p 8080:8080 -v "${HOME}/Documents/Prog/Data/Cockroach:/cockroach/cockroach-data" cockroachdb/cockroach:v21.2.9 start-single-node --insecure'
 alias roachup='docker start crdb'
 alias roachdown='docker stop crdb'
 
-alias mssqlcreate='docker run -d --name sqlserver -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=StrongPa!!w0rd" -p 1433:1433 -v $HOME/Documents/Prog/Data/SqlServer:/var/opt/mssql  -v $HOME/Documents/Prog/Data/SqlServer/log:/var/opt/mssql/log -v $HOME/Documents/Prog/Data/SqlServer/secrets:/var/opt/mssql/secrets mcr.microsoft.com/mssql/server:2019-latest'
-alias mssqlup='docker start sqlserver'
+# alias mssqlcreate='docker run -d --name sqlserver -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=StrongPa!!w0rd" -p 1433:1433 -v $HOME/Documents/Prog/Data/SqlServer:/var/opt/mssql  -v $HOME/Documents/Prog/Data/SqlServer/log:/var/opt/mssql/log -v $HOME/Documents/Prog/Data/SqlServer/secrets:/var/opt/mssql/secrets mcr.microsoft.com/mssql/server:2019-latest'
+alias mssqlcreate='docker run -d --name sqlserver -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=MyPass@word0" -p 1433:1433 -v $HOME/Documents/Prog/Data/SqlServer:/var/opt/mssql  -v $HOME/Documents/Prog/Data/SqlServer/log:/var/opt/mssql/log -v $HOME/Documents/Prog/Data/SqlServer/secrets:/var/opt/mssql/secrets mcr.microsoft.com/mssql/server:2019-latest' alias mssqlup='docker start sqlserver'
 alias mssqldown='docker stop sqlserver'
 
-alias int_db_tunnel='cloudflared access tcp --hostname cockroach-exo-zrh-tg-db.int.t-dx.com --url 127.0.0.1:26259 --loglevel=debug'
+alias int_db_cockroach='cloudflared access tcp --hostname cockroach-exo-zrh-tg-db.int.t-dx.com --url 127.0.0.1:26259 --loglevel=debug'
+alias int_db_sqlserver='cloudflared access tcp --hostname sqlserver-exo-zrh-tg-db.int.t-dx.com --url 127.0.0.1:21433 --loglevel=debug'
 alias int_vaultd_tunnel='cloudflared access tcp --hostname tg-vaultd-exo-zrh-tg.int.t-dx.com --url 127.0.0.1:7777 --loglevel=debug'
 alias int_opensearch='cloudflared access tcp --hostname int-exo-zrh-opensearch-dashboard-tunnel.int.t-dx.com --url 127.0.0.1:44444'
 alias int_oc_ingress='sudo cloudflared access ssh --hostname prod-exo-zrh-osme-oc-ingress-https-01.prod.t-dx.com --url 127.0.0.1:443'
 alias int_openshift_tunnel_cli='cloudflared access ssh --hostname prod-exo-zrh-osme-oc-master-01.prod.t-dx.com --url 127.0.0.1:6443'
 
-alias acc_db_tunnel='cloudflared access tcp --hostname sqlserver-exo-zrh-tg-db.acc.t-dx.com --url 127.0.0.1:13000 --loglevel=debug'
+alias acc_db_cockroach='cloudflared access tcp --hostname cockroach-exo-zrh-tg-db.acc.t-dx.com --url 127.0.0.1:12004'
+alias acc_db_sqlserver='cloudflared access tcp --hostname sqlserver-exo-zrh-tg-db.acc.t-dx.com --url 127.0.0.1:13000 --loglevel=debug'
 
 alias prod_ada_zrh_tunnel='cloudflared access tcp --hostname ada-vshn-zrh-tg-nodes.nodes.prod.t-dx.com --url 127.0.0.1:23001 --loglevel=debug'
 alias prod_ada_gva_tunnel='cloudflared access tcp --hostname ada-vshn-gva-tg-nodes.nodes.prod.t-dx.com --url 127.0.0.1:23101 --loglevel=debug'
@@ -42,10 +44,13 @@ alias prod_all_nodes_gva_tunnel='prod_algo_gva_tunnel & prod_ada_gva_tunnel & pr
 alias local_gated='cd ~/Documents/Prog/Taurus/tg-gated; go run ./cmd/tg-gated start | logs_for_humans'
 
 alias gotest='grc go test ./... -v'
-alias gobuild='grc go build ./...'
-alias govet='grc go vet ./...'
+alias gotestacc='grc go test ./... -v -p 1 --tags acceptance'
+alias gobuild='grc go build --tags acceptance ./...'
+alias govet='grc go vet --tags acceptance ./...'
+alias gocilint='grc golangci-lint run --tags acceptance ./...'
+alias golint='govet && gocilint'
 
 
-[[ -s "~/Documents/Prog/Taurus/taurus-scripts/git_helpers.sh" ]] && source ~/Documents/Prog/Taurus/taurus-scripts/git_helpers.sh
+[[ -f "$HOME/Documents/Prog/Taurus/taurus-scripts/git_helpers.sh" ]] && source $HOME/Documents/Prog/Taurus/taurus-scripts/git_helpers.sh
 
 # vim: set ft=zsh:
