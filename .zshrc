@@ -97,6 +97,7 @@ alias c='clear'
 alias cdg='cd ~/Documents/Prog/GregsSandbox/'
 alias cdm='cd ~/Documents/Prog/MyConfig'
 alias cdp='cd ~/Documents/Prog/'
+alias ghpr='gh pr checkout'
 alias gitk='gitk --all'
 alias ls='ls -Gh'
 alias logj='jq -R -r ". as \$line | try (fromjson | \"[\" + .ts + \"][\" + (.level | ascii_upcase) + \"] \" + (if has(\"error\") then (.error + \" - \") else \"\" end)  + .msg + \" \" + (.block_number? | tostring) + \" (\" + .caller + \")\" + \"\\n\\t\" + (\$line|fromjson|del(.msg)|del(.ts)|del(.caller)|del(.level)|del(.block_number)|tostring)) catch \$line"'
@@ -116,6 +117,7 @@ alias sshadd='ssh-add ~/.ssh/id_rsa'
 alias tf='terraform'
 alias ys='yarn start'
 alias yt='yarn test -- --verbose'
+
 cat()
 {
   bat $@
