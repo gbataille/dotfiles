@@ -1,7 +1,8 @@
 vim.g.mapleader = ','
 
 -- remap toggle folding to the space bar
-vim.keymap.set('n', '<Space>', 'zA')
+vim.keymap.set('n', '<Space>', 'za')
+vim.keymap.set('n', '<C-Space>', 'zA')
 -- Tab completion in pmenu
 vim.keymap.set('i', '<expr><TAB>', 'pumvisible() ? "\\<C-n>" : "\\<TAB>"')
 
@@ -116,6 +117,8 @@ vim.keymap.set('n', '<leader>s', ':set spell!<CR>', {silent = true})
 -- ### T ###
 -- Test launcher (vim-test)
 vim.keymap.set('n', '<leader>tt', ':TestNearest<CR>')
+vim.keymap.set('n', '<leader>ttc', ':call RunCrdbTestsNearest()<CR>')
+vim.keymap.set('n', '<leader>tts', ':call RunSQLServerTestsNearest()<CR>')
 vim.keymap.set('n', '<leader>tf', ':TestFile<CR>')
 vim.keymap.set('n', '<leader>tl', ':TestLast<CR>')
 vim.keymap.set('n', '<leader>tv', ':TestVisit<CR>')

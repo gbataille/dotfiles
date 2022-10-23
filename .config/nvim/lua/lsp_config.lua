@@ -28,9 +28,9 @@ local on_attach = function(client, bufnr)
 
   -- Set some keybinds conditional on server capabilities
   if client.resolved_capabilities.document_formatting then
-    buf_set_keymap("n", "ff", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+    buf_set_keymap("n", "gff", "<cmd>lua vim.lsp.buf.format({async=true})<CR>", opts)
   elseif client.resolved_capabilities.document_range_formatting then
-    buf_set_keymap("n", "ff", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+    buf_set_keymap("n", "gff", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
   end
 
   -- hi LspReferenceRead cterm=bold ctermbg=DarkMagenta guibg=LightYellow
@@ -64,8 +64,8 @@ nvim_lsp.gopls.setup{
             shadow = false,
          },
          staticcheck = true,
-         buildFlags = {"-tags=unit,integration,acceptance,greg"},
-         env = {GOFLAGS="-tags=unit,integration,acceptance,greg"},
+         buildFlags = {"-tags=unit,integration,acceptance,greg,manual"},
+         env = {GOFLAGS="-tags=unit,integration,acceptance,greg,manual"},
         },
       },
   on_attach = on_attach,

@@ -19,11 +19,11 @@ end
 
 vim.call('plug#begin', '~/.local/share/nvim/site/plugged')
 
+Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rbenv'
-Plug 'vim-ruby/vim-ruby'
+-- Plug 'vim-ruby/vim-ruby' -- in polyglot
 Plug 'tpope/vim-rails'
-Plug 'tpope/vim-markdown'
+-- Plug 'tpope/vim-markdown' -- in polyglot
 Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular'
 Plug 'tomtom/tcomment_vim'
@@ -31,13 +31,13 @@ Plug 'vim-scripts/bufkill.vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
-Plug 'tpope/vim-sleuth'
+-- Plug 'tpope/vim-sleuth' -- in polyglot
 Plug 'mattn/calendar-vim'
 Plug 'vim-scripts/utl.vim'
 Plug 'airblade/vim-rooter'
 Plug 'airblade/vim-gitgutter'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
+-- Plug 'pangloss/vim-javascript' -- in polyglot
+-- Plug 'mxw/vim-jsx' -- in polyglot
 Plug 'vim-scripts/gitignore'
 Plug 'majutsushi/tagbar'
 Plug 'vim-airline/vim-airline'
@@ -49,7 +49,7 @@ Plug 'Konfekt/FastFold'
 -- Plug 'tpope/vim-eunuch'
 
 -- Typescript
-Plug 'leafgarland/typescript-vim'
+-- Plug 'leafgarland/typescript-vim'  -- in polyglot
 Plug 'peitalin/vim-jsx-typescript'
 
 -- Editorconfig
@@ -63,23 +63,23 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'lilydjwg/colorizer'
 
 -- Terraform
-Plug 'hashivim/vim-terraform'
+-- Plug 'hashivim/vim-terraform' -- in polyglot
 
 -- Plantuml
-Plug 'aklt/plantuml-syntax'
+-- Plug 'aklt/plantuml-syntax' -- in polyglot
 
 -- Scala
-Plug 'derekwyatt/vim-scala'
+-- Plug 'derekwyatt/vim-scala' -- in polyglot
 
 -- Nix
-Plug 'LnL7/vim-nix'
+-- Plug 'LnL7/vim-nix' -- in polyglot
 
 -- Haskell
 Plug 'enomsg/vim-haskellConcealPlus'
 Plug 'sdiehl/vim-ormolu'    -- Formatting
 
 -- Graphql
-Plug 'jparise/vim-graphql'
+-- Plug 'jparise/vim-graphql' -- in polyglot
 
 -- FZF
 Plug('junegunn/fzf', { dir = '~/.fzf', ['do'] = vim.fn['fzf#install'] })
@@ -92,7 +92,7 @@ Plug 'rizzatti/dash.vim'
 Plug 'liuchengxu/vim-which-key'
 
 -- TOML
-Plug 'cespare/vim-toml'
+-- Plug 'cespare/vim-toml' -- in polyglot
 
 -- cursor location
 Plug 'edluffy/specs.nvim'
@@ -105,7 +105,7 @@ Plug 'EdenEast/nightfox.nvim'
 -- Plug 'junegunn/vim-peekaboo'
 
 -- Docker
-Plug 'ekalinin/Dockerfile.vim'
+-- Plug 'ekalinin/Dockerfile.vim'  -- in polyglot
 
 -- Debugging
 Plug 'puremourning/vimspector'
@@ -144,5 +144,5 @@ Plug 'vim-test/vim-test'
 -- Performance issues on large file. The technique used might be a bit brutal
 -- " Go collapse of errors
 -- Plug 'Snyssfx/goerr-nvim'
---
+
 vim.call('plug#end')
