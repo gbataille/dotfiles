@@ -1,46 +1,6 @@
 {
   "configurations": {
-    "1_go": {
-      "adapter": "delve",
-      "filetypes": ["go"],
-      "variables": {},
-      "configuration": {
-        "request": "launch",
-        "program": "${fileDirname}",
-        "args": ["*${params}"],
-        "mode": "debug"
-      }
-    },
-    "2_go-test": {
-      "adapter": "delve",
-      "filetypes": ["go"],
-      "variables": {},
-      "configuration": {
-        "request": "launch",
-        "program": "${fileDirname}",
-        "buildFlags": "-tags=integration,acceptance",
-        "args": ["*${params}"],
-        "mode": "test",
-        "showLog": true,
-        "trace": "log"
-      }
-    },
-    "3_go-single-test": {
-      "adapter": "delve",
-      "filetypes": ["go"],
-      "variables": {},
-      "configuration": {
-        "request": "launch",
-        "program": "${fileDirname}",
-        "cwd": "${fileDirname}",
-        "args": ["-test.run", "${regex}", "*${params}"],
-        "buildFlags": "-tags=integration,acceptance",
-        "mode": "test",
-        "showLog": true,
-        "trace": "log"
-      }
-    },
-    "blocksd": {
+    "1_blocksd": {
       "adapter": "delve",
       "filetypes": ["go"],
       "variables": {},
@@ -49,10 +9,11 @@
         "program": "${cwd}/cmd/tg-blocksd",
         "args": ["start", "*${params}"],
         "mode": "debug",
+        "showLog": true,
         "trace": "log"
       }
     },
-    "validatord": {
+    "2_validatord": {
       "adapter": "delve",
       "filetypes": ["go"],
       "variables": {},
@@ -62,6 +23,103 @@
         "args": ["start", "*${params}"],
         "mode": "debug",
         "trace": "log"
+      }
+    },
+    "3_go-single-test-crdb": {
+      "adapter": "delve",
+      "filetypes": ["go"],
+      "variables": {},
+      "configuration": {
+        "request": "launch",
+        "program": "${fileDirname}",
+        "cwd": "${fileDirname}",
+        "args": ["-test.run", "${regex}", "*${params}"],
+        "buildFlags": "-tags=integration,acceptance",
+        "env": {
+          "TG_DB_HOST": "localhost",
+          "TG_DB_PORT": "26257",
+          "TG_DB_USER": "root",
+          "TG_DB_PASSWORD": "root",
+          "TG_DB_DRIVER": "cockroach"
+        },
+        "mode": "test",
+        "showLog": true,
+        "trace": "log"
+      }
+    },
+    "4_go-single-test-sqlserver": {
+      "adapter": "delve",
+      "filetypes": ["go"],
+      "variables": {},
+      "configuration": {
+        "request": "launch",
+        "program": "${fileDirname}",
+        "cwd": "${fileDirname}",
+        "args": ["-test.run", "${regex}", "*${params}"],
+        "buildFlags": "-tags=integration,acceptance",
+        "env": {
+          "TG_DB_HOST": "localhost",
+          "TG_DB_PORT": "1433",
+          "TG_DB_USER": "sa",
+          "TG_DB_PASSWORD": "MyPass@word0",
+          "TG_DB_DRIVER": "sqlserver"
+        },
+        "mode": "test",
+        "showLog": true,
+        "trace": "log"
+      }
+    },
+    "5_go-test-crdb": {
+      "adapter": "delve",
+      "filetypes": ["go"],
+      "variables": {},
+      "configuration": {
+        "request": "launch",
+        "program": "${fileDirname}",
+        "buildFlags": "-tags=integration,acceptance",
+        "args": ["*${params}"],
+        "env": {
+          "TG_DB_HOST": "localhost",
+          "TG_DB_PORT": "26257",
+          "TG_DB_USER": "root",
+          "TG_DB_PASSWORD": "root",
+          "TG_DB_DRIVER": "cockroach"
+        },
+        "mode": "test",
+        "showLog": true,
+        "trace": "log"
+      }
+    },
+    "6_go-test-sqlserver": {
+      "adapter": "delve",
+      "filetypes": ["go"],
+      "variables": {},
+      "configuration": {
+        "request": "launch",
+        "program": "${fileDirname}",
+        "buildFlags": "-tags=integration,acceptance",
+        "args": ["*${params}"],
+        "env": {
+          "TG_DB_HOST": "localhost",
+          "TG_DB_PORT": "1433",
+          "TG_DB_USER": "sa",
+          "TG_DB_PASSWORD": "MyPass@word0",
+          "TG_DB_DRIVER": "sqlserver"
+        },
+        "mode": "test",
+        "showLog": true,
+        "trace": "log"
+      }
+    },
+    "7_go": {
+      "adapter": "delve",
+      "filetypes": ["go"],
+      "variables": {},
+      "configuration": {
+        "request": "launch",
+        "program": "${fileDirname}",
+        "args": ["*${params}"],
+        "mode": "debug"
       }
     }
   }

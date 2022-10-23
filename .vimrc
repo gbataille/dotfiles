@@ -1,3 +1,21 @@
+function! RunSQLServerTestsNearest()
+  let g:test#go#gotest#executable = 'TG_DB_HOST=localhost TG_DB_PORT=1433 TG_DB_USER=sa TG_DB_PASSWORD=MyPass@word0 TG_DB_DRIVER=sqlserver grc go test'
+  let g:test#go#gotest#options = '-v -tags integration,acceptance,manual -count 1'
+  :TestNearest
+  " defaults to unit tests
+  let g:test#go#gotest#executable = 'grc go test'
+  let g:test#go#gotest#options = '-v -tags acceptance,manual -count 1'
+endfunction
+
+function! RunCrdbTestsNearest()
+  let g:test#go#gotest#executable = 'TG_DB_HOST=localhost TG_DB_PORT=26257 TG_DB_USER=root TG_DB_PASSWORD=root TG_DB_DRIVER=cockroach grc go test'
+  let g:test#go#gotest#options = '-v -tags integration,acceptance,manual -count 1'
+  :TestNearest
+  " defaults to unit tests
+  let g:test#go#gotest#executable = 'grc go test'
+  let g:test#go#gotest#options = '-v -tags acceptance,manual -count 1'
+endfunction
+
 " See the vim-ormolu plugin
 function! s:RunClangFormat()
   let output = system("clang-format " . bufname("%"))
@@ -75,7 +93,7 @@ if has('autocmd')
   autocmd BufRead *.nasm set ft=nasm
 
   " The preview pane annoyingly stays open on autocompletion
-  au InsertLeave * :pc
+  " au InsertLeave * :pc
 
   " C++
   au BufWritePost *.c,*.cpp,*.h,*.hpp call s:ClangFormatCPP()
@@ -301,7 +319,7 @@ let g:go_list_type = "quickfix"
 let test#strategy = "neovim"
 let g:test#basic#start_normal = 1
 let g:test#preserve_screen = 1
-let test#go#gotest#options = '-v -tags integration,acceptance,manual -count 1'
+let test#go#gotest#options = '-v -tags acceptance,manual -count 1'
 let test#go#gotest#executable = 'grc go test'
 let test#neovim#term_position = "bel"
 
