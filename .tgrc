@@ -10,7 +10,7 @@ alias int_db_cockroach='cloudflared access tcp --hostname cockroach-exo-zrh-tg-d
 alias int_db_sqlserver='cloudflared access tcp --hostname sqlserver-exo-zrh-tg-db.int.t-dx.com --url 127.0.0.1:21433 --loglevel=debug'
 alias int_vaultd_tunnel='cloudflared access tcp --hostname tg-vaultd-exo-zrh-tg.int.t-dx.com --url 127.0.0.1:7777 --loglevel=debug'
 alias int_opensearch='cloudflared access tcp --hostname int-exo-zrh-opensearch-dashboard-tunnel.int.t-dx.com --url 127.0.0.1:44444'
-alias int_oc_ingress='sudo cloudflared access ssh --hostname prod-exo-zrh-osme-oc-ingress-https-01.prod.t-dx.com --url 127.0.0.1:443'
+alias int_oc_ingress='sudo cloudflared access ssh --hostname prod-exo-zrh-osme-oc-ingress-https-01.prod.t-dx.com --url 127.0.0.1:443 & sudo chown -R gbataille ~/.cloudflared; fg'
 alias int_openshift_tunnel_cli='cloudflared access ssh --hostname prod-exo-zrh-osme-oc-master-01.prod.t-dx.com --url 127.0.0.1:6443'
 
 alias acc_db_cockroach='cloudflared access tcp --hostname cockroach-exo-zrh-tg-db.acc.t-dx.com --url 127.0.0.1:12004'
