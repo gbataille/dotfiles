@@ -91,6 +91,9 @@ export GITHUD_DEBUG=TRUE
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 export SHELL_USER=gbataille
 
+# RUST
+export RUST_BACKTRACE=1
+
 alias ..='cd ..'
 alias branchclean='git branch --merged | grep -v "\*" | grep -v master | grep -v staging | xargs -n 1 git branch -d'
 alias c='clear'

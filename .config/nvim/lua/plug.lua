@@ -81,6 +81,9 @@ Plug 'sdiehl/vim-ormolu'    -- Formatting
 -- Graphql
 -- Plug 'jparise/vim-graphql' -- in polyglot
 
+-- Rust
+Plug 'rust-lang/rust.vim'
+
 -- FZF
 Plug('junegunn/fzf', { dir = '~/.fzf', ['do'] = vim.fn['fzf#install'] })
 Plug 'junegunn/fzf.vim'

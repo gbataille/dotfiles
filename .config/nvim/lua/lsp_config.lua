@@ -106,4 +106,9 @@ function OrgImports(wait_ms)
   end
 end
 
+require'lspconfig'.rust_analyzer.setup{
+  cmd = { "rust-analyzer" },
+  root_dir = nvim_lsp.util.root_pattern("Cargo.toml", "rust-project.json", ".git", ".root")
+}
+
 --vim.lsp.set_log_level("debug")

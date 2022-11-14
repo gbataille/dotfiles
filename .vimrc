@@ -345,3 +345,8 @@ let test#neovim#term_position = "bel"
 " "#############################################
 " " Saves the current cursor and window position and returns to that later
 " autocmd BufWritePost *.go silent! execute "normal mrMmm" | silent! execute 'g/if err != nil {/silent execute("normal zozc")' | silent! execute "normal 'mzz'r"
+
+" "#############################################
+" "################### RUST ####################
+" "#############################################
+let g:rustfmt_autosave = 1
