@@ -7,3 +7,5 @@ export BUF_USER=gbataille
 export ALGORAND_HOME=$HOME/Documents/Prog/Cryptos/AlgoNode
 export ALGORAND_DATA=$ALGORAND_HOME/testnetdata
 eval "$(pyenv init --path)"
+
+[[ -f "$HOME/.cargo/env" ]] && . $HOME/.cargo/env
