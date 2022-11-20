@@ -7,7 +7,7 @@ vim.keymap.set('n', '<C-Space>', 'zA')
 vim.keymap.set('i', '<expr><TAB>', 'pumvisible() ? "\\<C-n>" : "\\<TAB>"')
 
 -- ### H ###
-vim.keymap.set('i', 'hh', '<Esc>')
+-- vim.keymap.set('i', 'hh', '<Esc>') -- handled by better-escape plugin
 
 -- ### Q ###
 -- Disable ex mode - use for formatting
@@ -32,9 +32,9 @@ vim.keymap.set('n', '<leader>/', ':nohlsearch<CR>', {silent = true})
 vim.keymap.set('n', '<leader>=', 'gg=G')
 
 -- ### C ###
--- Tcomment -- TODO
-vim.keymap.set('n', '<Leader>c', '<C-_><C-_>', {remap = true})
-vim.keymap.set('v', '<Leader>c', '<C-_><C-_>', {remap = true})
+-- Commentary
+vim.keymap.set('n', '<Leader>c', ':Commentary<CR>', {remap = true})
+vim.keymap.set('v', '<Leader>c', ':Commentary<CR>', {remap = true})
 -- quickfix list
 vim.keymap.set('n', '<leader>co', ':copen<CR>')
 vim.keymap.set('n', '<leader>cc', ':cclose<CR>')
@@ -105,7 +105,7 @@ vim.keymap.set('n', '<leader>n', ':bnext<CR>')
 vim.keymap.set('n', '<leader>p', ':bprevious<CR>')
 
 -- ### Q ###
-vim.keymap.set('n', '<leader>q', ':BD<CR>')
+vim.keymap.set('n', '<leader>q', ':lua require(\'close_buffers\').delete({ type = \'this\' })<CR>')
 vim.keymap.set('n', '<leader>Q', ':bufdo BD<CR>')
 
 -- ### S ###
@@ -132,7 +132,7 @@ vim.keymap.set('n', '<leader>wm', ':MaximizerToggle!<CR>')
 -- <C-e> -- see FZF above
 
 -- ### N ###
-vim.keymap.set('n', '<C-n>', ':call Nerd()<CR>')
+vim.keymap.set('n', '<C-n>', ':lua NvimTree()<CR>') -- see plug_nvim-tree.lua
 
 -- ### H, J, K, L ###
 -- Move between splits with <c-hjkl>

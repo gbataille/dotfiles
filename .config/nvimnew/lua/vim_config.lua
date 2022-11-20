@@ -1,5 +1,12 @@
 local o = vim.opt
 
+-- advised by nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+o.termguicolors = true
+
 o.encoding='UTF-8'
 
 o.ts=2
@@ -71,10 +78,14 @@ o.wildmode='full'
 o.wildignore:append({'*.swp','*.back','*.class','*/tmp/*','*.o'})
 
 -- Folding setup
-o.foldmethod='syntax'
 o.foldcolumn='3'
 o.foldlevel=99
+-- new setup (using treesitter)
+o.foldmethod='expr'
+o.foldexpr='nvim_treesitter#foldexpr()'
 o.foldenable=false
+-- old config (no treesitter)
+-- o.foldmethod='syntax'
 
 -- Scroll offset
 o.scrolloff=15

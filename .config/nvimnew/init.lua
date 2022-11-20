@@ -24,18 +24,18 @@ require('vim_config')
 -- require('cmp_config') -- autocompletion module
 require("lsp_config") -- lsp
 require("mappings") -- key mappings
--- require("fold")
--- require("netrw")
 
 -- Pluggins
-require("fugitive")
--- require("nerdtree")
--- require("simpylfold")
--- require("vimspector")
+require("plug_fugitive")
+require("plug_lualine")
+require("plug_treesitter")
+require("plug_nvim-tree")
+require("plug_better-escape")
+require("plug_close-buffers")
+require("plug_gitsigns")
 
 -- Filetype specific
--- require("ft/go")
--- require("ft/python")
+require("ft/go")
 
 require("utils")
 require("overrides") -- last to run, overrides what might have been setup by plugins and such
