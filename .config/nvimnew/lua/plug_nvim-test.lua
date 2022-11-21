@@ -26,3 +26,59 @@ require('nvim-test').setup {
     typescriptreact = "nvim-test.runners.jest",
   }
 }
+
+RunSQLServerTest = function()
+  local test = require("nvim-test")
+
+  require('nvim-test.runners.go-test'):setup {
+    command = "go",
+    args = { "test", "-v", "-tags", "integration,acceptance,manual", "-count", "1" },
+    file_pattern = "\\v([^.]+_test)\\.go$", -- determine whether a file is a testfile
+    find_files = { "{name}_test.go" }, -- find testfile for a file
+    env = {
+      TG_DB_HOST="localhost",
+      TG_DB_PORT=1433,
+      TG_DB_USER="sa",
+      TG_DB_PASSWORD="MyPass@word0",
+      TG_DB_DRIVER="sqlserver",
+    },
+  }
+
+  test.run('nearest')
+
+  -- Reset to factory defaults
+  require('nvim-test.runners.go-test'):setup {
+    command = "go",
+    args = { "test", "-v" },
+    file_pattern = "\\v([^.]+_test)\\.go$", -- determine whether a file is a testfile
+    find_files = { "{name}_test.go" }, -- find testfile for a file
+  }
+end
+
+RunCrdbTest = function()
+  local test = require("nvim-test")
+
+  require('nvim-test.runners.go-test'):setup {
+    command = "go",
+    args = { "test", "-v", "-tags", "integration,acceptance,manual", "-count", "1" },
+    file_pattern = "\\v([^.]+_test)\\.go$", -- determine whether a file is a testfile
+    find_files = { "{name}_test.go" }, -- find testfile for a file
+    env = {
+      TG_DB_HOST="localhost",
+      TG_DB_PORT=26257,
+      TG_DB_USER="root",
+      TG_DB_PASSWORD="root",
+      TG_DB_DRIVER="cockroach",
+    },
+  }
+
+  test.run('nearest')
+
+  -- Reset to factory defaults
+  require('nvim-test.runners.go-test'):setup {
+    command = "go",
+    args = { "test", "-v" },
+    file_pattern = "\\v([^.]+_test)\\.go$", -- determine whether a file is a testfile
+    find_files = { "{name}_test.go" }, -- find testfile for a file
+  }
+end

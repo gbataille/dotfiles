@@ -30,6 +30,12 @@ return require('packer').startup(function(use)
   use 'tpope/vim-surround'            -- manage surrounding chars
   use 'tpope/vim-unimpaired'          -- Gives many '[' ']' commands, including ]<space>
 
+  -- Debug setup
+  use 'mfussenegger/nvim-dap'           -- DAP adapter
+  use 'rcarriga/nvim-dap-ui'            -- nvim-dap UI
+  use 'theHamsta/nvim-dap-virtual-text' -- inline preview of variable content in Debug mode
+  -- use 'leoluz/nvim-dap-go'              -- delve template configs
+
   -- Autocompletion stack, with snippets and snippets library
   use({
     "hrsh7th/nvim-cmp",
