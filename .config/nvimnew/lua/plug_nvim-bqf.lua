@@ -2,8 +2,8 @@ require('bqf').setup({
     auto_enable = true,
     auto_resize_height = true, -- highly recommended enable
     preview = {
-        win_height = 12,
-        win_vheight = 12,
+        win_height = 22,
+        win_vheight = 22,
         delay_syntax = 80,
         border_chars = {'┃', '┃', '━', '━', '┏', '┓', '┗', '┛', '█'},
         show_title = false,

@@ -107,6 +107,7 @@ require'lspconfig'.rust_analyzer.setup{
 -- ############## Lua #################
 
 require'lspconfig'.sumneko_lua.setup {
+  on_attach = on_attach,
   settings = {
     Lua = {
       runtime = {

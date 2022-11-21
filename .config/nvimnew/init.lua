@@ -17,7 +17,6 @@ if os.capture('uname') == 'Darwin' then
   require('mac_specific')
 end
 
-require('ensure_packer') -- install packer if not present
 require('plug')          -- Load all vim-plug plugins
 require('vim_config')    -- general vim configuration
 require("lsp_config")    -- lsp
