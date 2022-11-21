@@ -30,11 +30,30 @@ return require('packer').startup(function(use)
   use 'tpope/vim-surround'            -- manage surrounding chars
   use 'tpope/vim-unimpaired'          -- Gives many '[' ']' commands, including ]<space>
 
+  -- Autocompletion stack, with snippets and snippets library
+  use({
+    "hrsh7th/nvim-cmp",
+    requires = {
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'hrsh7th/cmp-buffer' },
+      { 'hrsh7th/cmp-path' },
+      { 'hrsh7th/cmp-cmdline' },
+      {
+        "L3MON4D3/LuaSnip",
+        requires = {
+          "rafamadriz/friendly-snippets",
+          "molleweide/LuaSnip-snippets.nvim",
+        },
+      },
+      { 'saadparwaiz1/cmp_luasnip' },
+    },
+  })
+
   use { 'junegunn/fzf', run = function() vim.fn['fzf#install']() end }                               -- fzf, used by nvim-bqf (and my shell history)
   use { 'nvim-lualine/lualine.nvim', requires = { 'nvim-tree/nvim-web-devicons', opt = true } }     -- status line
+  use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { {'nvim-lua/plenary.nvim'} }} -- Fuzzy finder
   use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' } }                   -- file explorer
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }                                      -- syntax highlighting
-  use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { {'nvim-lua/plenary.nvim'} }} -- Fuzzy finder
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
