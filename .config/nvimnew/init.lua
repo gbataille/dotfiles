@@ -26,13 +26,14 @@ require("lsp_config") -- lsp
 require("mappings") -- key mappings
 
 -- Pluggins
-require("plug_fugitive")
-require("plug_lualine")
-require("plug_treesitter")
-require("plug_nvim-tree")
 require("plug_better-escape")
 require("plug_close-buffers")
+require("plug_fugitive")
 require("plug_gitsigns")
+require("plug_lualine")
+require("plug_nvim-test")
+require("plug_nvim-tree")
+require("plug_treesitter")
 
 -- Filetype specific
 require("ft/go")

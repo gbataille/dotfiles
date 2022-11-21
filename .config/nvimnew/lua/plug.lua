@@ -11,6 +11,9 @@ return require('packer').startup(function(use)
   use  "max397574/better-escape.nvim" -- better handling of 'hh'
   use 'kazhala/close-buffers.nvim'    -- buffer killer
   use 'lewis6991/gitsigns.nvim'       -- git signcolumn annotations
+  use 'lilydjwg/colorizer'            -- overlay colors onto color codes
+  use  'liuchengxu/vim-which-key'     -- show what's behind the started key combination
+  use 'klen/nvim-test'                -- run tests
 
   use { 'nvim-lualine/lualine.nvim', requires = { 'nvim-tree/nvim-web-devicons', opt = true } } -- status line
   use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' } }               -- file explorer
