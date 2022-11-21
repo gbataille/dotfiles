@@ -17,13 +17,15 @@ if os.capture('uname') == 'Darwin' then
   require('mac_specific')
 end
 
-require('ensure_packer')
-require('plug') -- Load all vim-plug plugins
+require('ensure_packer') -- install packer if not present
+require('plug')          -- Load all vim-plug plugins
+require('vim_config')    -- general vim configuration
+require("lsp_config")    -- lsp
+require("mappings")      -- key mappings
+require("qf")            -- nicer looking quickfix window
+
 -- vim.api.nvim_command('source ~/.vimrc') -- legacy
-require('vim_config')
 -- require('cmp_config') -- autocompletion module
-require("lsp_config") -- lsp
-require("mappings") -- key mappings
 
 -- Pluggins
 require("plug_better-escape")

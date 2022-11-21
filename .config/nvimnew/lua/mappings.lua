@@ -73,7 +73,6 @@ vim.keymap.set('n', '<leader>dgo', ':call GoToWindow(g:vimspector_session_window
 -- Telescope
 vim.keymap.set('n', '<leader>e', ':Telescope git_files<CR>')
 vim.keymap.set('n', '<C-e>', ':Telescope find_files<CR>')
-vim.keymap.set('n', '<leader>ff', ':Telescope buffers<CR>')
 
 -- -- FZF (trying to replace with telescope)
 -- vim.keymap.set('n', '<leader>e', ':FZF<CR>')
@@ -81,18 +80,10 @@ vim.keymap.set('n', '<leader>ff', ':Telescope buffers<CR>')
 -- vim.keymap.set('n', '<leader>ff', ':BLines<CR>')
 
 -- ### F ###
--- RipGrep word under cursor
-vim.keymap.set('n', '<leader>f', ':Rg <C-R><C-W><CR>', {remap = true})
+vim.keymap.set('n', '<leader>fb', ':Telescope buffers<CR>')
+vim.keymap.set('n', '<leader>ft', ':Telescope treesitter<CR>')
 
 -- ### G ###
--- GO specific
-vim.api.nvim_create_autocmd('Filetype', {
-  pattern = 'go',
-  callback = function ()
-    vim.keymap.set('n', '<leader>gt', ':GoAlternate<CR>')
-  end
-})
--- Shortcuts for Git actions
 vim.keymap.set('n', '<leader>gg', ':Git<CR>') -- fugitive
 
 -- ### L ###

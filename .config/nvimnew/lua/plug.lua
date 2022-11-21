@@ -14,7 +14,9 @@ return require('packer').startup(function(use)
   use 'lilydjwg/colorizer'            -- overlay colors onto color codes
   use  'liuchengxu/vim-which-key'     -- show what's behind the started key combination
   use 'klen/nvim-test'                -- run tests
+  use 'kevinhwang91/nvim-bqf'         -- better quickfix experience
 
+  use {'junegunn/fzf', run = function() vim.fn['fzf#install']() end }                               -- fzf, used by nvim-bqf (and my shell history)
   use { 'nvim-lualine/lualine.nvim', requires = { 'nvim-tree/nvim-web-devicons', opt = true } }     -- status line
   use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' } }                   -- file explorer
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }                                      -- syntax highlighting
