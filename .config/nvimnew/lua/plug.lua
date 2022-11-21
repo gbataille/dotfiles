@@ -15,8 +15,10 @@ return require('packer').startup(function(use)
   use  'liuchengxu/vim-which-key'     -- show what's behind the started key combination
   use 'klen/nvim-test'                -- run tests
 
-  use { 'nvim-lualine/lualine.nvim', requires = { 'nvim-tree/nvim-web-devicons', opt = true } } -- status line
-  use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' } }               -- file explorer
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }                                  -- syntax highlighting
+  use { 'nvim-lualine/lualine.nvim', requires = { 'nvim-tree/nvim-web-devicons', opt = true } }     -- status line
+  use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' } }                   -- file explorer
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }                                      -- syntax highlighting
+  use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { {'nvim-lua/plenary.nvim'} } -- Fuzzy finder
+}
 
 end)

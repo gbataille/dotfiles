@@ -70,10 +70,15 @@ vim.keymap.set('n', '<leader>dgs', ':call GoToWindow(g:vimspector_session_window
 vim.keymap.set('n', '<leader>dgo', ':call GoToWindow(g:vimspector_session_windows.output)<CR>')
 
 -- ### E ###
--- FZF
-vim.keymap.set('n', '<leader>e', ':FZF<CR>')
-vim.keymap.set('n', '<C-e>', ':GFiles<CR>')
-vim.keymap.set('n', '<leader>ff', ':BLines<CR>')
+-- Telescope
+vim.keymap.set('n', '<leader>e', ':Telescope git_files<CR>')
+vim.keymap.set('n', '<C-e>', ':Telescope find_files<CR>')
+vim.keymap.set('n', '<leader>ff', ':Telescope buffers<CR>')
+
+-- -- FZF (trying to replace with telescope)
+-- vim.keymap.set('n', '<leader>e', ':FZF<CR>')
+-- vim.keymap.set('n', '<C-e>', ':GFiles<CR>')
+-- vim.keymap.set('n', '<leader>ff', ':BLines<CR>')
 
 -- ### F ###
 -- RipGrep word under cursor
