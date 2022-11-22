@@ -54,6 +54,12 @@ require("nvim-tree").setup({
   filters = {
     dotfiles = false,
   },
+  git = {
+    enable = true,
+    ignore = false,
+    show_on_dirs = true,
+    timeout = 400,
+  },
 })
 
 function NvimTree()
