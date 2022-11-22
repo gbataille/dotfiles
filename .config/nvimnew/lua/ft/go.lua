@@ -13,10 +13,10 @@ function OrgImports(wait_ms)
   end
 end
 
-vim.api.nvim_create_autocmd('BufWritePost', {
+vim.api.nvim_create_autocmd('BufWrite', {
   pattern = '*.go',
   callback = function()
-    vim.lsp.buf.format({async = true})
+    vim.lsp.buf.formatting()
     OrgImports(1000)
   end
 })
