@@ -1,4 +1,3 @@
-
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
@@ -48,6 +47,13 @@ local on_attach = function(client, bufnr)
     ]], false)
   end
 end
+
+vim.api.nvim_create_autocmd('BufWrite', {
+  pattern = '*',
+  callback = function()
+    vim.lsp.buf.formatting()
+  end
+})
 
 local nvim_lsp = require('lspconfig')
 
