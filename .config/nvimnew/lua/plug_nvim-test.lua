@@ -27,12 +27,22 @@ require('nvim-test').setup {
   }
 }
 
+local defaultGoTest = function()
+  require('nvim-test.runners.go-test'):setup {
+    command = "grc",
+    args = { "go", "test", "-v" },
+    file_pattern = "\\v([^.]+_test)\\.go$", -- determine whether a file is a testfile
+    find_files = { "{name}_test.go" }, -- find testfile for a file
+  }
+end
+
+-- See mappings.lua
 RunSQLServerTest = function()
   local test = require("nvim-test")
 
   require('nvim-test.runners.go-test'):setup {
-    command = "go",
-    args = { "test", "-v", "-tags", "integration,acceptance,manual", "-count", "1" },
+    command = "grc",
+    args = { "go", "test", "-v", "-tags", "integration,acceptance,manual", "-count", "1" },
     file_pattern = "\\v([^.]+_test)\\.go$", -- determine whether a file is a testfile
     find_files = { "{name}_test.go" }, -- find testfile for a file
     env = {
@@ -46,21 +56,16 @@ RunSQLServerTest = function()
 
   test.run('nearest')
 
-  -- Reset to factory defaults
-  require('nvim-test.runners.go-test'):setup {
-    command = "go",
-    args = { "test", "-v" },
-    file_pattern = "\\v([^.]+_test)\\.go$", -- determine whether a file is a testfile
-    find_files = { "{name}_test.go" }, -- find testfile for a file
-  }
+  defaultGoTest()
 end
 
+-- See mappings.lua
 RunCrdbTest = function()
   local test = require("nvim-test")
 
   require('nvim-test.runners.go-test'):setup {
-    command = "go",
-    args = { "test", "-v", "-tags", "integration,acceptance,manual", "-count", "1" },
+    command = "grc",
+    args = { "go", "test", "-v", "-tags", "integration,acceptance,manual", "-count", "1" },
     file_pattern = "\\v([^.]+_test)\\.go$", -- determine whether a file is a testfile
     find_files = { "{name}_test.go" }, -- find testfile for a file
     env = {
@@ -74,11 +79,7 @@ RunCrdbTest = function()
 
   test.run('nearest')
 
-  -- Reset to factory defaults
-  require('nvim-test.runners.go-test'):setup {
-    command = "go",
-    args = { "test", "-v" },
-    file_pattern = "\\v([^.]+_test)\\.go$", -- determine whether a file is a testfile
-    find_files = { "{name}_test.go" }, -- find testfile for a file
-  }
+  defaultGoTest()
 end
+
+defaultGoTest() -- init go test with grc for colors
