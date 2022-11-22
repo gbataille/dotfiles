@@ -40,6 +40,7 @@ require("plug_nvim-dap-ui")
 require("plug_nvim-dap-virtual-text")
 require("plug_nvim-test")
 require("plug_nvim-tree")
+require("plug_telescope")
 require("plug_treesitter")
 
 -- Filetype specific
