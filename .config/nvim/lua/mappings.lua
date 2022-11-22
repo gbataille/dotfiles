@@ -7,23 +7,21 @@ vim.keymap.set('n', '<C-Space>', 'zA')
 vim.keymap.set('i', '<expr><TAB>', 'pumvisible() ? "\\<C-n>" : "\\<TAB>"')
 
 -- ### H ###
-vim.keymap.set('i', 'hh', '<Esc>')
-
--- ### Y ###
-vim.keymap.set('n', 'Y', 'yy')
-vim.keymap.set('v', 'Y', 'yy')
+-- vim.keymap.set('i', 'hh', '<Esc>') -- handled by better-escape plugin
 
 -- ### Q ###
 -- Disable ex mode - use for formatting
 vim.keymap.set('n', 'Q', 'gq', {remap = true})
 
+-- ### Y ###
+vim.keymap.set('n', 'Y', 'yy')
+vim.keymap.set('v', 'Y', 'yy')
 
 -- ################
 -- #    LEADER    #
 -- ################
 -- Plugin to see available remaps
 vim.keymap.set('n', '<Leader>', ':WhichKey ","<CR>', {silent = true})
-
 
 -- ### Special Char ###
 -- Remove spaces on empty lines
@@ -33,11 +31,10 @@ vim.keymap.set('n', '<leader>/', ':nohlsearch<CR>', {silent = true})
 -- reindent the entire buffer
 vim.keymap.set('n', '<leader>=', 'gg=G')
 
-
 -- ### C ###
--- Tcomment
-vim.keymap.set('n', '<Leader>c', '<C-_><C-_>', {remap = true})
-vim.keymap.set('v', '<Leader>c', '<C-_><C-_>', {remap = true})
+-- Commentary
+vim.keymap.set('n', '<Leader>c', ':Commentary<CR>', {remap = true})
+vim.keymap.set('v', '<Leader>c', ':Commentary<CR>', {remap = true})
 -- quickfix list
 vim.keymap.set('n', '<leader>co', ':copen<CR>')
 vim.keymap.set('n', '<leader>cc', ':cclose<CR>')
@@ -45,53 +42,68 @@ vim.keymap.set('n', '<leader>cn', ':cnext<CR>')
 vim.keymap.set('n', '<leader>cp', ':cprevious<CR>')
 
 -- ### D ###
+-- Shortcuts for debugging (nvim-dap)
+vim.keymap.set('n', '<leader>dbp', '<Cmd>lua require("dap").toggle_breakpoint()<CR>')
+vim.keymap.set('n', '<leader>dbc', '<Cmd>lua require("dap").clear_breakpoints()<CR>')
+vim.keymap.set('n', '<leader>dlbp', '<Cmd>lua require("dap").list_breakpoints()<CR>')
+vim.keymap.set('n', '<leader>dc', '<Cmd>lua require("dap").continue()<CR>')
+vim.keymap.set('n', '<leader>dd', '<Cmd>lua require("dap").continue()<CR>')
+vim.keymap.set('n', '<leader>dfd', '<Cmd>lua require("dap").down()<CR>')
+vim.keymap.set('n', '<leader>dfu', '<Cmd>lua require("dap").up()<CR>')
+vim.keymap.set('n', '<leader>de', '<Cmd>lua require("dap").repl.open()<CR>')
+vim.keymap.set('n', '<leader>di', '<Cmd>lua require("dapui").eval()<CR>', {remap = true})
+vim.keymap.set('n', '<leader>dtc', '<Cmd>lua require("dap").run_to_cursor()<CR>', {remap = true})
+vim.keymap.set('n', '<leader>dn', '<Cmd>lua require("dap").step_over()<CR>')
+vim.keymap.set('n', '<leader>dq', '<Cmd>lua require("dap").terminate()<CR><Cmd>lua require("dapui").close()<CR>')
+vim.keymap.set('n', '<leader>du', '<Cmd>lua require("dapui").close()<CR>')
+vim.keymap.set('n', '<leader>dsi', '<Cmd>lua require("dap").step_into()<CR>')
+vim.keymap.set('n', '<leader>dso', '<Cmd>lua require("dap").step_over()<CR>')
+vim.keymap.set('n', '<leader>dsu', '<Cmd>lua require("dap").step_out()<CR>')
+
 -- Shortcuts for vimspector
-vim.keymap.set('n', '<leader>dbp', ':call vimspector#ToggleBreakpoint()<CR>')
-vim.keymap.set('n', '<leader>dbc', ':call vimspector#ClearBreakpoints()<CR>')
-vim.keymap.set('n', '<leader>dlbp', ':call vimspector#ListBreakpoints()<CR>')
-vim.keymap.set('n', '<leader>dc', ':call vimspector#Continue()<CR>')
-vim.keymap.set('n', '<leader>dd', ':call vimspector#Launch()<CR>')
-vim.keymap.set('n', '<leader>dfd', ':call vimspector#DownFrame()<CR>')
-vim.keymap.set('n', '<leader>dfu', ':call vimspector#UpFrame()<CR>')
-vim.keymap.set('n', '<leader>de', ':VimspectorEval ')
-vim.keymap.set('n', '<leader>di', '<Plug>VimspectorBalloonEval', {remap = true})
-vim.keymap.set('x', '<leader>di', '<Plug>VimspectorBalloonEval', {remap = true})
-vim.keymap.set('n', '<leader>dn', ':call vimspector#StepOver()<CR>')
-vim.keymap.set('n', '<leader>dq', ':call GoToWindow(win_getid(5))<CR>:BD!<CR>:call vimspector#Reset()<CR>')
-vim.keymap.set('n', '<leader>dr', ':call vimspector#Restart()<CR>')
-vim.keymap.set('n', '<leader>dtc', ':call vimspector#RunToCursor()<CR>')
-vim.keymap.set('n', '<leader>dsi', ':call vimspector#StepInto()<CR>')
-vim.keymap.set('n', '<leader>dso', ':call vimspector#StepOver()<CR>')
-vim.keymap.set('n', '<leader>dsu', ':call vimspector#StepOut()<CR>')
-vim.keymap.set('n', '<leader>dw', ':VimspectorWatch ')
-vim.keymap.set('n', '<leader>dx', ':call vimspector#Stop()<CR>')
-vim.keymap.set('n', '<leader>dgc', ':call GoToWindow(g:vimspector_session_windows.code)<CR>')
-vim.keymap.set('n', '<leader>dgt', ':call GoToWindow(g:vimspector_session_windows.tagpage)<CR>')
-vim.keymap.set('n', '<leader>dgv', ':call GoToWindow(g:vimspector_session_windows.variables)<CR>')
-vim.keymap.set('n', '<leader>dgw', ':call GoToWindow(g:vimspector_session_windows.watches)<CR>')
-vim.keymap.set('n', '<leader>dgs', ':call GoToWindow(g:vimspector_session_windows.stack_trace)<CR>')
-vim.keymap.set('n', '<leader>dgo', ':call GoToWindow(g:vimspector_session_windows.output)<CR>')
+-- vim.keymap.set('n', '<leader>dbp', ':call vimspector#ToggleBreakpoint()<CR>')
+-- vim.keymap.set('n', '<leader>dbc', ':call vimspector#ClearBreakpoints()<CR>')
+-- vim.keymap.set('n', '<leader>dlbp', ':call vimspector#ListBreakpoints()<CR>')
+-- vim.keymap.set('n', '<leader>dc', ':call vimspector#Continue()<CR>')
+-- vim.keymap.set('n', '<leader>dd', ':call vimspector#Launch()<CR>')
+-- vim.keymap.set('n', '<leader>dfd', ':call vimspector#DownFrame()<CR>')
+-- vim.keymap.set('n', '<leader>dfu', ':call vimspector#UpFrame()<CR>')
+-- vim.keymap.set('n', '<leader>de', ':VimspectorEval ')
+-- vim.keymap.set('n', '<leader>di', '<Plug>VimspectorBalloonEval', {remap = true})
+-- vim.keymap.set('x', '<leader>di', '<Plug>VimspectorBalloonEval', {remap = true})
+-- vim.keymap.set('n', '<leader>dn', ':call vimspector#StepOver()<CR>')
+-- vim.keymap.set('n', '<leader>dq', ':call GoToWindow(win_getid(5))<CR>:BD!<CR>:call vimspector#Reset()<CR>')
+-- vim.keymap.set('n', '<leader>dr', ':call vimspector#Restart()<CR>')
+-- vim.keymap.set('n', '<leader>dtc', ':call vimspector#RunToCursor()<CR>')
+-- vim.keymap.set('n', '<leader>dsi', ':call vimspector#StepInto()<CR>')
+-- vim.keymap.set('n', '<leader>dso', ':call vimspector#StepOver()<CR>')
+-- vim.keymap.set('n', '<leader>dsu', ':call vimspector#StepOut()<CR>')
+-- vim.keymap.set('n', '<leader>dw', ':VimspectorWatch ')
+-- vim.keymap.set('n', '<leader>dx', ':call vimspector#Stop()<CR>')
+-- vim.keymap.set('n', '<leader>dgc', ':call GoToWindow(g:vimspector_session_windows.code)<CR>')
+-- vim.keymap.set('n', '<leader>dgt', ':call GoToWindow(g:vimspector_session_windows.tagpage)<CR>')
+-- vim.keymap.set('n', '<leader>dgv', ':call GoToWindow(g:vimspector_session_windows.variables)<CR>')
+-- vim.keymap.set('n', '<leader>dgw', ':call GoToWindow(g:vimspector_session_windows.watches)<CR>')
+-- vim.keymap.set('n', '<leader>dgs', ':call GoToWindow(g:vimspector_session_windows.stack_trace)<CR>')
+-- vim.keymap.set('n', '<leader>dgo', ':call GoToWindow(g:vimspector_session_windows.output)<CR>')
 
 -- ### E ###
--- FZF
-vim.keymap.set('n', '<leader>e', ':FZF<CR>')
-vim.keymap.set('n', '<C-e>', ':GFiles<CR>')
-vim.keymap.set('n', '<leader>ff', ':BLines<CR>')
+-- Telescope
+vim.keymap.set('n', '<leader>e', ':Telescope find_files<CR>')
+vim.keymap.set('n', '<C-e>', ':Telescope git_files<CR>')
+
+-- -- FZF (trying to replace with telescope)
+-- vim.keymap.set('n', '<leader>e', ':FZF<CR>')
+-- vim.keymap.set('n', '<C-e>', ':GFiles<CR>')
+-- vim.keymap.set('n', '<leader>ff', ':BLines<CR>')
 
 -- ### F ###
--- RipGrep word under cursor
-vim.keymap.set('n', '<leader>f', ':Rg <C-R><C-W><CR>', {remap = true})
+vim.keymap.set('n', '<leader>ff', ':Telescope find_files<CR>')
+vim.keymap.set('n', '<leader>fb', ':Telescope buffers<CR>')
+vim.keymap.set('n', '<leader>ft', ':Telescope treesitter<CR>')
 
 -- ### G ###
--- GO specific
-vim.api.nvim_create_autocmd('Filetype', {
-  pattern = 'go',
-  callback = function ()
-    vim.keymap.set('n', '<leader>gt', ':GoAlternate<CR>')
-  end
-})
--- Shortcuts for Git actions
-vim.keymap.set('n', '<leader>gg', ':Git<CR>')
+vim.keymap.set('n', '<leader>gg', ':Git<CR>') -- fugitive
 
 -- ### L ###
 vim.keymap.set('n', '<leader>lb', ':ls<CR>:b<Space>')
@@ -108,8 +120,8 @@ vim.keymap.set('n', '<leader>n', ':bnext<CR>')
 vim.keymap.set('n', '<leader>p', ':bprevious<CR>')
 
 -- ### Q ###
-vim.keymap.set('n', '<leader>q', ':BD<CR>')
-vim.keymap.set('n', '<leader>Q', ':bufdo BD<CR>')
+vim.keymap.set('n', '<leader>q', ':lua require(\'close_buffers\').delete({ type = \'this\' })<CR>')
+vim.keymap.set('n', '<leader>Q', ':lua require("close_buffers").wipe({ type = "all", force = true })<CR>')
 
 -- ### S ###
 vim.keymap.set('n', '<leader>s', ':set spell!<CR>', {silent = true})
@@ -117,8 +129,8 @@ vim.keymap.set('n', '<leader>s', ':set spell!<CR>', {silent = true})
 -- ### T ###
 -- Test launcher (vim-test)
 vim.keymap.set('n', '<leader>tt', ':TestNearest<CR>')
-vim.keymap.set('n', '<leader>ttc', ':call RunCrdbTestsNearest()<CR>')
-vim.keymap.set('n', '<leader>tts', ':call RunSQLServerTestsNearest()<CR>')
+vim.keymap.set('n', '<leader>ttc', ':lua RunCrdbTest()<CR>')
+vim.keymap.set('n', '<leader>tts', ':lua RunSQLServerTest()<CR>')
 vim.keymap.set('n', '<leader>tf', ':TestFile<CR>')
 vim.keymap.set('n', '<leader>tl', ':TestLast<CR>')
 vim.keymap.set('n', '<leader>tv', ':TestVisit<CR>')
@@ -131,9 +143,11 @@ vim.keymap.set('n', '<leader>wm', ':MaximizerToggle!<CR>')
 -- #     CTRL     #
 -- ################
 
--- ### N ###
+-- ### E ###
 -- <C-e> -- see FZF above
-vim.keymap.set('n', '<C-n>', ':call Nerd()<CR>')
+
+-- ### N ###
+vim.keymap.set('n', '<C-n>', ':lua NvimTree()<CR>') -- see plug_nvim-tree.lua
 
 -- ### H, J, K, L ###
 -- Move between splits with <c-hjkl>

@@ -1,151 +1,71 @@
-local Plug = vim.fn['plug#']
-
-function file_exists(name)
-   local f=io.open(name,"r")
-   if f~=nil then io.close(f) return true else return false end
-end
-
-local plugPath = os.getenv('HOME') .. '/.local/share/nvim/site/autoload/plug.vim'
--- If vim-plug is not yet present, download it and install all the plugins
-if not file_exists(plugPath) then
-  ok, t, v = os.execute('curl -fLo '..plugPath..' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim > /dev/null 2>&1')
-  if not ok then
-    print(t)
-    os.exit(v)
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
   end
-  vim.api.nvim_exec('autocmd VimEnter * PlugInstall --sync | source $MYVIMRC', false)
+  return false
 end
 
+local packer_bootstrap = ensure_packer()
 
-vim.call('plug#begin', '~/.local/share/nvim/site/plugged')
+return require('packer').startup(function(use)
+  use 'wbthomason/packer.nvim'        -- Packer can manage itself
 
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-fugitive'
--- Plug 'vim-ruby/vim-ruby' -- in polyglot
-Plug 'tpope/vim-rails'
--- Plug 'tpope/vim-markdown' -- in polyglot
-Plug 'tpope/vim-surround'
-Plug 'godlygeek/tabular'
-Plug 'tomtom/tcomment_vim'
-Plug 'vim-scripts/bufkill.vim'
-Plug 'tpope/vim-unimpaired'
-Plug 'mattn/webapi-vim'
-Plug 'mattn/gist-vim'
--- Plug 'tpope/vim-sleuth' -- in polyglot
-Plug 'mattn/calendar-vim'
-Plug 'vim-scripts/utl.vim'
-Plug 'airblade/vim-rooter'
-Plug 'airblade/vim-gitgutter'
--- Plug 'pangloss/vim-javascript' -- in polyglot
--- Plug 'mxw/vim-jsx' -- in polyglot
-Plug 'vim-scripts/gitignore'
-Plug 'majutsushi/tagbar'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'Konfekt/FastFold'
+  use  "max397574/better-escape.nvim"               -- better handling of 'hh'
+  use  'liuchengxu/vim-which-key'                   -- show what's behind the started key combination
+  use 'EdenEast/nightfox.nvim'                      -- colorscheme
+  use 'godlygeek/tabular'                           -- table layout
+  use 'kazhala/close-buffers.nvim'                  -- buffer killer
+  use 'kevinhwang91/nvim-bqf'                       -- better quickfix experience
+  use 'klen/nvim-test'                              -- run tests
+  use 'lewis6991/gitsigns.nvim'                     -- git signcolumn annotations
+  use 'lilydjwg/colorizer'                          -- overlay colors onto color codes
+  use 'neovim/nvim-lspconfig'                       -- Configurations for Nvim LSP
+  use 'nvim-tree/nvim-web-devicons'                 -- font with icons
+  use 'tpope/vim-commentary'                        -- comment lines in bulk
+  use 'tpope/vim-fugitive'                          -- GIT
+  use 'tpope/vim-surround'                          -- manage surrounding chars
+  use 'tpope/vim-unimpaired'                        -- Gives many '[' ']' commands, including ]<space>
+  use 'nvim-treesitter/nvim-treesitter-textobjects' -- enable semantically aware navigation
+  use 'nvim-treesitter/nvim-treesitter-context'     -- continue to show the context at the top
 
--- disabled due to possible conflict (yet unexplained) with https://github.com/hrsh7th/nvim-cmp/issues/858
--- Plug 'tpope/vim-eunuch'
 
--- Typescript
--- Plug 'leafgarland/typescript-vim'  -- in polyglot
-Plug 'peitalin/vim-jsx-typescript'
+  -- Debug setup
+  use 'mfussenegger/nvim-dap'           -- DAP adapter
+  use 'rcarriga/nvim-dap-ui'            -- nvim-dap UI
+  use 'theHamsta/nvim-dap-virtual-text' -- inline preview of variable content in Debug mode
 
--- Editorconfig
-Plug 'editorconfig/editorconfig-vim'
+  -- Autocompletion stack, with snippets and snippets library
+  use({
+    "hrsh7th/nvim-cmp",
+    requires = {
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'hrsh7th/cmp-buffer' },
+      { 'hrsh7th/cmp-path' },
+      { 'hrsh7th/cmp-cmdline' },
+      {
+        "L3MON4D3/LuaSnip",
+        requires = {
+          "rafamadriz/friendly-snippets",
+          "molleweide/LuaSnip-snippets.nvim",
+        },
+      },
+      { 'saadparwaiz1/cmp_luasnip' },
+    },
+  })
 
--- Python
-Plug 'tmhedberg/SimpylFold'
-Plug 'hynek/vim-python-pep8-indent'
+  use { 'junegunn/fzf', run = function() vim.fn['fzf#install']() end }                               -- fzf, used by nvim-bqf (and my shell history)
+  use { 'nvim-lualine/lualine.nvim', requires = { 'nvim-tree/nvim-web-devicons', opt = true } }     -- status line
+  use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { {'nvim-lua/plenary.nvim'} }} -- Fuzzy finder
+  use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' } }                   -- file explorer
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }                                      -- syntax highlighting
 
--- RGB
-Plug 'lilydjwg/colorizer'
-
--- Terraform
--- Plug 'hashivim/vim-terraform' -- in polyglot
-
--- Plantuml
--- Plug 'aklt/plantuml-syntax' -- in polyglot
-
--- Scala
--- Plug 'derekwyatt/vim-scala' -- in polyglot
-
--- Nix
--- Plug 'LnL7/vim-nix' -- in polyglot
-
--- Haskell
-Plug 'enomsg/vim-haskellConcealPlus'
-Plug 'sdiehl/vim-ormolu'    -- Formatting
-
--- Graphql
--- Plug 'jparise/vim-graphql' -- in polyglot
-
--- Rust
-Plug 'rust-lang/rust.vim'
-
--- FZF
-Plug('junegunn/fzf', { dir = '~/.fzf', ['do'] = vim.fn['fzf#install'] })
-Plug 'junegunn/fzf.vim'
-
--- Dash integration
-Plug 'rizzatti/dash.vim'
-
--- Snippets
-Plug 'liuchengxu/vim-which-key'
-
--- TOML
--- Plug 'cespare/vim-toml' -- in polyglot
-
--- cursor location
-Plug 'edluffy/specs.nvim'
-
--- colorscheme
-Plug 'EdenEast/nightfox.nvim'
-
--- Preview content of registers
--- https://github.com/junegunn/vim-peekaboo/issues/63
--- Plug 'junegunn/vim-peekaboo'
-
--- Docker
--- Plug 'ekalinin/Dockerfile.vim'  -- in polyglot
-
--- Debugging
-Plug 'puremourning/vimspector'
-
--- Maximize a window
-Plug 'szw/vim-maximizer'
-
--- Treeview
-Plug 'preservim/nerdtree'
-Plug 'ryanoasis/vim-devicons'
-
--- Generic Nvim LSP
-Plug 'neovim/nvim-lspconfig'
-
--- Snippets
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
--- Snippets library
-Plug 'rafamadriz/friendly-snippets'
-
--- Completion plugin
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
-
--- Go tools
-Plug('fatih/vim-go', { ['do'] = vim.fn[':GoInstallBinaries'] })
-
--- Test launcher
-Plug 'vim-test/vim-test'
-
--- Performance issues on large file. The technique used might be a bit brutal
--- " Go collapse of errors
--- Plug 'Snyssfx/goerr-nvim'
-
-vim.call('plug#end')
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- Put this at the end after all plugins
+  if packer_bootstrap then
+    require('packer').sync()
+  end
+end)

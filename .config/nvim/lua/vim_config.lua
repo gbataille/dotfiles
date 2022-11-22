@@ -1,5 +1,12 @@
 local o = vim.opt
 
+-- advised by nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+o.termguicolors = true
+
 o.encoding='UTF-8'
 
 o.ts=2
@@ -48,7 +55,6 @@ o.mat=5
 -- Show $ at end of line and trailing space as ~
 o.listchars={tab='¬ ',trail='~',extends='>',precedes='<'}
 o.list=true
--- o.lcs={tab='¬\\',trail='~',extends='>',precedes='<'}
 -- No blinking .
 o.visualbell=false
 -- No noise.
@@ -60,8 +66,8 @@ o.cul=true
 -- maxmemory for regex, in KiB (default to 1000)
 o.mmp=10000
 -- Small updatetime for CursorHold events to trigger "fast". Used by LSP for document_highlight
-o.updatetime=1000
-o.timeoutlen=1000
+o.updatetime=250
+o.timeoutlen=250
 
 -- Show branch name in the status bar
 o.statusline='%<%f\\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\\ %P'
@@ -72,16 +78,19 @@ o.wildmode='full'
 o.wildignore:append({'*.swp','*.back','*.class','*/tmp/*','*.o'})
 
 -- Folding setup
-o.foldmethod='syntax'
 o.foldcolumn='3'
 o.foldlevel=99
+-- new setup (using treesitter)
+o.foldmethod='expr'
+o.foldexpr='nvim_treesitter#foldexpr()'
 o.foldenable=false
+-- old config (no treesitter)
+-- o.foldmethod='syntax'
 
 -- Scroll offset
 o.scrolloff=15
 o.sidescrolloff=15
 
--- Experimental
 o.signcolumn='auto'
 o.colorcolumn='120'
 
@@ -121,12 +130,8 @@ vim.api.nvim_create_autocmd('BufRead', {
   ]]
 })
 
--- Set it as autocmd to override the ft autocmd from some plugins
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'ruby,haskell,java,markdown',
-  command = 'set textwidth=100'
-})
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'javascript,html,text,proto,go,json',
-  command = 'set textwidth=0'
+-- Force refolding on file open (bug in telescope ?) -- https://github.com/nvim-telescope/telescope.nvim/issues/699
+vim.api.nvim_create_autocmd({ "BufRead" }, {
+    pattern = { "*" },
+    command = "normal zx",
 })

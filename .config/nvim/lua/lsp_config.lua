@@ -1,3 +1,4 @@
+
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
@@ -27,17 +28,14 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'cq', '<cmd>lua vim.diagnostic.set_loclist()<CR>', opts)
 
   -- Set some keybinds conditional on server capabilities
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.document_formatting then
     buf_set_keymap("n", "gff", "<cmd>lua vim.lsp.buf.format({async=true})<CR>", opts)
-  elseif client.resolved_capabilities.document_range_formatting then
+  elseif client.server_capabilities.document_range_formatting then
     buf_set_keymap("n", "gff", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
   end
 
-  -- hi LspReferenceRead cterm=bold ctermbg=DarkMagenta guibg=LightYellow
-  -- hi LspReferenceText cterm=bold ctermbg=DarkMagenta guibg=LightYellow
-  -- hi LspReferenceWrite cterm=bold ctermbg=DarkMagenta guibg=LightYellow
   -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.document_highlight then
     vim.api.nvim_exec([[
       hi LspReferenceRead cterm=bold guibg=Blue
       hi LspReferenceText cterm=bold guibg=Green
@@ -52,6 +50,9 @@ local on_attach = function(client, bufnr)
 end
 
 local nvim_lsp = require('lspconfig')
+
+-- ############## GO #################
+
 nvim_lsp.gopls.setup{
   cmd = {'gopls'},
   -- for postfix snippets and analyzers
@@ -80,6 +81,8 @@ nvim_lsp.golangci_lint_ls.setup{
     root_dir = nvim_lsp.util.root_pattern('go.mod', '.golangci.yml', '.golangci.yaml', '.git'),
 }
 
+-- ############## Python #################
+
 require'lspconfig'.pyright.setup{
   on_attach = on_attach,
     flags = {
@@ -88,27 +91,40 @@ require'lspconfig'.pyright.setup{
     }
 }
 
+-- ############## C #################
+
 require'lspconfig'.ccls.setup{}
 -- require'lspconfig'.clangd.setup{}
 
-function OrgImports(wait_ms)
-  local params = vim.lsp.util.make_range_params()
-  params.context = {only = {"source.organizeImports"}}
-  local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, wait_ms)
-  for _, res in pairs(result or {}) do
-    for _, r in pairs(res.result or {}) do
-      if r.edit then
-        vim.lsp.util.apply_workspace_edit(r.edit, "utf-16")
-      else
-        vim.lsp.buf.execute_command(r.command)
-      end
-    end
-  end
-end
+-- ############## Rust #################
 
 require'lspconfig'.rust_analyzer.setup{
   cmd = { "rust-analyzer" },
-  root_dir = nvim_lsp.util.root_pattern("Cargo.toml", "rust-project.json", ".git", ".root")
+  root_dir = nvim_lsp.util.root_pattern("Cargo.toml", "rust-project.json", ".git", ".root"),
+  on_attach = on_attach,
+}
+
+-- ############## Lua #################
+
+require'lspconfig'.sumneko_lua.setup {
+  on_attach = on_attach,
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT', -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+      },
+      diagnostics = {
+        globals = {'vim'}, -- Get the language server to recognize the `vim` global
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true), -- Make the server aware of Neovim runtime files
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
 }
 
 --vim.lsp.set_log_level("debug")
