@@ -8,19 +8,19 @@ vim.api.nvim_create_autocmd('FileType', {
 
 local dap_breakpoint = {
   error = {
-    text = "🟥",
+    text = "🛑",
     texthl = "LspDiagnosticsSignError",
     linehl = "",
     numhl = "",
   },
   rejected = {
-    text = "",
+    text = "🐛",
     texthl = "LspDiagnosticsSignHint",
     linehl = "",
     numhl = "",
   },
   stopped = {
-    text = "⭐️",
+    text = "🌟",
     texthl = "LspDiagnosticsSignInformation",
     linehl = "DiagnosticUnderlineInfo",
     numhl = "LspDiagnosticsSignInformation",
@@ -38,6 +38,9 @@ dap.adapters.delve = {
   executable = {
     command = 'dlv',
     args = {'dap', '-l', '127.0.0.1:${port}'},
+    options = {
+      initialize_timeout_sec = 30,
+    },
   }
 }
 
@@ -115,9 +118,8 @@ dap.configurations.go = {
     type = "delve",
     name = "1_blocksd",
     request = "launch",
-    program = "${cwd}/cmd/tg-blocksd",
+    program = "./cmd/tg-blocksd",
     args = get_start,
-    mode = "debug",
     showLog = true,
     trace = "log"
   },
@@ -125,9 +127,10 @@ dap.configurations.go = {
     type = "delve",
     name = "2_validatord",
     request = "launch",
-    program = "${cwd}/cmd/tg-validatord",
-    args = get_start,
     mode = "debug",
+    program = "./cmd/tg-validatord",
+    args = get_start,
+    showLog = true,
     trace = "log"
   },
   {
@@ -170,7 +173,7 @@ dap.configurations.go = {
   },
   {
     type = "delve",
-    name = "5_go-single-test-crdb",
+    name = "5_go-all-test-crdb",
     request = "launch",
     program = "${fileDirname}",
     cwd = "${fileDirname}",
@@ -189,7 +192,7 @@ dap.configurations.go = {
   },
   {
     type = "delve",
-    name = "6_go-single-test-sqlserver",
+    name = "6_go-all-test-sqlserver",
     request = "launch",
     program = "${fileDirname}",
     cwd = "${fileDirname}",

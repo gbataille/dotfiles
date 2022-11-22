@@ -42,6 +42,8 @@ require("plug_nvim-test")
 require("plug_nvim-tree")
 require("plug_telescope")
 require("plug_treesitter")
+require("plug_nvim-treesitter-context")
+require("plug_nvim-treesitter-textobjects")
 
 -- Filetype specific
 require("ft/go")

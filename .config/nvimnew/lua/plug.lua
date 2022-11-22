@@ -14,27 +14,29 @@ local packer_bootstrap = ensure_packer()
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'        -- Packer can manage itself
 
-  use  "max397574/better-escape.nvim" -- better handling of 'hh'
-  use  'liuchengxu/vim-which-key'     -- show what's behind the started key combination
-  use 'EdenEast/nightfox.nvim'        -- colorscheme
-  use 'godlygeek/tabular'             -- table layout
-  use 'kazhala/close-buffers.nvim'    -- buffer killer
-  use 'kevinhwang91/nvim-bqf'         -- better quickfix experience
-  use 'klen/nvim-test'                -- run tests
-  use 'lewis6991/gitsigns.nvim'       -- git signcolumn annotations
-  use 'lilydjwg/colorizer'            -- overlay colors onto color codes
-  use 'neovim/nvim-lspconfig'         -- Configurations for Nvim LSP
-  use 'nvim-tree/nvim-web-devicons'   -- font with icons
-  use 'tpope/vim-commentary'          -- comment lines in bulk
-  use 'tpope/vim-fugitive'            -- GIT
-  use 'tpope/vim-surround'            -- manage surrounding chars
-  use 'tpope/vim-unimpaired'          -- Gives many '[' ']' commands, including ]<space>
+  use  "max397574/better-escape.nvim"               -- better handling of 'hh'
+  use  'liuchengxu/vim-which-key'                   -- show what's behind the started key combination
+  use 'EdenEast/nightfox.nvim'                      -- colorscheme
+  use 'godlygeek/tabular'                           -- table layout
+  use 'kazhala/close-buffers.nvim'                  -- buffer killer
+  use 'kevinhwang91/nvim-bqf'                       -- better quickfix experience
+  use 'klen/nvim-test'                              -- run tests
+  use 'lewis6991/gitsigns.nvim'                     -- git signcolumn annotations
+  use 'lilydjwg/colorizer'                          -- overlay colors onto color codes
+  use 'neovim/nvim-lspconfig'                       -- Configurations for Nvim LSP
+  use 'nvim-tree/nvim-web-devicons'                 -- font with icons
+  use 'tpope/vim-commentary'                        -- comment lines in bulk
+  use 'tpope/vim-fugitive'                          -- GIT
+  use 'tpope/vim-surround'                          -- manage surrounding chars
+  use 'tpope/vim-unimpaired'                        -- Gives many '[' ']' commands, including ]<space>
+  use 'nvim-treesitter/nvim-treesitter-textobjects' -- enable semantically aware navigation
+  use 'nvim-treesitter/nvim-treesitter-context'     -- continue to show the context at the top
+
 
   -- Debug setup
   use 'mfussenegger/nvim-dap'           -- DAP adapter
   use 'rcarriga/nvim-dap-ui'            -- nvim-dap UI
   use 'theHamsta/nvim-dap-virtual-text' -- inline preview of variable content in Debug mode
-  -- use 'leoluz/nvim-dap-go'              -- delve template configs
 
   -- Autocompletion stack, with snippets and snippets library
   use({
