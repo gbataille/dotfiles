@@ -2,7 +2,8 @@ require("nvim-tree").setup({
   sort_by = "case_sensitive",
   reload_on_bufenter = true,
   view = {
-    adaptive_size = true,
+    adaptive_size = false,
+    width = 45,
     mappings = {
       list = {
         { key = "u", action = "dir_up" },
