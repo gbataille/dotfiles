@@ -3,12 +3,13 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
-  local opts = { noremap=true, silent=true }
+  local opts = { noremap = true, silent = true }
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'ga', '<Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
@@ -21,10 +22,11 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'cD', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   buf_set_keymap('n', 'crn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', 'ge', '<cmd>lua vim.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', 'gee', '<cmd>lua vim.diagnostic.show_line_diagnostics()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', 'cq', '<cmd>lua vim.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', 'gel', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+  buf_set_keymap('n', 'geq', '<cmd>lua vim.diagnostic.setqflist()<CR>', opts)
 
   -- Set some keybinds conditional on server capabilities
   if client.server_capabilities.document_formatting then
@@ -59,52 +61,52 @@ local nvim_lsp = require('lspconfig')
 
 -- ############## GO #################
 
-nvim_lsp.gopls.setup{
-  cmd = {'gopls'},
+nvim_lsp.gopls.setup {
+  cmd = { 'gopls' },
   -- for postfix snippets and analyzers
   capabilities = capabilities,
-      settings = {
-        gopls = {
-          experimentalPostfixCompletions = true,
-          analyses = {
-            unusedparams = true,
-            shadow = false,
-         },
-         staticcheck = true,
-         buildFlags = {"-tags=unit,integration,acceptance,greg,manual"},
-         env = {GOFLAGS="-tags=unit,integration,acceptance,greg,manual"},
-        },
+  settings = {
+    gopls = {
+      experimentalPostfixCompletions = true,
+      analyses = {
+        unusedparams = true,
+        shadow = false,
       },
+      staticcheck = true,
+      buildFlags = { "-tags=unit,integration,acceptance,greg,manual" },
+      env = { GOFLAGS = "-tags=unit,integration,acceptance,greg,manual" },
+    },
+  },
   on_attach = on_attach,
 }
 
-nvim_lsp.golangci_lint_ls.setup{
-    cmd = { "golangci-lint-langserver" },
-    filetypes = { "go", "gomod" },
-    init_options = {
-      command = { "golangci-lint", "run", "--out-format", "json"},
-    },
-    root_dir = nvim_lsp.util.root_pattern('go.mod', '.golangci.yml', '.golangci.yaml', '.git'),
+nvim_lsp.golangci_lint_ls.setup {
+  cmd = { "golangci-lint-langserver" },
+  filetypes = { "go", "gomod" },
+  init_options = {
+    command = { "golangci-lint", "run", "--out-format", "json" },
+  },
+  root_dir = nvim_lsp.util.root_pattern('go.mod', '.golangci.yml', '.golangci.yaml', '.git'),
 }
 
 -- ############## Python #################
 
-require'lspconfig'.pyright.setup{
+require 'lspconfig'.pyright.setup {
   on_attach = on_attach,
-    flags = {
-      -- This will be the default in neovim 0.7+
-      debounce_text_changes = 150,
-    }
+  flags = {
+    -- This will be the default in neovim 0.7+
+    debounce_text_changes = 150,
+  }
 }
 
 -- ############## C #################
 
-require'lspconfig'.ccls.setup{}
+require 'lspconfig'.ccls.setup {}
 -- require'lspconfig'.clangd.setup{}
 
 -- ############## Rust #################
 
-require'lspconfig'.rust_analyzer.setup{
+require 'lspconfig'.rust_analyzer.setup {
   cmd = { "rust-analyzer" },
   root_dir = nvim_lsp.util.root_pattern("Cargo.toml", "rust-project.json", ".git", ".root"),
   on_attach = on_attach,
@@ -112,7 +114,7 @@ require'lspconfig'.rust_analyzer.setup{
 
 -- ############## Lua #################
 
-require'lspconfig'.sumneko_lua.setup {
+require 'lspconfig'.sumneko_lua.setup {
   on_attach = on_attach,
   settings = {
     Lua = {
@@ -120,7 +122,7 @@ require'lspconfig'.sumneko_lua.setup {
         version = 'LuaJIT', -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
       },
       diagnostics = {
-        globals = {'vim'}, -- Get the language server to recognize the `vim` global
+        globals = { 'vim' }, -- Get the language server to recognize the `vim` global
       },
       workspace = {
         library = vim.api.nvim_get_runtime_file("", true), -- Make the server aware of Neovim runtime files
