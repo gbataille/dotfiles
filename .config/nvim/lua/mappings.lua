@@ -21,7 +21,7 @@ vim.keymap.set('v', 'Y', 'yy')
 -- #    LEADER    #
 -- ################
 -- Plugin to see available remaps
-vim.keymap.set('n', '<Leader>', ':WhichKey ","<CR>', {silent = true})
+-- vim.keymap.set('n', '<Leader>', ':WhichKey ","<CR>', {silent = true}) -- creates errors with current plugins. Not important enough for me to search for the issue
 
 -- ### Special Char ###
 -- Remove spaces on empty lines
