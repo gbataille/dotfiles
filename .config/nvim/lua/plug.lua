@@ -15,7 +15,6 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'        -- Packer can manage itself
 
   use  "max397574/better-escape.nvim"               -- better handling of 'hh'
-  use  'liuchengxu/vim-which-key'                   -- show what's behind the started key combination
   use 'EdenEast/nightfox.nvim'                      -- colorscheme
   use 'godlygeek/tabular'                           -- table layout
   use 'kazhala/close-buffers.nvim'                  -- buffer killer
@@ -32,6 +31,8 @@ return require('packer').startup(function(use)
   use 'nvim-treesitter/nvim-treesitter-textobjects' -- enable semantically aware navigation
   use 'nvim-treesitter/nvim-treesitter-context'     -- continue to show the context at the top
 
+  -- Creates errors
+  -- use  'liuchengxu/vim-which-key'                   -- show what's behind the started key combination
 
   -- Debug setup
   use 'mfussenegger/nvim-dap'           -- DAP adapter

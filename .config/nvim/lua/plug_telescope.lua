@@ -1,3 +1,9 @@
+require('telescope').setup{
+  defaults = {
+    file_ignore_patterns = {".pb.go", ".pb.gw.go", "internal/api/clients/", "/generated/"},
+  }
+}
+
 local mappings = require "telescope.mappings"
 local actions = require "telescope.actions"
 
