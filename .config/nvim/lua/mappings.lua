@@ -10,8 +10,6 @@ vim.keymap.set('i', '<expr><TAB>', 'pumvisible() ? "\\<C-n>" : "\\<TAB>"')
 -- vim.keymap.set('i', 'hh', '<Esc>') -- handled by better-escape plugin
 
 -- ### Q ###
--- Disable ex mode - use for formatting
-vim.keymap.set('n', 'Q', 'gq', {remap = true})
 
 -- ### Y ###
 vim.keymap.set('n', 'Y', 'yy')

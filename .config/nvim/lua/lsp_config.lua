@@ -53,7 +53,7 @@ end
 vim.api.nvim_create_autocmd('BufWrite', {
   pattern = '*',
   callback = function()
-    vim.lsp.buf.formatting()
+    vim.lsp.buf.format({ async = true })
   end
 })
 
