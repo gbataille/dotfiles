@@ -29,14 +29,14 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'geq', '<cmd>lua vim.diagnostic.setqflist()<CR>', opts)
 
   -- Set some keybinds conditional on server capabilities
-  if client.server_capabilities.document_formatting then
-    buf_set_keymap("n", "gff", "<cmd>lua vim.lsp.buf.format({async=true})<CR>", opts)
-  elseif client.server_capabilities.document_range_formatting then
+  if client.server_capabilities.documentFormattingProvider then
+    buf_set_keymap("n", "gff", "<cmd>lua vim.lsp.buf.format({async=false})<CR>", opts)
+  elseif client.server_capabilities.documentRangeFormattingProvider then
     buf_set_keymap("n", "gff", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
   end
 
   -- Set autocommands conditional on server_capabilities
-  if client.server_capabilities.document_highlight then
+  if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_exec([[
       hi LspReferenceRead cterm=bold guibg=Blue
       hi LspReferenceText cterm=bold guibg=Green
@@ -53,7 +53,7 @@ end
 vim.api.nvim_create_autocmd('BufWrite', {
   pattern = '*',
   callback = function()
-    vim.lsp.buf.format({ async = true })
+    vim.lsp.buf.format({ async = false })
   end
 })
 
