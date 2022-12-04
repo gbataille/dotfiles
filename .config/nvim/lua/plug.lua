@@ -31,6 +31,7 @@ return require('packer').startup(function(use)
   use 'nvim-treesitter/nvim-treesitter-textobjects' -- enable semantically aware navigation
   use 'nvim-treesitter/nvim-treesitter-context' -- continue to show the context at the top
   use 'nvim-treesitter/playground' -- play with treesitter directly in nvim
+  use 'lvimuser/lsp-inlayhints.nvim' -- inline display hints
 
   -- Creates errors
   -- use  'liuchengxu/vim-which-key'                   -- show what's behind the started key combination

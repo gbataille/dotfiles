@@ -68,6 +68,14 @@ nvim_lsp.gopls.setup {
   settings = {
     gopls = {
       experimentalPostfixCompletions = true,
+      hints = {
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+        constantValues = true,
+        functionTypeParameters = true,
+        parameterNames = true,
+        rangeVariableTypes = true
+      },
       analyses = {
         unusedparams = true,
         shadow = false,
