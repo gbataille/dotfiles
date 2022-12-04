@@ -71,10 +71,9 @@
 	required = true
 [user]
 	name = Grégory Bataille
-	signingkey = 1D2DF15BF8DA7B8D
+  email = gregory.bataille@gmail.com
+	signingkey = 4BF93972CBD058ED
 [commit]
 	gpgsign = true
-[url "git@github.com:taurusgroup"]
-	insteadOf = https://github.com/taurusgroup
-[url "git@github.com:t-dx"]
-	insteadOf = https://github.com/t-dx
+[includeIf "gitdir:~/Documents/Prog/Taurus/"]
+	path = ~/.gitconfig-taurus

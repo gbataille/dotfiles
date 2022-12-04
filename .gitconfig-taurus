@@ -1,0 +1,10 @@
+[user]
+	name = Grégory Bataille
+  email = gregory.bataille@taurusgroup.ch
+	signingkey = 1D2DF15BF8DA7B8D
+[commit]
+	gpgsign = true
+[url "git@github.com:taurusgroup"]
+	insteadOf = https://github.com/taurusgroup
+[url "git@github.com:t-dx"]
+	insteadOf = https://github.com/t-dx
