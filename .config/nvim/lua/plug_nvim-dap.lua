@@ -37,22 +37,22 @@ dap.adapters.delve = {
   port = '${port}',
   executable = {
     command = 'dlv',
-    args = {'dap', '-l', '127.0.0.1:${port}'},
+    args = { 'dap', '-l', '127.0.0.1:${port}' },
     options = {
       initialize_timeout_sec = 30,
     },
   }
 }
 
-local function union ( a, b )
-    local result = {}
-    for _,v in pairs ( a ) do
-        table.insert( result, v )
-    end
-    for _,v in pairs ( b ) do
-         table.insert( result, v )
-    end
-    return result
+local function union(a, b)
+  local result = {}
+  for _, v in pairs(a) do
+    table.insert(result, v)
+  end
+  for _, v in pairs(b) do
+    table.insert(result, v)
+  end
+  return result
 end
 
 local function get_arguments()
@@ -80,14 +80,14 @@ local function get_start()
     return coroutine.create(function()
       local args = {}
       vim.ui.input({ prompt = 'Args: ' }, function(input)
-        args = union({"start"}, vim.split(input or "", " "))
+        args = union({ "start" }, vim.split(input or "", " "))
       end)
       coroutine.resume(co, args)
     end)
   else
     local args = {}
     vim.ui.input({ prompt = 'Args: ' }, function(input)
-      args = union({"start"}, vim.split(input or "", " "))
+      args = union({ "start" }, vim.split(input or "", " "))
     end)
     return args
   end
@@ -99,14 +99,14 @@ local function get_test_filter()
     return coroutine.create(function()
       local args = {}
       vim.ui.input({ prompt = 'Test regex + Args: ' }, function(input)
-        args = union({"-test.run"}, vim.split(input or "", " "))
+        args = union({ "-test.run" }, vim.split(input or "", " "))
       end)
       coroutine.resume(co, args)
     end)
   else
     local args = {}
     vim.ui.input({ prompt = 'Test regex + Args: ' }, function(input)
-      args = union({"-test.run"}, vim.split(input or "", " "))
+      args = union({ "-test.run" }, vim.split(input or "", " "))
     end)
     return args
   end
