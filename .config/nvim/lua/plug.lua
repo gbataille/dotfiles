@@ -32,6 +32,8 @@ return require('packer').startup(function(use)
   use 'nvim-treesitter/nvim-treesitter-context' -- continue to show the context at the top
   use 'nvim-treesitter/playground' -- play with treesitter directly in nvim
   use 'lvimuser/lsp-inlayhints.nvim' -- inline display hints
+  use 'yioneko/nvim-type-fmt' -- on type indentation -- TEMP - expect real implem - https://github.com/neovim/neovim/issues/21191
+
 
   -- Creates errors
   -- use  'liuchengxu/vim-which-key'                   -- show what's behind the started key combination
