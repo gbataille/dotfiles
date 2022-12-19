@@ -78,6 +78,7 @@ export GOBIN=$GOPATH/bin
 export GOPRIVATE=github.com/t-dx/*,github.com/taurusgroup/*
 export PYTHONPATH=$HOME/Documents/Prog/Perso/pytoolkit:$PYTHONPATH
 export PYTHONBREAKPOINT=ipdb.set_trace
+export PYENV_ROOT="$HOME/.pyenv"
 export AWS_ASSUME_ROLE_TTL=4h
 export AWS_CHAINED_SESSION_TOKEN_TTL=1h
 export AWS_FEDERATION_TOKEN_TTL=4h
@@ -90,6 +91,12 @@ export ZSH_HIGHLIGHT_MAXLENGTH=60     # For perf on text paste
 export GITHUD_DEBUG=TRUE
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 export SHELL_USER=gbataille
+export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=true
+export BUF_USER=gbataille
+export ALGORAND_HOME=$HOME/Documents/Prog/Cryptos/AlgoNode
+export ALGORAND_DATA=$ALGORAND_HOME/testnetdata
+
+export PATH=$PYENV_ROOT/bin:$HOME/Documents/Prog/MyConfig/scripts:$GOBIN:$HOME/.cabal/bin:$PATH
 
 # RUST
 export RUST_BACKTRACE=1
@@ -144,6 +151,7 @@ fi
 if [ -f /usr/local/bin/find ]; then
   alias find='/usr/local/bin/find'
 fi
+
 aws_get_account_id()
 {
   ave $1 -- aws sts get-caller-identity --output text --query 'Account'
@@ -152,35 +160,6 @@ aws_get_canonical_account_id()
 {
   ave $1 -- aws s3api list-buckets --query Owner.ID
 }
-
-# TOOLS
-[[ -f `brew --prefix`/etc/bash_completion ]] && . `brew --prefix`/etc/bash_completion
-[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
-
-generate_random_alpha()
-{
-  if [ -z "$1" ]; then; echo "Please pass a length as parameter"; return; fi
-  LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c $1 | pbcopy
-}
-
-generate_random()
-{
-  if [ -z "$1" ]; then; echo "Please pass a length as parameter"; return; fi
-  LC_ALL=C tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' </dev/urandom | head -c $1 | pbcopy
-}
-
-## Node
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-
-## Ruby
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-## Python
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 
 # Init SSH keys
 # init_ssh_keys.sh
@@ -215,13 +194,53 @@ vpn_up()
   sudo wg-quick up $1
 }
 
-# . $HOME/.nix-profile/etc/profile.d/nix.sh
+# TOOLS
+[[ -f `brew --prefix`/etc/bash_completion ]] && . `brew --prefix`/etc/bash_completion
+[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
+generate_random_alpha()
+{
+  if [ -z "$1" ]; then; echo "Please pass a length as parameter"; return; fi
+  LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c $1 | pbcopy
+}
+
+generate_random()
+{
+  if [ -z "$1" ]; then; echo "Please pass a length as parameter"; return; fi
+  LC_ALL=C tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' </dev/urandom | head -c $1 | pbcopy
+}
+
+## Python
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+## Rust
+[[ -f "$HOME/.cargo/env" ]] && . $HOME/.cargo/env
+
+## Node
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+## Ruby
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+# DIRENV
 eval "$(direnv hook zsh)"
 
-# grc colouring of standard commands
+# GRC
 [[ -s "/usr/local/etc/grc.zsh" ]] && source /usr/local/etc/grc.zsh
 export GPG_TTY=$(tty)
+
+# Add .zsh to your fpath when the zsh shell starts
+fpath+=~/.config/completions/zsh
+
+# Zellij
+function zr () { zellij run --name "$*" -- zsh -ic "$*";}
+function zrf () { zellij run --name "$*" --floating -- zsh -ic "$*";}
+function ze () { zellij edit "$*";}
+function zef () { zellij edit --floating "$*";}
 
 # TG
 [[ -s "$HOME/.tgrc" ]] && source $HOME/.tgrc

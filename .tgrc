@@ -52,6 +52,8 @@ alias govet='grc go vet --tags acceptance ./...'
 alias gocilint='grc golangci-lint run --tags acceptance ./...'
 alias golint='govet && gocilint'
 
+alias zt='zellij --layout taurus'
+
 
 [[ -f "$HOME/Documents/Prog/Taurus/taurus-scripts/git_helpers.sh" ]] && source $HOME/Documents/Prog/Taurus/taurus-scripts/git_helpers.sh
 

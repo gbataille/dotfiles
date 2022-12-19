@@ -1,0 +1,40 @@
+layout {
+    tab_template name="decorated" {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        children
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+
+    pane_template name="workdir" {
+        pane split_direction="vertical" {
+            pane
+            pane split_direction="horizontal" {
+                pane
+                pane
+            }
+        }
+    }
+
+    decorated name="1. utils" {
+        pane split_direction="vertical" {
+            pane split_direction="horizontal" {
+                pane
+                pane
+            }
+            pane split_direction="horizontal" {
+                pane
+                pane
+            }
+        }
+    }
+    decorated name="2. tg-blocksd" cwd="/Users/gbataille/Documents/Prog/Taurus/tg-blocksd" {
+        workdir
+    }
+    decorated name="3. tg-validatord" cwd="/Users/gbataille/Documents/Prog/Taurus/tg-validatord" {
+        workdir
+    }
+}
