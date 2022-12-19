@@ -77,3 +77,7 @@
 	gpgsign = true
 [includeIf "gitdir:~/Documents/Prog/Taurus/"]
 	path = ~/.gitconfig-taurus
+[url "git@github.com:taurusgroup"]
+	insteadOf = https://github.com/taurusgroup
+[url "git@github.com:t-dx"]
+	insteadOf = https://github.com/t-dx
