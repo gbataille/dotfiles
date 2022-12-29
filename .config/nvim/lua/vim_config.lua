@@ -7,92 +7,92 @@ vim.g.loaded_netrwPlugin = 1
 -- set termguicolors to enable highlight groups
 o.termguicolors = true
 
-o.encoding='UTF-8'
+o.encoding = 'UTF-8'
 
-o.ts=2
-o.shiftwidth=2
-o.shiftround=true
-o.softtabstop=2
-o.smarttab=true
-o.expandtab=true
-o.wrap=false
-o.smartcase=true
+o.ts = 2
+o.shiftwidth = 2
+o.shiftround = true
+o.softtabstop = 2
+o.smarttab = true
+o.expandtab = true
+o.wrap = false
+o.smartcase = true
 
 -- Allows unsaved buffer to exist
-o.hidden=true
+o.hidden = true
 -- allow backspacing over everything in insert mode
-o.backspace='indent,eol,start'
-o.previewheight=20
+o.backspace = 'indent,eol,start'
+o.previewheight = 20
 -- file search recursively
-o.path:append({'**'})
+o.path:append({ '**' })
 -- swap files dir
 o.directory = os.getenv('HOME') .. '/.vim_swap//'
 -- backup files dir
 o.backupdir = os.getenv('HOME') .. '/.vim_backup//'
 -- show the cursor position all the time
-o.ruler=true
+o.ruler = true
 -- display incomplete commands
-o.showcmd=true
+o.showcmd = true
 -- do incremental searching
-o.incsearch=true
+o.incsearch = true
 -- show line number
-o.number=true
+o.number = true
 -- show line number relative to cursor position
-o.relativenumber=true
+o.relativenumber = true
 -- Don't redraw while executing macros (good performance config)
-o.lazyredraw=true
+o.lazyredraw = true
 -- Regexp magic by default
-o.magic=true
+o.magic = true
 -- Confirm on unsaved files
-o.cf=true
+o.cf = true
 -- Number of things to remember in history.
-o.history=256
+o.history = 256
 
 -- Show matching brackets.
-o.showmatch=true
+o.showmatch = true
 -- Bracket blinking.
-o.mat=5
+o.mat = 5
 -- Show $ at end of line and trailing space as ~
-o.listchars={tab='¬ ',trail='~',extends='>',precedes='<'}
-o.list=true
+o.listchars = { tab = '¬ ', trail = '~', extends = '>', precedes = '<' }
+o.list = true
 -- No blinking .
-o.visualbell=false
+o.visualbell = false
 -- No noise.
-o.errorbells=false
+o.errorbells = false
 -- Always show status line.
-o.laststatus=2
+o.laststatus = 2
 -- cursor line highlight
-o.cul=true
+o.cul = true
 -- maxmemory for regex, in KiB (default to 1000)
-o.mmp=10000
+o.mmp = 10000
 -- Small updatetime for CursorHold events to trigger "fast". Used by LSP for document_highlight
-o.updatetime=250
-o.timeoutlen=500
+o.updatetime = 250
+o.timeoutlen = 1000
 
 -- Show branch name in the status bar
-o.statusline='%<%f\\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\\ %P'
+o.statusline = '%<%f\\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\\ %P'
 
 -- Wildmenu
-o.wildmenu=true
-o.wildmode='full'
-o.wildignore:append({'*.swp','*.back','*.class','*/tmp/*','*.o'})
+o.wildmenu = true
+o.wildmode = 'full'
+o.wildignore:append({ '*.swp', '*.back', '*.class', '*/tmp/*', '*.o' })
 
 -- Folding setup
-o.foldcolumn='3'
-o.foldlevel=99
+o.foldcolumn = '3'
+o.foldlevel = 99
 -- new setup (using treesitter)
-o.foldmethod='expr'
-o.foldexpr='nvim_treesitter#foldexpr()'
-o.foldenable=false
+o.foldmethod = 'expr'
+o.foldexpr = 'nvim_treesitter#foldexpr()'
+o.foldenable = false
 -- old config (no treesitter)
 -- o.foldmethod='syntax'
 
 -- Scroll offset
-o.scrolloff=15
-o.sidescrolloff=15
+o.scrolloff = 15
+o.sidescrolloff = 15
 
-o.signcolumn='auto'
-o.colorcolumn='120'
+o.signcolumn = 'auto'
+o.colorcolumn = '120'
 
 -- popup config
 o.pumheight = 25
@@ -132,6 +132,6 @@ vim.api.nvim_create_autocmd('BufRead', {
 
 -- Force refolding on file open (bug in telescope ?) -- https://github.com/nvim-telescope/telescope.nvim/issues/699
 vim.api.nvim_create_autocmd({ "BufRead" }, {
-    pattern = { "*" },
-    command = "normal zx",
+  pattern = { "*" },
+  command = "normal zx",
 })

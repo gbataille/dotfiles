@@ -55,9 +55,31 @@ alias gobuild='grc go build --tags acceptance ./...'
 alias govet='grc go vet --tags acceptance ./...'
 alias gocilint='grc golangci-lint run --tags acceptance ./...'
 alias golint='govet && gocilint'
+function gotestcover () {
+  go test -coverprofile=coverage.out $*
+  go tool cover -html=coverage.out
+}
 
 alias zt='zellij --layout taurus'
 
+function local_hsm () {
+  if [ -z "$1" ]; then
+    echo "Need to pass a version number for tg-hsm docker image"
+    return
+  fi
+  echo "Starting HSM version $1"
+  docker run -it -p 31500:31500 -v $HOME/Documents/Keys/HSM:/keys  tdxdockhub/tg-hsm:$1 ./tg-hsmd --server /keys
+}
+
+function local_vaultd () {
+  if [ -z "$1" ]; then
+    echo "Need to pass a version number for tg-vaultd docker image"
+    return
+  fi
+  echo "Starting HSM version $1"
+  cd /Users/gbataille/Documents/Prog/Taurus/tg-vaultd
+  docker run -p 7783:7783 -p 8083:8083 -e LD_LIBRARY_PATH=/taurus/tg-vaultd/7.2 -v $PWD/configs/dev/:/configs  tdxdockhub/tg-vaultd:$1 ./tg-vaultd start --config /configs/tg-vaultd.yml | logs_for_humans
+}
 
 [[ -f "$HOME/Documents/Prog/Taurus/taurus-scripts/git_helpers.sh" ]] && source $HOME/Documents/Prog/Taurus/taurus-scripts/git_helpers.sh
 
