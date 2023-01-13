@@ -43,6 +43,7 @@ require("plug_treesitter")
 require("plug_nvim-treesitter-context")
 require("plug_nvim-treesitter-textobjects")
 require("plug_lsp-inlayhints")
+require("plug_vim-silicon")
 
 -- Filetype specific
 require("ft/go")
