@@ -3,3 +3,5 @@ function zrf () { zellij run --name "$*" --floating -- zsh -ic "$*";}
 function ze () { zellij edit "$*";}
 function zef () { zellij edit --floating "$*";}
 function znt () { zellij action  new-tab --layout=default; }
+
+alias zbtop="zrf btop"
