@@ -117,6 +117,11 @@ require 'lspconfig'.ccls.setup {}
 require 'lspconfig'.rust_analyzer.setup {
   cmd = { "rust-analyzer" },
   root_dir = nvim_lsp.util.root_pattern("Cargo.toml", "rust-project.json", ".git", ".root"),
+  cargo = {
+    buildScripts = {
+      enable = true,
+    },
+  },
   on_attach = on_attach,
 }
 
