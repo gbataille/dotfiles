@@ -68,6 +68,8 @@ o.mmp = 10000
 -- Small updatetime for CursorHold events to trigger "fast". Used by LSP for document_highlight
 o.updatetime = 250
 o.timeoutlen = 1000
+-- terminal buffer size
+o.scrollback = 100000
 
 -- Show branch name in the status bar
 o.statusline = '%<%f\\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\\ %P'
