@@ -1,4 +1,4 @@
-alias roachcreate='docker run -d --name=crdb --hostname=crdb -e COCKROACH_RAFT_CLOSEDTS_ASSERTIONS_ENABLED=false -p 26257:26257 -p 8080:8080 -v "${HOME}/Documents/Prog/Data/Cockroach:/cockroach/cockroach-data" cockroachdb/cockroach:latest-v22.1 start-single-node --insecure'
+alias roachcreate='docker run -d --name=crdb --hostname=crdb -e COCKROACH_RAFT_CLOSEDTS_ASSERTIONS_ENABLED=false -p 26257:26257 -p 8080:8080 -v "${HOME}/Documents/Prog/Data/Cockroach:/cockroach/cockroach-data" cockroachdb/cockroach:latest-v22.2 start-single-node --insecure'
 alias roachup='docker start crdb'
 alias roachdown='docker stop crdb'
 
@@ -69,7 +69,7 @@ function local_hsm () {
     return
   fi
   echo "Starting HSM version $1"
-  docker run -it -p 31500:31500 -v $HOME/Documents/Keys/HSM:/keys  tdxdockhub/tg-hsm:$1 ./tg-hsmd --server /keys
+  docker run --rm -it -p 31500:31500 -v $HOME/Documents/Keys/HSM:/keys  tdxdockhub/tg-hsm:$1 ./tg-hsmd --server /keys
 }
 
 function local_vaultd () {
@@ -79,7 +79,7 @@ function local_vaultd () {
   fi
   echo "Starting HSM version $1"
   cd /Users/gbataille/Documents/Prog/Taurus/tg-vaultd
-  docker run -p 7783:7783 -p 8083:8083 -e LD_LIBRARY_PATH=/taurus/tg-vaultd/7.2 -v $PWD/configs/dev/:/configs  tdxdockhub/tg-vaultd:$1 ./tg-vaultd start --config /configs/tg-vaultd.yml | logs_for_humans
+  docker run --rm -p 7783:7783 -p 8083:8083 -e LD_LIBRARY_PATH=/taurus/tg-vaultd/7.2 -v $PWD/configs/dev/:/configs  tdxdockhub/tg-vaultd:$1 ./tg-vaultd start --config /configs/tg-vaultd.yml | logs_for_humans
 }
 
 [[ -f "$HOME/Documents/Prog/Taurus/taurus-scripts/git_helpers.sh" ]] && source $HOME/Documents/Prog/Taurus/taurus-scripts/git_helpers.sh
