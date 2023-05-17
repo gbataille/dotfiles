@@ -25,14 +25,14 @@ vim.keymap.set('v', 'Y', 'yy')
 -- Remove spaces on empty lines
 vim.keymap.set('n', '<leader><Space>', 'mz:%s/ *$//g<CR>:nohlsearch<CR>`z')
 -- remove current highlighted text
-vim.keymap.set('n', '<leader>/', ':nohlsearch<CR>', {silent = true})
+vim.keymap.set('n', '<leader>/', ':nohlsearch<CR>', { silent = true })
 -- reindent the entire buffer
 vim.keymap.set('n', '<leader>=', 'gg=G')
 
 -- ### C ###
 -- Commentary
-vim.keymap.set('n', '<Leader>c', ':Commentary<CR>', {remap = true})
-vim.keymap.set('v', '<Leader>c', ':Commentary<CR>', {remap = true})
+vim.keymap.set('n', '<Leader>c', ':Commentary<CR>', { remap = true })
+vim.keymap.set('v', '<Leader>c', ':Commentary<CR>', { remap = true })
 -- quickfix list
 vim.keymap.set('n', '<leader>co', ':copen<CR>')
 vim.keymap.set('n', '<leader>cc', ':cclose<CR>')
@@ -49,8 +49,8 @@ vim.keymap.set('n', '<leader>dd', '<Cmd>lua require("dap").continue()<CR>')
 vim.keymap.set('n', '<leader>dfd', '<Cmd>lua require("dap").down()<CR>')
 vim.keymap.set('n', '<leader>dfu', '<Cmd>lua require("dap").up()<CR>')
 vim.keymap.set('n', '<leader>de', '<Cmd>lua require("dap").repl.open()<CR>')
-vim.keymap.set('n', '<leader>di', '<Cmd>lua require("dapui").eval()<CR>', {remap = true})
-vim.keymap.set('n', '<leader>dtc', '<Cmd>lua require("dap").run_to_cursor()<CR>', {remap = true})
+vim.keymap.set('n', '<leader>di', '<Cmd>lua require("dapui").eval()<CR>', { remap = true })
+vim.keymap.set('n', '<leader>dtc', '<Cmd>lua require("dap").run_to_cursor()<CR>', { remap = true })
 vim.keymap.set('n', '<leader>dn', '<Cmd>lua require("dap").step_over()<CR>')
 vim.keymap.set('n', '<leader>dq', '<Cmd>lua require("dap").terminate()<CR><Cmd>lua require("dapui").close()<CR>')
 vim.keymap.set('n', '<leader>du', '<Cmd>lua require("dapui").close()<CR>')
@@ -99,6 +99,7 @@ vim.keymap.set('n', '<C-e>', ':Telescope git_files<CR>')
 vim.keymap.set('n', '<leader>ff', ':Telescope find_files<CR>')
 vim.keymap.set('n', '<leader>fb', ':Telescope buffers<CR>')
 vim.keymap.set('n', '<leader>ft', ':Telescope treesitter<CR>')
+vim.keymap.set('n', '<leader>fg', ':Telescope live_grep<CR>')
 
 -- ### G ###
 vim.keymap.set('n', '<leader>gg', ':Git<CR>') -- fugitive
@@ -122,7 +123,7 @@ vim.keymap.set('n', '<leader>q', ':lua require(\'close_buffers\').delete({ type 
 vim.keymap.set('n', '<leader>Q', ':lua require("close_buffers").wipe({ type = "all", force = true })<CR>')
 
 -- ### S ###
-vim.keymap.set('n', '<leader>s', ':set spell!<CR>', {silent = true})
+vim.keymap.set('n', '<leader>s', ':set spell!<CR>', { silent = true })
 
 -- ### T ###
 -- Test launcher (vim-test)
@@ -155,7 +156,7 @@ vim.keymap.set('n', '<c-k>', '<c-w>k')
 vim.keymap.set('n', '<c-l>', '<c-w>l')
 
 -- ### O ###
-vim.keymap.set('t', '<C-o>', '<C-\\><C-n>', {remap=true}) -- terminal map
+vim.keymap.set('t', '<C-o>', '<C-\\><C-n>', { remap = true }) -- terminal map
 
 -- ### U ###
 -- CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,

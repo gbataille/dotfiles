@@ -108,10 +108,18 @@ o.shadafile = os.getenv('HOME') .. '/.local/share/nvim/shada/main.shada'
 
 -- coloring
 o.hlsearch = true
-vim.cmd([[
-  syntax on
-  colorscheme nightfox
-]])
+-- Since neovim 0.9, seems we need to use a "deferred" autocommand for the colorscheme to be applied :/
+-- vim.cmd([[
+--   syntax on
+--   colorscheme nightfox
+-- ]])
+vim.api.nvim_create_autocmd('VimEnter', {
+  pattern = '*',
+  command = [[
+    colorscheme nightfox
+  ]]
+})
+
 
 -- filetype recognition
 vim.cmd([[
