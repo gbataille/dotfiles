@@ -45,6 +45,8 @@ alias prod_algo_gva_tunnel='cloudflared access tcp --hostname algo-vshn-gva-tg-n
 alias prod_all_nodes_zrh_tunnel='prod_algo_zrh_tunnel & prod_ada_zrh_tunnel & prod_bch_zrh_tunnel & prod_btc_zrh_tunnel & prod_eth_zrh_tunnel & prod_ltc_zrh_tunnel & prod_xlm_zrh_tunnel & prod_xrp_zrh_tunnel & prod_xtz_zrh_tunnel & prod_dot_zrh_tunnel & prod_ftm_zrh_tunnel &'
 alias prod_all_nodes_gva_tunnel='prod_algo_gva_tunnel & prod_ada_gva_tunnel & prod_bch_gva_tunnel & prod_btc_gva_tunnel & prod_eth_gva_tunnel & prod_ltc_gva_tunnel & prod_xlm_gva_tunnel & prod_xrp_gva_tunnel & prod_xtz_gva_tunnel & prod_dot_gva_tunnel & prod_ftm_gva_tunnel &'
 
+alias int_besu_zrh_tunnel='cloudflared access tcp --hostname besu-cubenet-exo-zrh-tg-nodes.int.t-dx.com --listener 127.0.0.1:23120 --loglevel=debug'
+
 alias local_gated='cd ~/Documents/Prog/Taurus/tg-gated; go run ./cmd/tg-gated start | logs_for_humans'
 
 alias gotest='grc go test -v'
