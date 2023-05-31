@@ -1,4 +1,6 @@
 if vim.api.nvim_win_get_option(0, "diff") then
+  print("Diffing - no LSP")
+else
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
