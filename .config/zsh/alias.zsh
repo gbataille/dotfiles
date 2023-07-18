@@ -24,6 +24,7 @@ alias sshadd='ssh-add ~/.ssh/id_rsa'
 alias tf='terraform'
 alias ys='yarn start'
 alias yt='yarn test -- --verbose'
+alias nh='ssh nethack@eu.hardfought.org'
 
 cat()
 {
