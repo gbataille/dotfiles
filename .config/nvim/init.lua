@@ -1,18 +1,18 @@
 local o = vim.opt
 
 function os.capture(cmd, raw)
-  local f = assert(io.popen(cmd, 'r'))
-  local s = assert(f:read('*a'))
-  f:close()
-  if raw then return s end
-  s = string.gsub(s, '^%s+', '')
-  s = string.gsub(s, '%s+$', '')
-  s = string.gsub(s, '[\n\r]+', ' ')
-  return s
+	local f = assert(io.popen(cmd, 'r'))
+	local s = assert(f:read('*a'))
+	f:close()
+	if raw then return s end
+	s = string.gsub(s, '^%s+', '')
+	s = string.gsub(s, '%s+$', '')
+	s = string.gsub(s, '[\n\r]+', ' ')
+	return s
 end
 
 if os.capture('uname') == 'Darwin' then
-  require('mac_specific')
+	require('mac_specific')
 end
 
 require('plug')       -- Load all vim-plug plugins
@@ -43,6 +43,7 @@ require("plug_nvim-treesitter-context")
 require("plug_nvim-treesitter-textobjects")
 require("plug_lsp-inlayhints")
 require("plug_vim-silicon")
+require("plug_vim-yadi")
 
 -- Filetype specific
 require("ft/go")

@@ -140,7 +140,7 @@ dap.configurations.go = {
     program = "${fileDirname}",
     cwd = "${fileDirname}",
     args = get_test_filter,
-    buildFlags = "-tags=integration,acceptance",
+    buildFlags = "-tags=integration,acceptance,manual",
     env = {
       TG_DB_HOST = "localhost",
       TG_DB_PORT = "26257",
@@ -206,6 +206,16 @@ dap.configurations.go = {
       TG_DB_DRIVER = "sqlserver"
     },
     mode = "test",
+    showLog = true,
+    trace = "log"
+  },
+  {
+    type = "delve",
+    name = "7_capitald",
+    request = "launch",
+    mode = "debug",
+    program = "./cmd/tg-capitald",
+    args = get_start,
     showLog = true,
     trace = "log"
   },

@@ -34,6 +34,7 @@ return require('packer').startup(function(use)
   use 'lvimuser/lsp-inlayhints.nvim'                -- inline display hints
   use 'yioneko/nvim-type-fmt'                       -- on type indentation -- TEMP - expect real implem - https://github.com/neovim/neovim/issues/21191
   use 'segeljakt/vim-silicon'                       -- Silicon (code image) integration
+  use 'timakro/vim-yadi'                            -- Indentation detection
 
 
   -- Creates errors

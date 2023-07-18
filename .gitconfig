@@ -1,24 +1,22 @@
 [alias]
-	st = status
-	co = checkout
-	cob = switch -c
-	sw = switch
-	swc = switch -c
-	commitamend = commit --amend --no-edit
+	b = branch -v
+	branch-clean = "!sh clean_remote_branches.sh"
 	ca = commit --amend
 	ce = commit --amend --no-edit
-	p = push
-	b = branch -v
-	t = tag -a
-	lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
-	lg = !"git lg1"
-	d = diff -w
-	dt = difftool
-	dc = diff --cached -w
-	branch-clean = "!sh clean_remote_branches.sh"
-	g = grep -W
 	clb = clean_local_branches
+	co = checkout
+	cob = switch -c
+	commitamend = commit --amend --no-edit
+	d = diff -w
+	dc = diff --cached -w
+	dt = difftool
+	g = grep -W
+	p = push
+	st = status
+	sw = switch
+	swc = switch -c
+	t = tag -a
+	mt = mergetool
 [core]
 	excludesfile = ~/.gitignore_global
 	hooksPath = /Users/gbataille/.git_hooks
@@ -38,7 +36,7 @@
 [diff]
 	tool = nvimdiff
 	indentHeuristic = true
-	algorithm = patience
+	algorithm = histogram
 	colorMoved = zebra
 [difftool]
 	prompt = false
@@ -49,7 +47,7 @@
 	tool = nvimdiff
 [mergetool]
 	tool = nvimdiff
-	prompt = false
+	prompt = true
 [difftool "nvimdiff"]
 	path = nvim
 [mergetool "nvimdiff"]
