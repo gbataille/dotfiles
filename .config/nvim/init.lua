@@ -24,6 +24,7 @@ require("qf")         -- nicer looking quickfix window
 -- require('cmp_config') -- autocompletion module
 
 -- Pluggins
+require("plug_mason")
 require("plug_better-escape")
 require("plug_close-buffers")
 require("plug_fugitive")

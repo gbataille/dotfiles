@@ -23,6 +23,7 @@ return require('packer').startup(function(use)
   use 'lewis6991/gitsigns.nvim'                     -- git signcolumn annotations
   use 'lilydjwg/colorizer'                          -- overlay colors onto color codes
   use 'neovim/nvim-lspconfig'                       -- Configurations for Nvim LSP
+  use 'williamboman/mason.nvim'                     -- LSP tools management
   use 'nvim-tree/nvim-web-devicons'                 -- font with icons
   use 'tpope/vim-commentary'                        -- comment lines in bulk
   use 'tpope/vim-fugitive'                          -- GIT

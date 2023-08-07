@@ -161,4 +161,11 @@ require 'lspconfig'.lua_ls.setup {
   },
 }
 
+-- ############## Typescript #################
+
+require 'lspconfig'.tsserver.setup {
+  on_attach = on_attach,
+}
+
+
 --vim.lsp.set_log_level("debug")
