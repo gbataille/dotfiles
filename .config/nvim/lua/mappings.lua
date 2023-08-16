@@ -119,8 +119,8 @@ vim.keymap.set('n', '<leader>n', ':bnext<CR>')
 vim.keymap.set('n', '<leader>p', ':bprevious<CR>')
 
 -- ### Q ###
-vim.keymap.set('n', '<leader>q', ':lua require(\'close_buffers\').delete({ type = \'this\' })<CR>')
-vim.keymap.set('n', '<leader>Q', ':lua require("close_buffers").wipe({ type = "all", force = true })<CR>')
+vim.keymap.set('n', '<leader>q', ':BufClose<CR>')    -- See close-buffers
+vim.keymap.set('n', '<leader>Q', ':BufCloseAll<CR>') -- See close-buffers
 
 -- ### S ###
 vim.keymap.set('n', '<leader>s', ':set spell!<CR>', { silent = true })
