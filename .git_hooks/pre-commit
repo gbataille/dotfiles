@@ -48,7 +48,7 @@ if [[ ("${FORCE_COMMIT:-false}" != "true") ]];
 then
   for i in $(git status --short | grep -E '(^A)|(^M)' | sed 's/...//' | grep -E '_enc\.|_enc$');
   do
-    if [[ !(`file $i` =~ ".*GPG.*") ]]; then
+    if [[ ! `file $i` =~ .*PGP.* ]]; then
       cat <<\EOF
 Please encrypt protected files (*_enc*)
 Aborting commit
