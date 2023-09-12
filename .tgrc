@@ -71,7 +71,7 @@ function local_hsm () {
     return
   fi
   echo "Starting HSM version $1"
-  docker run --rm -it -p 31500:31500 -v $HOME/Documents/Keys/HSM:/keys  tdxdockhub/tg-hsm:$1 ./tg-hsmd --server /keys
+  docker run --rm --name hsm -it -p 31500:31500 -v $HOME/Documents/Keys/HSM:/keys  tdxdockhub/tg-hsm:$1 ./tg-hsmd --server /keys
 }
 
 function local_vaultd () {
@@ -81,7 +81,7 @@ function local_vaultd () {
   fi
   echo "Starting HSM version $1"
   cd /Users/gbataille/Documents/Prog/Taurus/tg-vaultd
-  docker run --rm -p 7783:7783 -p 8083:8083 -e LD_LIBRARY_PATH=/taurus/tg-vaultd/7.2 -v $PWD/configs/dev/:/configs  tdxdockhub/tg-vaultd:$1 ./tg-vaultd start --config /configs/tg-vaultd.yml | logs_for_humans
+  docker run --rm --name vaultd -p 7783:7783 -p 8083:8083 -e LD_LIBRARY_PATH=/taurus/tg-vaultd/7.2 -v $PWD/configs/dev/:/configs  tdxdockhub/tg-vaultd:$1 ./tg-vaultd start --config /configs/tg-vaultd.yml | logs_for_humans
 }
 
 [[ -f "$HOME/Documents/Prog/Taurus/taurus-scripts/git_helpers.sh" ]] && source $HOME/Documents/Prog/Taurus/taurus-scripts/git_helpers.sh
