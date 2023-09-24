@@ -1,0 +1,7 @@
+[github]
+	user = GuyInTheShell
+[user]
+	name = GuyInTheShell
+	email = guyintheshell@gmail.com
+[commit]
+	gpgsign = false
