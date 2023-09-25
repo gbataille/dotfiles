@@ -33,12 +33,12 @@ cat()
 unalias ll
 ll()
 {
-  exa -la --git -F $@
+  eza -la --git -F $@
 }
 alias l='ll'
 tree()
 {
-  exa -la --git -F -T -I ".mypy_cache|.DS_Store|__pycache__|.git|node_modules" $@
+  eza -la --git -F -T -I ".mypy_cache|.DS_Store|__pycache__|.git|node_modules" $@
 }
 
 if [ -f /usr/local/bin/nvim ]; then
