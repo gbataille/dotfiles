@@ -131,7 +131,8 @@ dap.configurations.go = {
     program = "./cmd/tg-validatord",
     args = get_start,
     showLog = true,
-    trace = "log"
+    trace = "log",
+    initialize_timeout_sec = 60
   },
   {
     type = "delve",
