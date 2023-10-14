@@ -112,12 +112,18 @@ nvim_lsp.golangci_lint_ls.setup {
 
 -- ############## Python #################
 
-require 'lspconfig'.pyright.setup {
+require 'lspconfig'.pylsp.setup {
   on_attach = on_attach,
-  flags = {
-    -- This will be the default in neovim 0.7+
-    debounce_text_changes = 150,
-  }
+  settings = {
+    pylsp = {
+      plugins = {
+        ruff = {
+          enabled = true,
+          extendSelect = { "I" },
+        },
+      }
+    }
+  },
 }
 
 -- ############## C #################
