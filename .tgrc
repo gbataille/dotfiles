@@ -1,8 +1,8 @@
-alias roachcreate='docker run -d --name=crdb --hostname=crdb -e COCKROACH_RAFT_CLOSEDTS_ASSERTIONS_ENABLED=false -p 26257:26257 -p 8080:8080 -v "${HOME}/Documents/Prog/Data/Cockroach:/cockroach/cockroach-data" cockroachdb/cockroach:latest-v22.2 start-single-node --insecure'
+alias roachcreate='docker run -d --name=crdb --hostname=crdb -e COCKROACH_RAFT_CLOSEDTS_ASSERTIONS_ENABLED=false -p 26257:26257 -p 8080:8080 -v "${HOME}/Documents/Prog/Data/Cockroach:/cockroach/cockroach-data" cockroachdb/cockroach:latest-v23.1 start-single-node --insecure'
 alias roachup='docker start crdb'
 alias roachdown='docker stop crdb'
 
-alias roachcreate_int='docker run -d --name=crdb_int --hostname=crdb -e COCKROACH_RAFT_CLOSEDTS_ASSERTIONS_ENABLED=false -p 26257:26257 -p 8080:8080 -v "${HOME}/Documents/Prog/Data/Cockroach_INT:/cockroach/cockroach-data" cockroachdb/cockroach:latest-v22.1 start-single-node --insecure'
+alias roachcreate_int='docker run -d --name=crdb_int --hostname=crdb -e COCKROACH_RAFT_CLOSEDTS_ASSERTIONS_ENABLED=false -p 26257:26257 -p 8080:8080 -v "${HOME}/Documents/Prog/Data/Cockroach_INT:/cockroach/cockroach-data" cockroachdb/cockroach:latest-v23.1 start-single-node --insecure'
 alias roachup_int='docker start crdb_int'
 alias roachdown_int='docker stop crdb_int'
 
