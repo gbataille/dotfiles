@@ -88,8 +88,5 @@ fpath+=~/.config/completions/zsh
 [ -f ~/.config/zsh/rust.zsh ] && source ~/.config/zsh/rust.zsh
 [ -f ~/.config/zsh/zellij.zsh ] && source ~/.config/zsh/zellij.zsh
 
-[ -f ~/.config/zsh/taurus.zsh ] && source ~/.config/zsh/taurus.zsh
-
-
 # Load Angular CLI autocompletion.
 source <(ng completion script)
