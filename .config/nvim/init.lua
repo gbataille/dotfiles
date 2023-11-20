@@ -17,14 +17,19 @@ end
 
 require('plug')       -- Load all vim-plug plugins
 require('vim_config') -- general vim configuration
-require("lsp_config") -- lsp
 require("mappings")   -- key mappings
 require("qf")         -- nicer looking quickfix window
+
+-- Make sure to load Neoconf first, as its setup might impact other plugin
+require("plug_neoconf")
+-- Make sure to install Mason before LSP
+require("plug_mason")
+require("lsp_config") -- lsp
+
 
 -- require('cmp_config') -- autocompletion module
 
 -- Pluggins
-require("plug_mason")
 require("plug_better-escape")
 require("plug_close-buffers")
 require("plug_fugitive")

@@ -22,8 +22,12 @@ return require('packer').startup(function(use)
   use 'klen/nvim-test'                              -- run tests
   use 'lewis6991/gitsigns.nvim'                     -- git signcolumn annotations
   use 'lilydjwg/colorizer'                          -- overlay colors onto color codes
-  use 'neovim/nvim-lspconfig'                       -- Configurations for Nvim LSP
-  use 'williamboman/mason.nvim'                     -- LSP tools management
+  use 'folke/neoconf.nvim'                          -- Project specific config
+  use {
+    'williamboman/mason.nvim',                      -- LSP tools management
+    'williamboman/mason-lspconfig.nvim',            -- Bridge between Mason and LSP config
+    'neovim/nvim-lspconfig',                        -- Configurations for Nvim LSP
+  }
   use 'nvim-tree/nvim-web-devicons'                 -- font with icons
   use 'tpope/vim-commentary'                        -- comment lines in bulk
   use 'tpope/vim-fugitive'                          -- GIT
@@ -36,6 +40,12 @@ return require('packer').startup(function(use)
   use 'yioneko/nvim-type-fmt'                       -- on type indentation -- TEMP - expect real implem - https://github.com/neovim/neovim/issues/21191
   use 'segeljakt/vim-silicon'                       -- Silicon (code image) integration
   use 'timakro/vim-yadi'                            -- Indentation detection
+
+  -- better ts LSP
+  use {
+    "pmizio/typescript-tools.nvim",
+    requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+  }
 
 
   -- Creates errors
