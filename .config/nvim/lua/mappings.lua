@@ -30,9 +30,22 @@ vim.keymap.set('n', '<leader>/', ':nohlsearch<CR>', { silent = true })
 vim.keymap.set('n', '<leader>=', 'gg=G')
 
 -- ### C ###
--- Commentary
-vim.keymap.set('n', '<Leader>c', ':Commentary<CR>', { remap = true })
-vim.keymap.set('v', '<Leader>c', ':Commentary<CR>', { remap = true })
+-- Comment
+local api = require('Comment.api')
+vim.keymap.set('n', '<Leader>c', api.toggle.linewise.current, { remap = true })
+vim.keymap.set('n', '<Leader>cb', api.toggle.blockwise.current, { remap = true })
+-- vim.keymap.set('v', '<Leader>c', ':Commentary<CR>', { remap = true })
+local esc = vim.api.nvim_replace_termcodes(
+  '<ESC>', true, false, true
+)
+vim.keymap.set('x', '<Leader>c', function()
+  vim.api.nvim_feedkeys(esc, 'nx', false)
+  api.toggle.linewise(vim.fn.visualmode())
+end)
+vim.keymap.set('x', '<Leader>cb', function()
+  vim.api.nvim_feedkeys(esc, 'nx', false)
+  api.toggle.blockwise(vim.fn.visualmode())
+end)
 -- quickfix list
 vim.keymap.set('n', '<leader>co', ':copen<CR>')
 vim.keymap.set('n', '<leader>cc', ':cclose<CR>')

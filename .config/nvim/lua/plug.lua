@@ -29,7 +29,8 @@ return require('packer').startup(function(use)
     'neovim/nvim-lspconfig',                        -- Configurations for Nvim LSP
   }
   use 'nvim-tree/nvim-web-devicons'                 -- font with icons
-  use 'tpope/vim-commentary'                        -- comment lines in bulk
+  use 'numToStr/Comment.nvim'                       -- Lua alternative to tpope commentary, with support for commentline
+  use 'JoosepAlviste/nvim-ts-context-commentstring' -- companion to Comment.nvim. Better for tsx/jsx detection
   use 'tpope/vim-fugitive'                          -- GIT
   use 'tpope/vim-surround'                          -- manage surrounding chars
   use 'tpope/vim-unimpaired'                        -- Gives many '[' ']' commands, including ]<space>
