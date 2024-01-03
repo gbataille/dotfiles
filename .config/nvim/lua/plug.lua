@@ -30,7 +30,17 @@ return require('packer').startup(function(use)
   use 'godlygeek/tabular'            -- table layout
   use 'kazhala/close-buffers.nvim'   -- buffer killer
   use 'kevinhwang91/nvim-bqf'        -- better quickfix experience
-  use 'klen/nvim-test'                              -- run tests
+  -- use 'klen/nvim-test'                              -- run tests
+  use {
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-neotest/neotest-python",
+      "rcasia/neotest-java"
+    }
+  }
   use 'lewis6991/gitsigns.nvim'                     -- git signcolumn annotations
   use 'lilydjwg/colorizer'                          -- overlay colors onto color codes
   use 'folke/neoconf.nvim'                          -- Project specific config

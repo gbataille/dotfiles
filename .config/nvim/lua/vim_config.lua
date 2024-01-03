@@ -145,3 +145,7 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
   pattern = { "*" },
   command = "normal zx",
 })
+
+-- in millisecond, used for both CursorHold and CursorHoldI,
+-- use updatetime instead if not defined
+vim.g.cursorhold_updatetime = 100
