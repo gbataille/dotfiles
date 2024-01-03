@@ -26,6 +26,7 @@ return require('packer').startup(function(use)
   use {
     'williamboman/mason.nvim',                      -- LSP tools management
     'williamboman/mason-lspconfig.nvim',            -- Bridge between Mason and LSP config
+    "jay-babu/mason-nvim-dap.nvim",
     'neovim/nvim-lspconfig',                        -- Configurations for Nvim LSP
   }
   use 'nvim-tree/nvim-web-devicons'                 -- font with icons
@@ -41,6 +42,9 @@ return require('packer').startup(function(use)
   use 'yioneko/nvim-type-fmt'                       -- on type indentation -- TEMP - expect real implem - https://github.com/neovim/neovim/issues/21191
   use 'segeljakt/vim-silicon'                       -- Silicon (code image) integration
   use 'timakro/vim-yadi'                            -- Indentation detection
+  use 'mfussenegger/nvim-jdtls'                     -- Java LSP/DAP
+  use 'simrat39/symbols-outline.nvim'
+
 
   -- better ts LSP
   use {
@@ -79,6 +83,7 @@ return require('packer').startup(function(use)
   use { 'junegunn/fzf', run = function() vim.fn['fzf#install']() end }                                  -- fzf, used by nvim-bqf (and my shell history)
   use { 'nvim-lualine/lualine.nvim', requires = { 'nvim-tree/nvim-web-devicons', opt = true } }         -- status line
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { { 'nvim-lua/plenary.nvim' } } } -- Fuzzy finder
+  use { 'nvim-telescope/telescope-ui-select.nvim' }                                                     -- UI for code actions
   use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' } }                       -- file explorer
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }                                          -- syntax highlighting
 

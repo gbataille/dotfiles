@@ -81,11 +81,13 @@ fpath+=~/.config/completions/zsh
 [ -f ~/.config/zsh/direnv.zsh ] && source ~/.config/zsh/direnv.zsh
 [ -f ~/.config/zsh/go.zsh ] && source ~/.config/zsh/go.zsh
 [ -f ~/.config/zsh/grc.zsh ] && source ~/.config/zsh/grc.zsh
+[ -f ~/.config/zsh/java.zsh ] && source ~/.config/zsh/java.zsh
 [ -f ~/.config/zsh/node.zsh ] && source ~/.config/zsh/node.zsh
 [ -f ~/.config/zsh/python.zsh ] && source ~/.config/zsh/python.zsh
 [ -f ~/.config/zsh/random.zsh ] && source ~/.config/zsh/random.zsh
 [ -f ~/.config/zsh/ruby.zsh ] && source ~/.config/zsh/ruby.zsh
 [ -f ~/.config/zsh/rust.zsh ] && source ~/.config/zsh/rust.zsh
+[ -f ~/.config/zsh/xdg.zsh ] && source ~/.config/zsh/xdg.zsh
 [ -f ~/.config/zsh/zellij.zsh ] && source ~/.config/zsh/zellij.zsh
 
 # Load Angular CLI autocompletion.

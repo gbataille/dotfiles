@@ -29,7 +29,7 @@ require("lsp_config") -- lsp
 
 -- require('cmp_config') -- autocompletion module
 
--- Pluggins
+-- Plugins
 require("plug_better-escape")
 require("plug_close-buffers")
 require("plug_fugitive")
@@ -50,9 +50,7 @@ require("plug_nvim-treesitter-textobjects")
 require("plug_lsp-inlayhints")
 require("plug_vim-silicon")
 require("plug_vim-yadi")
-
--- Filetype specific
-require("ft/go")
+require("plug_symbols-outline")
 
 require("utils")
 require("overrides") -- last to run, overrides what might have been setup by plugins and such

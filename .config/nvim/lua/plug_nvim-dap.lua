@@ -31,6 +31,24 @@ vim.fn.sign_define("DapBreakpoint", dap_breakpoint.error)
 vim.fn.sign_define("DapStopped", dap_breakpoint.stopped)
 vim.fn.sign_define("DapBreakpointRejected", dap_breakpoint.rejected)
 
+-- ############### KOTLIN #################
+dap.defaults.kotlin.auto_continue_if_many_stopped = false
+
+dap.adapters.kotlin = {
+  type = 'executable',
+  command = 'kotlin-debug-adapter',
+}
+
+dap.configurations.kotlin = {
+  {
+    type = 'kotlin',
+    request = 'launch',
+    name = 'Launch kotlin program',
+    projectRoot = "${workspaceFolder}/src/main/kotlin",
+    mainClass = "com.example.demo.DemoApplication",
+  },
+}
+
 -- ############### GO #################
 dap.adapters.delve = {
   type = 'server',
