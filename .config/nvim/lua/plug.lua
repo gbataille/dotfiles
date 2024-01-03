@@ -12,23 +12,28 @@ end
 local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'                      -- Packer can manage itself
+  use 'wbthomason/packer.nvim'                                                                          -- Packer can manage itself
 
-  use "max397574/better-escape.nvim"                -- better handling of 'hh'
-  use 'EdenEast/nightfox.nvim'                      -- colorscheme
-  use 'godlygeek/tabular'                           -- table layout
-  use 'kazhala/close-buffers.nvim'                  -- buffer killer
-  use 'kevinhwang91/nvim-bqf'                       -- better quickfix experience
+  use 'folke/neodev.nvim'                                                                               -- Neovim development lua custom LSP
+  use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { { 'nvim-lua/plenary.nvim' } } } -- Fuzzy finder
+  use { 'nvim-telescope/telescope-ui-select.nvim' }                                                     -- UI for code actions
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }                                          -- syntax highlighting
+  use {
+    'williamboman/mason.nvim',                                                                          -- LSP tools management
+    'williamboman/mason-lspconfig.nvim',                                                                -- Bridge between Mason and LSP config
+    "jay-babu/mason-nvim-dap.nvim",
+    'neovim/nvim-lspconfig',                                                                            -- Configurations for Nvim LSP
+  }
+
+  use "max397574/better-escape.nvim" -- better handling of 'hh'
+  use 'EdenEast/nightfox.nvim'       -- colorscheme
+  use 'godlygeek/tabular'            -- table layout
+  use 'kazhala/close-buffers.nvim'   -- buffer killer
+  use 'kevinhwang91/nvim-bqf'        -- better quickfix experience
   use 'klen/nvim-test'                              -- run tests
   use 'lewis6991/gitsigns.nvim'                     -- git signcolumn annotations
   use 'lilydjwg/colorizer'                          -- overlay colors onto color codes
   use 'folke/neoconf.nvim'                          -- Project specific config
-  use {
-    'williamboman/mason.nvim',                      -- LSP tools management
-    'williamboman/mason-lspconfig.nvim',            -- Bridge between Mason and LSP config
-    "jay-babu/mason-nvim-dap.nvim",
-    'neovim/nvim-lspconfig',                        -- Configurations for Nvim LSP
-  }
   use 'nvim-tree/nvim-web-devicons'                 -- font with icons
   use 'numToStr/Comment.nvim'                       -- Lua alternative to tpope commentary, with support for commentline
   use 'JoosepAlviste/nvim-ts-context-commentstring' -- companion to Comment.nvim. Better for tsx/jsx detection
@@ -45,13 +50,11 @@ return require('packer').startup(function(use)
   use 'mfussenegger/nvim-jdtls'                     -- Java LSP/DAP
   use 'simrat39/symbols-outline.nvim'
 
-
   -- better ts LSP
   use {
     "pmizio/typescript-tools.nvim",
     requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
   }
-
 
   -- Creates errors
   -- use  'liuchengxu/vim-which-key'                   -- show what's behind the started key combination
@@ -81,12 +84,9 @@ return require('packer').startup(function(use)
     },
   })
 
-  use { 'junegunn/fzf', run = function() vim.fn['fzf#install']() end }                                  -- fzf, used by nvim-bqf (and my shell history)
-  use { 'nvim-lualine/lualine.nvim', requires = { 'nvim-tree/nvim-web-devicons', opt = true } }         -- status line
-  use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { { 'nvim-lua/plenary.nvim' } } } -- Fuzzy finder
-  use { 'nvim-telescope/telescope-ui-select.nvim' }                                                     -- UI for code actions
-  use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' } }                       -- file explorer
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }                                          -- syntax highlighting
+  use { 'junegunn/fzf', run = function() vim.fn['fzf#install']() end }                          -- fzf, used by nvim-bqf (and my shell history)
+  use { 'nvim-lualine/lualine.nvim', requires = { 'nvim-tree/nvim-web-devicons', opt = true } } -- status line
+  use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' } }               -- file explorer
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
