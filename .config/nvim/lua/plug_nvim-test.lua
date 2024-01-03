@@ -59,49 +59,4 @@ local runWithTagsAndEnv = function(tags, env)
   defaultGoTest()
 end
 
-RunSQLServerTest = function()
-  runWithTagsAndEnv("integration,acceptance", {
-    TG_DB_HOST = "localhost",
-    TG_DB_PORT = 1433,
-    TG_DB_USER = "sa",
-    TG_DB_PASSWORD = "MyPass@word0",
-    TG_DB_DRIVER = "sqlserver",
-  }
-  )
-end
-
-RunSQLServerManualTest = function()
-  runWithTagsAndEnv("manual", {
-    TG_DB_HOST = "localhost",
-    TG_DB_PORT = 1433,
-    TG_DB_USER = "sa",
-    TG_DB_PASSWORD = "MyPass@word0",
-    TG_DB_DRIVER = "sqlserver",
-  }
-  )
-end
-
--- See mappings.lua
-RunCrdbTest = function()
-  runWithTagsAndEnv("integration,acceptance", {
-    TG_DB_HOST = "localhost",
-    TG_DB_PORT = 26257,
-    TG_DB_USER = "root",
-    TG_DB_PASSWORD = "root",
-    TG_DB_DRIVER = "cockroach",
-  }
-  )
-end
-
-RunCrdbManualTest = function()
-  runWithTagsAndEnv("manual", {
-    TG_DB_HOST = "localhost",
-    TG_DB_PORT = 26257,
-    TG_DB_USER = "root",
-    TG_DB_PASSWORD = "root",
-    TG_DB_DRIVER = "cockroach",
-  }
-  )
-end
-
 defaultGoTest() -- init go test with grc for colors
