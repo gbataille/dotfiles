@@ -31,10 +31,10 @@ layout {
             }
         }
     }
-    decorated name="2. tg-blocksd" cwd="/Users/gbataille/Documents/Prog/Taurus/tg-blocksd" {
+    decorated name="2. backend" cwd="/Users/gbataille/Documents/Prog/Shift/CBS" {
         workdir
     }
-    decorated name="3. tg-validatord" cwd="/Users/gbataille/Documents/Prog/Taurus/tg-validatord" {
+    decorated name="3. infra" cwd="/Users/gbataille/Documents/Prog/Shift/CBS/infra" {
         workdir
     }
 }
