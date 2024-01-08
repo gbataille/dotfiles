@@ -11,7 +11,7 @@ layout {
 
     pane_template name="workdir" {
         pane split_direction="vertical" {
-            pane
+            pane focus=true
             pane split_direction="horizontal" {
                 pane
                 pane
@@ -22,7 +22,7 @@ layout {
     decorated name="1. utils" {
         pane split_direction="vertical" {
             pane split_direction="horizontal" {
-                pane
+                pane cwd="/Users/gbataille/Documents/Prog/Shift/CBS"
                 pane
             }
             pane split_direction="horizontal" {
@@ -31,7 +31,7 @@ layout {
             }
         }
     }
-    decorated name="2. backend" cwd="/Users/gbataille/Documents/Prog/Shift/CBS" {
+    decorated name="2. backend" focus=true cwd="/Users/gbataille/Documents/Prog/Shift/CBS" {
         workdir
     }
     decorated name="3. infra" cwd="/Users/gbataille/Documents/Prog/Shift/CBS/infra" {
