@@ -1,0 +1,7 @@
+Plug 'preservim/nerdtree'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+
+let mapleader = ","
+nmap <leader>tt = <Action>(RunClass)
+nmap <leader>gf <Action>(GotoFile)
