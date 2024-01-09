@@ -2,6 +2,46 @@ Plug 'preservim/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 
+set relativenumber
+
 let mapleader = ","
-nmap <leader>tt = <Action>(RunClass)
+
+# Utils
+nmap [<Space> O<Esc>
+nmap ]<Space> o<Esc>
+
+# Change
+nmap <leader>cg <Action>(Generate)
+nmap <leader>cnc <Action>(NewClass)
+nmap <leader>cnf <Action>(NewFile)
+nmap <leader>cgb <Action>(GenerateBuilder)
+nmap <leader>cgc <Action>(GenerateConstructor)
+nmap <leader>cgg <Action>(GenerateGetterAndSetter)
+nmap <leader>crn <Action>(RenameElement)
+
+# Debug
+nmap <leader>dbc = <Action>(Debugger.RemoveAllBreakpoints)
+nmap <leader>dbp = <Action>(ToggleLineBreakpoint)
+nmap <leader>df = <Action>(RunConfigurationAsAction_Debug_FastTestSuite_default_target)
+nmap <leader>dn = <Action>(StepOver)
+nmap <leader>dr = <Action>(RunConfigurationAsAction_Debug_CbsApplication_default_target)
+nmap <leader>ds = <Action>(RunConfigurationAsAction_Debug_SlowTestSuite_default_target)
+nmap <leader>dsi = <Action>(StepInto)
+nmap <leader>dso = <Action>(StepOver)
+nmap <leader>dsu = <Action>(StepOut)
+nmap <leader>dtr = <Action>(RunToCursor)
+
+# Codes movements
+nmap <leader>ga <Action>(ShowIntentionActions)
+nmap <leader>gd <Action>(GotoDeclaration)
+nmap <leader>gi <Action>(FindUsages)
 nmap <leader>gf <Action>(GotoFile)
+nmap <leader>e <Action>(SearchEverywhere)
+
+# Run
+nmap <leader>rr <Action>(RunConfigurationAsAction_Run_CbsApplication_default_target)
+
+# Tests
+nmap <leader>tt = <Action>(RunClass)
+nmap <leader>tf = <Action>(RunConfigurationAsAction_Run_FastTestSuite_default_target)
+nmap <leader>ts = <Action>(RunConfigurationAsAction_Run_SlowTestSuite_default_target)
