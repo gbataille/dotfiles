@@ -1,6 +1,0 @@
-[user]
-	name = Grégory Bataille
-  email = gregory.bataille@taurusgroup.ch
-	signingkey = 1D2DF15BF8DA7B8D
-[commit]
-	gpgsign = true
