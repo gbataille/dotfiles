@@ -9,8 +9,13 @@ let mapleader = ","
 # Utils
 nmap [<Space> O<Esc>
 nmap ]<Space> o<Esc>
+nmap ]d <Action>(GotoNextError)
+nmap [d <Action>(GotoPreviousError)
+nmap <Space> <Action>(ExpandCollapseToggleAction)
 
 # Change
+map <leader>c <Action>(CommentByLineComment)
+
 nmap <leader>cg <Action>(Generate)
 nmap <leader>cnc <Action>(NewClass)
 nmap <leader>cnf <Action>(NewFile)
@@ -31,17 +36,34 @@ nmap <leader>dso = <Action>(StepOver)
 nmap <leader>dsu = <Action>(StepOut)
 nmap <leader>dtr = <Action>(RunToCursor)
 
+# Edit
+nmap <leader>ec <Action>(GotoClass)
+nmap <leader>ee <Action>(SearchEverywhere)
+nmap <leader>ef <Action>(GotoFile)
+
+# Editor Full screen
+nmap <leader>ff = <Action>(HideAllWindows)
+
 # Codes movements
 nmap <leader>ga <Action>(ShowIntentionActions)
 nmap <leader>gd <Action>(GotoDeclaration)
 nmap <leader>gi <Action>(FindUsages)
-nmap <leader>gf <Action>(GotoFile)
-nmap <leader>e <Action>(SearchEverywhere)
+
+# Buffer closing
+nmap <leader>Q <Action>(CloseAllEditors)
+nmap <leader>q <Action>(CloseContent)
 
 # Run
-nmap <leader>rr <Action>(RunConfigurationAsAction_Run_CbsApplication_default_target)
+nmap <leader>rc <Action>(RunConfigurationAsAction_Run_CbsApplication_default_target)
+nmap <leader>rr <Action>(ChooseRunConfiguration)
+nmap <leader>rs <Action>(Stop)
 
 # Tests
 nmap <leader>tt = <Action>(RunClass)
 nmap <leader>tf = <Action>(RunConfigurationAsAction_Run_FastTestSuite_default_target)
 nmap <leader>ts = <Action>(RunConfigurationAsAction_Run_SlowTestSuite_default_target)
+
+# Folds
+nmap zA <Action>(ExpandRegionRecursively)
+" nmap <leader>zM <Action>(CollapseAll) # Already mapped like that
+" nmap <leader>zR <Action>(ExpandAll) # Already mapped like that
