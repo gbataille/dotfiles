@@ -1,0 +1,6 @@
+[user]
+	name = Grégory Bataille
+  email = gregory.bataille@or-dynamics.com
+	signingkey = 8D25C48FBEA11B0CCCF9788291B137975BDDDA72
+[commit]
+	gpgsign = true

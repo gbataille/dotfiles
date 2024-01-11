@@ -73,11 +73,7 @@
 	signingkey = 4BF93972CBD058ED
 [commit]
 	gpgsign = true
-[includeIf "gitdir:~/Documents/Prog/Taurus/"]
-	path = ~/.gitconfig-taurus
+[includeIf "gitdir:~/Documents/Prog/OrDynamics/"]
+	path = ~/.gitconfig-or
 [includeIf "gitdir:~/Documents/Prog/GITS/"]
 	path = ~/.gitconfig-gits
-[url "git@github.com:taurusgroup"]
-	insteadOf = https://github.com/taurusgroup
-[url "git@github.com:t-dx"]
-	insteadOf = https://github.com/t-dx
