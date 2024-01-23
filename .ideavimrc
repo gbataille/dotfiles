@@ -3,6 +3,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 
 set relativenumber
+set number
+set scrolloff=5
 
 let mapleader = ","
 
@@ -27,6 +29,7 @@ nmap <leader>crn <Action>(RenameElement)
 # Debug
 nmap <leader>dbc = <Action>(Debugger.RemoveAllBreakpoints)
 nmap <leader>dbp = <Action>(ToggleLineBreakpoint)
+nmap <leader>dc = <Action>(Resume)
 nmap <leader>df = <Action>(RunConfigurationAsAction_Debug_FastTestSuite_default_target)
 nmap <leader>dn = <Action>(StepOver)
 nmap <leader>dr = <Action>(RunConfigurationAsAction_Debug_CbsApplication_default_target)
@@ -34,6 +37,7 @@ nmap <leader>ds = <Action>(RunConfigurationAsAction_Debug_SlowTestSuite_default_
 nmap <leader>dsi = <Action>(StepInto)
 nmap <leader>dso = <Action>(StepOver)
 nmap <leader>dsu = <Action>(StepOut)
+nmap <leader>dt = <Action>(DebugClass)
 nmap <leader>dtr = <Action>(RunToCursor)
 
 # Edit
@@ -47,10 +51,12 @@ nmap <leader>ff = <Action>(HideAllWindows)
 # Codes movements
 nmap <leader>ga <Action>(ShowIntentionActions)
 nmap <leader>gd <Action>(GotoDeclaration)
-nmap <leader>gi <Action>(FindUsages)
+nmap <leader>gi <Action>(GotoImplementation)
+nmap <leader>gt <Action>(GotoTest)
+nmap <leader>gu <Action>(FindUsages)
 
 # Buffer closing
-nmap <leader>Q <Action>(CloseAllEditors)
+nmap <leader>Q <Action>(CloseAllEditorsButActive)
 nmap <leader>q <Action>(CloseContent)
 
 # Run
