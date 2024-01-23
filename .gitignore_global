@@ -25,3 +25,7 @@ dist/
 dist-newstyle/
 __debug_bin
 .config/gh/hosts.yml
+.classpath
+.factorypath
+.project
+.settings/
