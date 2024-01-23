@@ -22,7 +22,7 @@ layout {
     decorated name="1. utils" {
         pane split_direction="vertical" {
             pane split_direction="horizontal" {
-                pane cwd="/Users/gbataille/Documents/Prog/OrDynamics/Shift"
+                pane cwd="/Users/gbataille/Documents/Prog/OrDynamics/Shift/code"
                 pane
             }
             pane split_direction="horizontal" {
