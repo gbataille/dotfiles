@@ -111,8 +111,8 @@ window:
 font:
   # Normal (roman) font face
   normal:
-    family: DejaVuSansMono Nerd Font Mono
-    style: Book
+    family: DejaVuSansM Nerd Font Mono
+    style: Regular
     # Font family
     #
     # Default:
