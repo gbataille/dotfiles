@@ -30,7 +30,9 @@ nmap <leader>crn <Action>(RenameElement)
 nmap <leader>dbc = <Action>(Debugger.RemoveAllBreakpoints)
 nmap <leader>dbp = <Action>(ToggleLineBreakpoint)
 nmap <leader>dc = <Action>(Resume)
+nmap <leader>dd <Action>(ChooseDebugConfiguration)
 nmap <leader>df = <Action>(RunConfigurationAsAction_Debug_FastTestSuite_default_target)
+nmap <leader>di = <Action>(EditorEscape)
 nmap <leader>dn = <Action>(StepOver)
 nmap <leader>dr = <Action>(RunConfigurationAsAction_Debug_CbsApplication_default_target)
 nmap <leader>ds = <Action>(RunConfigurationAsAction_Debug_SlowTestSuite_default_target)
@@ -54,6 +56,11 @@ nmap <leader>gd <Action>(GotoDeclaration)
 nmap <leader>gi <Action>(GotoImplementation)
 nmap <leader>gt <Action>(GotoTest)
 nmap <leader>gu <Action>(FindUsages)
+
+# Mvn
+nmap <leader>mc <Action>(Maven_96d7cbf2cbsfecac4b7compile)
+nmap <leader>mr <Action>(Maven_96d7cbf2cbsfecac4b7clean)
+nmap <leader>mt <Action>(Maven_96d7cbf2cbsfecac4b7test)
 
 # Buffer closing
 nmap <leader>Q <Action>(CloseAllEditorsButActive)

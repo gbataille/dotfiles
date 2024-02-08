@@ -34,7 +34,7 @@ layout {
     decorated name="2. backend" focus=true cwd="/Users/gbataille/Documents/Prog/OrDynamics/Shift" {
         workdir
     }
-    decorated name="3. infra" cwd="/Users/gbataille/Documents/Prog/OrDynamics/Shift/infra" {
+    decorated name="3. front" cwd="/Users/gbataille/Documents/Prog/OrDynamics/Shift/front/cbs" {
         workdir
     }
 }
