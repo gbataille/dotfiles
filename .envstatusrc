@@ -1,5 +1,6 @@
-output_template: [venv: {{virtualenv}}]
+output_template: [venv: {{virtualenv}}] [node: {{node}}]
    {{githud}}
 
 virtualenv: /bin/zsh -c "basename $VIRTUAL_ENV"
+node: /bin/zsh -c "echo $NVM_BIN | sed -r 's/.*v(([[:digit:]]+\.)+[[:digit:]]+)\/.*$/\1/g'"
 githud: githud zsh

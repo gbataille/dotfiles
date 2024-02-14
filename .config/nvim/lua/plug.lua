@@ -57,7 +57,7 @@ return require('packer').startup(function(use)
   use 'yioneko/nvim-type-fmt'                       -- on type indentation -- TEMP - expect real implem - https://github.com/neovim/neovim/issues/21191
   use 'segeljakt/vim-silicon'                       -- Silicon (code image) integration
   use 'timakro/vim-yadi'                            -- Indentation detection
-  use 'mfussenegger/nvim-jdtls'                     -- Java LSP/DAP
+  -- use 'mfussenegger/nvim-jdtls'                     -- Java LSP/DAP
   use 'simrat39/symbols-outline.nvim'
 
   -- better ts LSP
