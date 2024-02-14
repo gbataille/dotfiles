@@ -77,3 +77,5 @@
 	path = ~/.gitconfig-or
 [includeIf "gitdir:~/Documents/Prog/GITS/"]
 	path = ~/.gitconfig-gits
+[maintenance]
+	repo = /Users/gbataille/Documents/Prog/OrDynamics/Shift

@@ -8,7 +8,7 @@ pgup()
     -e POSTGRES_PASSWORD=db_password \
     -e POSTGRES_USER=db_user \
     -e POSTGRES_DB=shiftdb \
-    -v $OR_DIR/code/cbs/config/create_postgresql_schema.sql:/docker-entrypoint-initdb.d/create_schema.sql  \
+    -v $OR_DIR/back/springBoot/config/create_postgresql_schema.sql:/docker-entrypoint-initdb.d/create_schema.sql  \
     postgres:16
 }
 pgdown()
