@@ -7,6 +7,11 @@ aws_get_canonical_account_id()
   ave $1 -- aws s3api list-buckets --query Owner.ID
 }
 
+awsdev()
+{
+  aws $@ --profile dev
+}
+
 # Init SSH keys
 # init_ssh_keys.sh
 # Setup local DNS

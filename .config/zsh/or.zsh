@@ -3,7 +3,7 @@ export OR_DIR="/Users/gbataille/Documents/Prog/OrDynamics/Shift"
 
 pgup()
 {
-  docker run -it --rm -d -p 5432:5432 \
+  docker run -it --rm -d -p 5433:5432 \
     --name pg_shift \
     -e POSTGRES_PASSWORD=db_password \
     -e POSTGRES_USER=db_user \
