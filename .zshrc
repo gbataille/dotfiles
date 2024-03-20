@@ -52,11 +52,11 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(autojump nix-shell)
+plugins=(autojump)
 
 # Start oh-my-zsh
 source $ZSH/oh-my-zsh.sh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 set -o vi
 
@@ -74,11 +74,11 @@ fpath+=~/.config/completions/zsh
 # Load configs
 [ -f ~/.config/zsh/environment.zsh ] && source ~/.config/zsh/environment.zsh
 
-[ -f ~/.config/zsh/.fzf.zsh ] && source ~/.config/zsh/.fzf.zsh
 [ -f ~/.config/zsh/alias.zsh ] && source ~/.config/zsh/alias.zsh
 [ -f ~/.config/zsh/aws.zsh ] && source ~/.config/zsh/aws.zsh
 [ -f ~/.config/zsh/brew-completion.zsh ] && source ~/.config/zsh/brew-completion.zsh
 [ -f ~/.config/zsh/direnv.zsh ] && source ~/.config/zsh/direnv.zsh
+[ -f ~/.config/zsh/fzf.zsh ] && source ~/.config/zsh/fzf.zsh
 [ -f ~/.config/zsh/go.zsh ] && source ~/.config/zsh/go.zsh
 [ -f ~/.config/zsh/grc.zsh ] && source ~/.config/zsh/grc.zsh
 [ -f ~/.config/zsh/java.zsh ] && source ~/.config/zsh/java.zsh
@@ -91,6 +91,3 @@ fpath+=~/.config/completions/zsh
 [ -f ~/.config/zsh/zellij.zsh ] && source ~/.config/zsh/zellij.zsh
 
 [ -f ~/.config/zsh/or.zsh ] && source ~/.config/zsh/or.zsh
-
-# Load Angular CLI autocompletion.
-source <(ng completion script)

@@ -29,3 +29,4 @@ __debug_bin
 .factorypath
 .project
 .settings/
+.config/nvim/plugin/*

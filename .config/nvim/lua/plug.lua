@@ -71,6 +71,7 @@ return require('packer').startup(function(use)
 
   -- Debug setup
   use 'mfussenegger/nvim-dap'           -- DAP adapter
+  use 'nvim-neotest/nvim-nio'
   use 'rcarriga/nvim-dap-ui'            -- nvim-dap UI
   use 'theHamsta/nvim-dap-virtual-text' -- inline preview of variable content in Debug mode
   use 'mfussenegger/nvim-dap-python'    -- python auto DAP setup with debugpy
