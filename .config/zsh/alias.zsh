@@ -39,6 +39,16 @@ alias rgall='rg --hidden --no-ignore'
 alias sshadd='ssh-add ~/.ssh/id_rsa'
 alias tf='terraform'
 alias tiga='tig --all'
+alias tsb32='tsid base32 | tr -d "\n" | pbcopy'
+alias tslong='tsid long | tr -d "\n" | pbcopy'
+ttb32()
+{
+  tsid toBase32 $@ | tr -d "\n" | pbcopy
+}
+ttlong()
+{
+  tsid toLong $@ | tr -d "\n" | pbcopy
+}
 alias uuid='uuidgen | tr -d "\n" |  tr "[:upper:]" "[:lower:]" | pbcopy'
 alias vi='/opt/homebrew/bin/nvim'
 alias ys='yarn start'
