@@ -1,5 +1,5 @@
-# OrDynamics shortcuts
-export OR_DIR="/Users/gbataille/Documents/Prog/OrDynamics/Shift"
+# LightFrame shortcuts
+export LF_DIR="/Users/gbataille/Documents/Prog/LightFrame/Shift"
 
 pgup()
 {
@@ -8,7 +8,7 @@ pgup()
     -e POSTGRES_PASSWORD=db_password \
     -e POSTGRES_USER=db_user \
     -e POSTGRES_DB=shiftdb \
-    -v $OR_DIR/back/springBoot/config/create_postgresql_schema.sql:/docker-entrypoint-initdb.d/create_schema.sql  \
+    -v $LF_DIR/back/springBoot/config/create_postgresql_schema.sql:/docker-entrypoint-initdb.d/create_schema.sql  \
     postgres:16
 }
 pgdown()

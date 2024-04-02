@@ -1,6 +1,6 @@
 prSections:
 - title: Shift
-  filters: is:open author:@me user:OrDynamics
+  filters: is:open author:@me user:LightFrame
 - title: My Pull Requests
   filters: is:open author:@me
 - title: Needs My Review

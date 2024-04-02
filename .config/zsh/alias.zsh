@@ -53,7 +53,7 @@ alias uuid='uuidgen | tr -d "\n" |  tr "[:upper:]" "[:lower:]" | pbcopy'
 alias vi='/opt/homebrew/bin/nvim'
 alias ys='yarn start'
 alias yt='yarn test -- --verbose'
-alias zor='zellij -l or'
+alias zlf='zellij -l lightframe'
 
 cat()
 {
