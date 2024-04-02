@@ -74,7 +74,7 @@
 [commit]
 	gpgsign = true
 [includeIf "gitdir:~/Documents/Prog/OrDynamics/"]
-	path = ~/.gitconfig-or
+	path = ~/.gitconfig-lightframe
 [includeIf "gitdir:~/Documents/Prog/GITS/"]
 	path = ~/.gitconfig-gits
 [maintenance]
