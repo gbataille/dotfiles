@@ -1,0 +1,3 @@
+{
+  cdp = "cd ~/Documents/Prog/";
+}
