@@ -9,12 +9,11 @@
 
   outputs = inputs@{ self, nix-darwin, nixpkgs }:
   let
+    pkgListFn = import ./systemPkgs.nix;
     configuration = { pkgs, ... }: {
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
-      environment.systemPackages =
-        [ pkgs.vim
-        ];
+      environment.systemPackages = pkgListFn { inherit pkgs; } ;
 
       # Auto upgrade nix package and the daemon service.
       services.nix-daemon.enable = true;
@@ -29,6 +28,8 @@
 
       # Set Git commit hash for darwin-version.
       system.configurationRevision = self.rev or self.dirtyRev or null;
+
+      # Sudo with touchId
       security.pam.enableSudoTouchIdAuth = true;
 
       # Used for backwards compatibility, please read the changelog before changing.
