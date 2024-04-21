@@ -16,9 +16,12 @@
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages = pkgListFn { inherit pkgs; } ;
-      environment.shellAliases = {
-        cdp = "cd ~/Documents/Prog/";
-      };
+
+      environment.variables.FOO = "BAR";
+
+      environment.shellAliases.cdp = "cd ~/Documents/Prog";
+
+      environment.loginShell = "${pkgs.zsh}/bin/zsh -l";
 
       # Auto upgrade nix package and the daemon service.
       services.nix-daemon.enable = true;
@@ -28,18 +31,13 @@
       nix.settings.experimental-features = "nix-command flakes";
 
       # Create /etc/zshrc that loads the nix-darwin environment.
-      programs.zsh = {
-        enable = true;
-        enableCompletion = true;
-        enableFzfCompletion = true;
-        enableFzfHistory = true;
-        enableSyntaxHighlighting = true;
-      };
-      # programs.fish.enable = true;
+      programs.zsh.enable = true;
+      programs.zsh.enableCompletion = true;
+      programs.zsh.enableFzfCompletion = true;
+      programs.zsh.enableFzfHistory = true;
+      programs.zsh.enableSyntaxHighlighting = true;
 
-      programs.direnv = {
-        enable = true;
-      };
+      programs.direnv.enable = true;
 
       # Sudo with touchId
       security.pam.enableSudoTouchIdAuth = true;
@@ -47,58 +45,46 @@
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
 
-      system = {
-        # Set Git commit hash for darwin-version.
-        configurationRevision = self.rev or self.dirtyRev or null;
+      # Set Git commit hash for darwin-version.
+      system.configurationRevision = self.rev or self.dirtyRev or null;
 
-        # Used for backwards compatibility, please read the changelog before changing.
-        # $ darwin-rebuild changelog
-        stateVersion = 4;
+      # Used for backwards compatibility, please read the changelog before changing.
+      # $ darwin-rebuild changelog
+      system.stateVersion = 4;
 
-        defaults = {
-          finder = {
-            AppleShowAllExtensions = true;
-            FXPreferredViewStyle = "clmv";
-            ShowPathbar = true;
-          };
+      system.defaults.finder.AppleShowAllExtensions = true;
+      system.defaults.finder.FXPreferredViewStyle = "clmv";
+      system.defaults.finder.ShowPathbar = true;
 
-          screensaver = {
-            askForPasswordDelay = 5;
-          };
+      system.defaults.screensaver.askForPasswordDelay = 5;
 
-          NSGlobalDomain = {
-            AppleShowAllFiles = true;
-            AppleKeyboardUIMode = 3;
-            InitialKeyRepeat = 500;
-            NSNavPanelExpandedStateForSaveMode = true;
-            NSNavPanelExpandedStateForSaveMode2 = true;
-            "com.apple.keyboard.fnState" = true;
-            "com.apple.mouse.tapBehavior" = 1;
-          };
+      system.defaults.NSGlobalDomain.AppleShowAllFiles = true;
+      system.defaults.NSGlobalDomain.AppleKeyboardUIMode = 3;
+      # 120, 90, 60, 30, 12, 6, 2
+      system.defaults.NSGlobalDomain.KeyRepeat = 2;
+      # 120, 94, 68, 35, 25, 15
+      system.defaults.NSGlobalDomain.InitialKeyRepeat = 15;
+      system.defaults.NSGlobalDomain.NSNavPanelExpandedStateForSaveMode = true;
+      system.defaults.NSGlobalDomain.NSNavPanelExpandedStateForSaveMode2 = true;
+      system.defaults.NSGlobalDomain."com.apple.keyboard.fnState" = true;
+      system.defaults.NSGlobalDomain."com.apple.mouse.tapBehavior" = 1;
 
-          dock = {
-            appswitcher-all-displays = true;
-            autohide = true;
-            mru-spaces = false;
-          };
+      system.defaults.dock.appswitcher-all-displays = true;
+      system.defaults.dock.autohide = true;
+      system.defaults.dock.mru-spaces = false;
 
-          trackpad = {
-            Clicking = true;
-            TrackpadRightClick = true;
-            TrackpadThreeFingerDrag = true;
-          };
+      system.defaults.trackpad.Clicking = true;
+      system.defaults.trackpad.TrackpadRightClick = true;
+      system.defaults.trackpad.TrackpadThreeFingerDrag = true;
 
-        };
-        keyboard = {
-          enableKeyMapping = true;
-          remapCapsLockToControl = true;
-        };
-      };
+      system.keyboard.enableKeyMapping = true;
+      system.keyboard.remapCapsLockToControl = true;
     };
   in
   {
     # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#simple
+    # $ darwin-rebuild build --flake . (if the configuration has the name of the machine hostname)
+    # $ darwin-rebuild build --flake .#simple (if the config has the name "simple")
     darwinConfigurations.GregM3Pro = nix-darwin.lib.darwinSystem {
       modules = [ configuration ];
     };
