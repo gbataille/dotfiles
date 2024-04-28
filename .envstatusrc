@@ -4,4 +4,4 @@ output_template: [venv: {{virtualenv}}] [node: {{node}}] [tf: {{tf}}]
 virtualenv: /bin/zsh -c "basename $VIRTUAL_ENV"
 node: /bin/zsh -c "echo $NVM_BIN | sed -r 's/.*v(([[:digit:]]+\.)+[[:digit:]]+)\/.*$/\1/g'"
 githud: githud zsh
-tf: terraform workspace show
+tf: tofu workspace show
