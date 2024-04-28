@@ -73,9 +73,9 @@
 	signingkey = 4BF93972CBD058ED
 [commit]
 	gpgsign = true
-[includeIf "gitdir:~/Documents/Prog/OrDynamics/"]
+[includeIf "gitdir:~/Documents/Prog/LightFrame/"]
 	path = ~/.gitconfig-lightframe
 [includeIf "gitdir:~/Documents/Prog/GITS/"]
 	path = ~/.gitconfig-gits
 [maintenance]
-	repo = /Users/gbataille/Documents/Prog/OrDynamics/Shift
+	repo = /Users/gbataille/Documents/Prog/LightFrame/Shift
