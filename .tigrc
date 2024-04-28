@@ -3,3 +3,23 @@ bind generic <Esc>g    view-grep
 bind generic g    move-first-line
 bind generic <C-f> move-page-down
 bind generic <C-b> move-page-up
+
+# Format reference names based on type:
+#  - head		: The current HEAD.
+#  - tag		: An annotated tag.
+#  - local-tag		: A lightweight tag.
+#  - remote		: A remote.
+#  - tracked-remote	: The remote tracked by current HEAD.
+#  - replace		: A replaced reference.
+#  - branch		: A branch.
+#  - stash		: The stash.
+#  - prefetch		: Refs prefetched by `git maintenance`.
+#  - other		: Any other reference.
+#
+# Expects a space-separated list of format strings.
+# If no format is specified for `local-tag`, the format for `tag` is used.
+# Similarly, if no format is specified for `tracked-remote`, the format for
+# `remote` is used, and if no format is specified for any other reference
+# type, the format for `branch` is used.
+# Prefix with `hide:` to not show that reference type, e.g. `hide:remote`.
+set reference-format		= [branch] <tag> {remote} ~replace~ |prefetch|
