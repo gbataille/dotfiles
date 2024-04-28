@@ -54,12 +54,12 @@
 	path = nvim
 	trustExitCode = true
 [pager]
-	log = /opt/homebrew/share/git-core/contrib/diff-highlight/diff-highlight | less
-	show = /opt/homebrew/share/git-core/contrib/diff-highlight/diff-highlight | less
-	diff = /opt/homebrew/share/git-core/contrib/diff-highlight/diff-highlight | less
+; 	log = /opt/homebrew/share/git-core/contrib/diff-highlight/diff-highlight | less
+; 	show = /opt/homebrew/share/git-core/contrib/diff-highlight/diff-highlight | less
+; 	diff = /opt/homebrew/share/git-core/contrib/diff-highlight/diff-highlight | less
 	branch = false
-[interactive]
-	diffFilter = /opt/homebrew/share/git-core/contrib/diff-highlight/diff-highlight
+; [interactive]
+; 	diffFilter = /opt/homebrew/share/git-core/contrib/diff-highlight/diff-highlight
 [grep]
 	lineNumber = true
 [filter "lfs"]

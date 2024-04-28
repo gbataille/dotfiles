@@ -17,7 +17,7 @@
       # $ nix-env -qaP | grep wget
       environment.systemPackages = pkgListFn { inherit pkgs; } ;
 
-      environment.variables.FOO = "BAR";
+      # environment.variables.FOO = "BAR";
 
       environment.shellAliases.cdp = "cd ~/Documents/Prog";
 

@@ -3,7 +3,6 @@ alias branchclean='git branch --merged | grep -v "\*" | grep -v master | grep -v
 alias c='clear'
 alias cdg='cd ~/Documents/Prog/GregsSandbox/'
 alias cdm='cd ~/Documents/Prog/MyConfig'
-alias cdp='cd ~/Documents/Prog/'
 alias ghpr='gh pr checkout'
 alias gitk='gitk --all'
 
@@ -50,7 +49,7 @@ ttlong()
   tsid toLong $@ | tr -d "\n" | pbcopy
 }
 alias uuid='uuidgen | tr -d "\n" |  tr "[:upper:]" "[:lower:]" | pbcopy'
-alias vi='/opt/homebrew/bin/nvim'
+alias vi='nvim'
 alias ys='yarn start'
 alias yt='yarn test -- --verbose'
 alias zlf='zellij -l lightframe'

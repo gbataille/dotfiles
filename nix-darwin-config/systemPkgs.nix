@@ -2,15 +2,12 @@
 
 with pkgs;
 [
-  curl
-  eza
-  vim
-  wget
-
-  btop
-  awscli
+  awscli2
   bat
+  btop
+  curl
   direnv
+  eza
   fzf
   git
   grc
@@ -23,6 +20,8 @@ with pkgs;
   pyenv
   ripgrep
   tig
-  zellij
+  vim
+  wget
   yadm
+  zellij
 ]
