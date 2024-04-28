@@ -78,6 +78,9 @@ nmap <leader>tt = <Action>(RunClass)
 nmap <leader>tf = <Action>(RunConfigurationAsAction_Run_FastTestSuite_default_target)
 nmap <leader>ts = <Action>(RunConfigurationAsAction_Run_SlowTestSuite_default_target)
 
+# Yank
+nmap <leader>yp = <Action>(CopyAbsolutePath)
+
 # Folds
 nmap zA <Action>(ExpandRegionRecursively)
 " nmap <leader>zM <Action>(CollapseAll) # Already mapped like that
