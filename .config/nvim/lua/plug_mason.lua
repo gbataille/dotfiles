@@ -8,9 +8,6 @@ require("mason-nvim-dap").setup({
   -- A list of adapters to install if they're not already installed.
   -- This setting has no relation with the `automatic_installation` setting.
   ensure_installed = {
-    'delve',
-    'java-debug',
-    'vscode-java-test',
   },
 
   -- NOTE: this is left here for future porting in case needed
