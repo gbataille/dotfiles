@@ -4,23 +4,31 @@ alias c='clear'
 alias cdg='cd ~/Documents/Prog/GregsSandbox/'
 alias cdm='cd ~/Documents/Prog/MyConfig'
 alias ghpr='gh pr checkout'
-alias gitk='gitk --all'
 
 alias gc='git commit'
 alias gca='git commit --amend'
 alias gce='git commit --amend --no-edit'
 alias gp='git push'
+alias gpc='git push -u origin `git rev-parse --abbrev-ref HEAD`'
 alias gpf='git push --force-with-lease'
-alias grm='git rebase origin/main'
-alias grmi='git rebase -i origin/main'
+alias grm='git fetch && git rebase origin/main'
+alias grmi='git fetch && git rebase -i origin/main'
+gro()
+{
+  git fetch && git rebase --onto=origin/main $@
+}
 
+alias helmup='pushd $GITROOT/helm/cbs; helm upgrade --install --namespace test-gba --wait --values tmp_values.yaml dev .; popd;'
+alias helmdown='helm uninstall --namespace test-gba --wait  dev'
 alias logj='jq -R -r ". as \$line | try (fromjson | \"[\" + .ts + \"][\" + (.level | ascii_upcase) + \"] \" + (if has(\"error\") then (.error + \" - \") else \"\" end)  + .msg + \" \" + (.block_number? | tostring) + \" (\" + .caller + \")\" + \"\\n\\t\" + (\$line|fromjson|del(.msg)|del(.ts)|del(.caller)|del(.level)|del(.block_number)|tostring)) catch \$line"'
 alias ls='ls -Gh'
 alias mcc='pushd $GITROOT/back; mvn clean install -DskipTests; popd'
 alias mct='pushd $GITROOT/back; mvn clean test; popd'
+alias mctv='pushd $GITROOT/back; mvn clean test -DredirectTestOutputToFile=false; popd'
 alias mci='pushd $GITROOT/back; mvn clean install; popd'
 alias nrb='pushd $GITROOT/front/cbs; npm run build; popd'
 alias nrd='pushd $GITROOT/front/cbs; npm run dev; popd'
+alias nrdp='pushd $GITROOT/front/cbs; NODE_ENV=production npm run dev; popd'
 alias nrt='pushd $GITROOT/front/cbs; npm run test; popd'
 alias mergeclean='rm $(find . -name "*BACKUP*");rm $(find . -name "*REMOTE*");rm $(find . -name "*LOCAL*");rm $(find . -name "*BASE*")'
 alias mergedremotebranch='git branch -r --merged | grep origin | grep -v ">" | grep -v master | grep -v staging | grep -v "rc-" | xargs -L1'
@@ -38,15 +46,21 @@ alias rgall='rg --hidden --no-ignore'
 alias sshadd='ssh-add ~/.ssh/id_rsa'
 alias tf='tofu'
 alias tiga='tig --all'
-alias tsb32='tsid base32 | tr -d "\n" | pbcopy'
-alias tslong='tsid long | tr -d "\n" | pbcopy'
+tsb32()
+{
+  tsid base32 $@
+}
+tslong()
+{
+  tsid long $@
+}
 ttb32()
 {
-  tsid toBase32 $@ | tr -d "\n" | pbcopy
+  tsid toBase32 $@
 }
 ttlong()
 {
-  tsid toLong $@ | tr -d "\n" | pbcopy
+  tsid toLong $@
 }
 alias uuid='uuidgen | tr -d "\n" |  tr "[:upper:]" "[:lower:]" | pbcopy'
 alias vi='nvim'

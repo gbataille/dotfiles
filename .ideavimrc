@@ -70,6 +70,7 @@ nmap <leader>q <Action>(CloseContent)
 
 # Run
 nmap <leader>rc <Action>(RunConfigurationAsAction_Run_SpringBootApplication_default_target)
+nmap <leader>rg <Action>(RunConfigurationAsAction_Run_gatling_default_target)
 nmap <leader>rr <Action>(ChooseRunConfiguration)
 nmap <leader>rs <Action>(Stop)
 
