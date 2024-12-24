@@ -149,6 +149,9 @@ require 'lspconfig'.pylsp.setup {
 require 'lspconfig'.ccls.setup {}
 -- require'lspconfig'.clangd.setup{}
 
+-- ############# Zig ################
+require 'lspconfig'.zls.setup {}
+
 -- ############## Rust #################
 
 require 'lspconfig'.rust_analyzer.setup {
@@ -164,26 +167,26 @@ require 'lspconfig'.rust_analyzer.setup {
 
 -- ############## Lua #################
 
-require 'lspconfig'.lua_ls.setup {
-  on_attach = on_attach,
-  settings = {
-    Lua = {
-      runtime = {
-        version = 'LuaJIT', -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-      },
-      diagnostics = {
-        globals = { 'vim' }, -- Get the language server to recognize the `vim` global
-      },
-      workspace = {
-        library = vim.api.nvim_get_runtime_file("", true), -- Make the server aware of Neovim runtime files
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
-    },
-  },
-}
+-- require 'lspconfig'.lua_ls.setup {
+--   on_attach = on_attach,
+--   settings = {
+--     Lua = {
+--       runtime = {
+--         version = 'LuaJIT', -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+--       },
+--       diagnostics = {
+--         globals = { 'vim' }, -- Get the language server to recognize the `vim` global
+--       },
+--       workspace = {
+--         library = vim.api.nvim_get_runtime_file("", true), -- Make the server aware of Neovim runtime files
+--       },
+--       -- Do not send telemetry data containing a randomized but unique identifier
+--       telemetry = {
+--         enable = false,
+--       },
+--     },
+--   },
+-- }
 
 -- ############## Typescript #################
 
@@ -215,7 +218,26 @@ if not require("neoconf").get("vue.enable") then
       -- memory limit in megabytes or "auto"(basically no limit)
       tsserver_max_memory = "auto",
       -- described below
-      tsserver_format_options = {},
+      tsserver_format_options = {
+        insertSpaceAfterCommaDelimiter = true,
+        insertSpaceAfterSemicolonInForStatements = true,
+        insertSpaceBeforeAndAfterBinaryOperators = true,
+        insertSpaceAfterConstructor = true,
+        insertSpaceAfterKeywordsInControlFlowStatements = true,
+        insertSpaceAfterFunctionKeywordForAnonymousFunctions = true,
+        insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = false,
+        insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
+        insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
+        insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = false,
+        insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = false,
+        insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces = false,
+        insertSpaceAfterTypeAssertion = true,
+        insertSpaceBeforeFunctionParenthesis = false,
+        placeOpenBraceOnNewLineForFunctions = false,
+        placeOpenBraceOnNewLineForControlBlocks = false,
+        insertSpaceBeforeTypeAnnotation = false,
+        semicolons = false,
+      },
       tsserver_file_preferences = {},
       -- locale of all tsserver messages, supported locales you can find here:
       -- https://github.com/microsoft/TypeScript/blob/3c221fc086be52b19801f6e8d82596d04607ede6/src/compiler/utilitiesPublic.ts#L620
