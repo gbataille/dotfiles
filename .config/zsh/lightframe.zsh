@@ -2,6 +2,15 @@
 export LF_DIR="/Users/gbataille/Documents/Prog/LightFrame/Shift"
 export LF_DATA_DIR="/Users/gbataille/Documents/Data/Postgres/LightFrame_Dev"
 
+alias mcc='pushd $GITROOT/back; mvn clean install -DskipTests; popd'
+alias mct='pushd $GITROOT/back; mvn clean test; popd'
+alias mctv='pushd $GITROOT/back; mvn clean test -DredirectTestOutputToFile=false; popd'
+alias mci='pushd $GITROOT/back; mvn clean install; popd'
+alias nrb='pushd $GITROOT/front/shift; npm run build; popd'
+alias nrd='pushd $GITROOT/front/shift; npm run dev; popd'
+alias nrdp='pushd $GITROOT/front/shift; NODE_ENV=production npm run dev; popd'
+alias nrt='pushd $GITROOT/front/shift; npm run test; popd'
+
 pgup()
 {
   docker run --rm -it -d -p 5433:5432 \

@@ -34,7 +34,7 @@ layout {
     decorated name="2. backend" focus=true cwd="/Users/gbataille/Documents/Prog/LightFrame/Shift" {
         workdir
     }
-    decorated name="3. front" cwd="/Users/gbataille/Documents/Prog/LightFrame/Shift/front/cbs" {
+    decorated name="3. front" cwd="/Users/gbataille/Documents/Prog/LightFrame/Shift/front/shift" {
         workdir
     }
 }
