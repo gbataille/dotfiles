@@ -60,9 +60,7 @@ nmap <leader>gt <Action>(GotoTest)
 nmap <leader>gu <Action>(FindUsages)
 
 # Mvn
-nmap <leader>mc <Action>(Maven_96d7cbf2cbsfecac4b7compile)
-nmap <leader>mr <Action>(Maven_96d7cbf2cbsfecac4b7clean)
-nmap <leader>mt <Action>(Maven_96d7cbf2cbsfecac4b7test)
+nmap <leader>rm <Action>(RunConfigurationAsAction_Run_MvnCleanInstallNoTests_default_target)
 
 # Buffer closing
 nmap <leader>Q <Action>(CloseAllEditorsButActive)
@@ -75,6 +73,7 @@ nmap <leader>rr <Action>(ChooseRunConfiguration)
 nmap <leader>rs <Action>(Stop)
 
 # Tests
+nmap <leader>ta = <Action>(RunConfigurationAsAction_Run_AllTestSuite_default_target)
 nmap <leader>tt = <Action>(RunClass)
 nmap <leader>tf = <Action>(RunConfigurationAsAction_Run_FastTestSuite_default_target)
 nmap <leader>ts = <Action>(RunConfigurationAsAction_Run_SlowTestSuite_default_target)
