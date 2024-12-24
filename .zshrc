@@ -1,3 +1,6 @@
+# Makes the entry in the path unique
+typeset -U path PATH
+
 # https://stackoverflow.com/questions/20357441/zsh-on-10-9-widgets-can-only-be-called-when-zle-is-active
 TRAPWINCH() {
   zle && { zle reset-prompt; zle -R }
@@ -69,7 +72,7 @@ bindkey '^N' history-search-forward
 bindkey '^R' fzf-history-widget
 
 # Add .zsh to your fpath when the zsh shell starts
-fpath+=~/.config/completions/zsh
+fpath+=~/.config/zsh/completions
 
 # Load configs
 [ -f ~/.config/zsh/environment.zsh ] && source ~/.config/zsh/environment.zsh
@@ -82,6 +85,7 @@ fpath+=~/.config/completions/zsh
 [ -f ~/.config/zsh/go.zsh ] && source ~/.config/zsh/go.zsh
 [ -f ~/.config/zsh/grc.zsh ] && source ~/.config/zsh/grc.zsh
 [ -f ~/.config/zsh/java.zsh ] && source ~/.config/zsh/java.zsh
+[ -f ~/.config/zsh/jj.zsh ] && source ~/.config/zsh/jj.zsh
 [ -f ~/.config/zsh/node.zsh ] && source ~/.config/zsh/node.zsh
 [ -f ~/.config/zsh/python.zsh ] && source ~/.config/zsh/python.zsh
 [ -f ~/.config/zsh/random.zsh ] && source ~/.config/zsh/random.zsh

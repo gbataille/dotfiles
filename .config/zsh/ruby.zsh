@@ -1,1 +1,4 @@
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+if ! [[ "$PATH" =~ '\.rbenv/bin' ]] then
+  eval "$(rbenv init -)"
+  export PATH="$HOME/.rbenv/bin:$PATH"
+fi

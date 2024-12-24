@@ -18,7 +18,9 @@ export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=true
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export LDFLAGS="-I$(xcrun --show-sdk-path)/usr/include"
-export PATH=/opt/homebrew/bin:$HOME/Documents/Prog/MyConfig/scripts:$XDG_DATA_HOME/nvim/mason/bin:$PATH
+if ! [[ "$PATH" =~ 'MyConfig' ]] then
+  export PATH=/opt/homebrew/bin:$HOME/Documents/Prog/MyConfig/scripts:$XDG_DATA_HOME/nvim/mason/bin:$PATH
+fi
 export PYENV_ROOT="$HOME/.pyenv"
 export PYTHONBREAKPOINT=ipdb.set_trace
 export PYTHONPATH=$HOME/Documents/Prog/Perso/pytoolkit:$PYTHONPATH
