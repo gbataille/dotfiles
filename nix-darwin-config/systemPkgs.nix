@@ -7,6 +7,7 @@ with pkgs;
   btop
   curl
   direnv
+  difftastic
   eza
   fzf
   git
@@ -24,4 +25,5 @@ with pkgs;
   wget
   yadm
   zellij
+  # zig
 ]
