@@ -140,6 +140,16 @@ vim.api.nvim_create_autocmd('BufRead', {
   ]]
 })
 
+vim.api.nvim_create_autocmd({'BufLeave', 'WinLeave', 'FocusLost'}, {
+  pattern = '*',
+  command = [[
+    if &buftype == "" && bufname('') != "" |
+      :silent w |
+    endif
+  ]],
+  nested = true,
+})
+
 -- Force refolding on file open (bug in telescope ?) -- https://github.com/nvim-telescope/telescope.nvim/issues/699
 vim.api.nvim_create_autocmd({ "BufRead" }, {
   pattern = { "*" },
