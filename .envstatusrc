@@ -1,8 +1,6 @@
 output_template: [venv: {{virtualenv}}] [rbenv: {{rbenv}}] [node: {{node}}] [tf: {{tf}}]
-   {{githud}}
 
 virtualenv: /bin/zsh -c "basename $VIRTUAL_ENV"
 rbenv: rbenv version-name
 node: /bin/zsh -c "echo $NVM_BIN | sed -r 's/.*v(([[:digit:]]+\.)+[[:digit:]]+)\/.*$/\1/g'"
-githud: githud zsh
 tf: tofu workspace show
