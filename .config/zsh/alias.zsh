@@ -1,9 +1,15 @@
 alias ..='cd ..'
 alias branchclean='git branch --merged | grep -v "\*" | grep -v master | grep -v staging | xargs -n 1 git branch -d'
 alias c='clear'
+cat()
+{
+  bat $@
+}
 alias cdg='cd ~/Documents/Prog/GregsSandbox/'
 alias cdm='cd ~/Documents/Prog/MyConfig'
 alias ghpr='gh pr checkout'
+
+alias gg='/Applications/gg.app/Contents/MacOS/gg'
 
 alias gc='git commit'
 alias gca='git commit --amend'
@@ -17,10 +23,28 @@ gro()
 {
   git fetch && git rebase --onto=origin/main $@
 }
-
+jjb()
+{
+  jj b c -r @- $@
+}
+alias jjf='jj git fetch'
+jjp()
+{
+  jj git push -b $@
+}
+jjrb()
+{
+  jj rebase -d main -b $@
+}
 alias helmup='pushd $GITROOT/helm/cbs; helm upgrade --install --namespace test-gba --wait --values tmp_values.yaml dev .; popd;'
 alias helmdown='helm uninstall --namespace test-gba --wait  dev'
 alias logj='jq -R -r ". as \$line | try (fromjson | \"[\" + .ts + \"][\" + (.level | ascii_upcase) + \"] \" + (if has(\"error\") then (.error + \" - \") else \"\" end)  + .msg + \" \" + (.block_number? | tostring) + \" (\" + .caller + \")\" + \"\\n\\t\" + (\$line|fromjson|del(.msg)|del(.ts)|del(.caller)|del(.level)|del(.block_number)|tostring)) catch \$line"'
+alias l='lazyjj'
+unalias ll
+ll()
+{
+  eza -la --git -F $@
+}
 alias ls='ls -Gh'
 alias mcc='pushd $GITROOT/back; mvn clean install -DskipTests; popd'
 alias mct='pushd $GITROOT/back; mvn clean test; popd'
@@ -46,6 +70,11 @@ alias rgall='rg --hidden --no-ignore'
 alias sshadd='ssh-add ~/.ssh/id_rsa'
 alias tf='tofu'
 alias tiga='tig --all'
+
+tree()
+{
+  eza -la --git -F -T -I ".mypy_cache|.DS_Store|__pycache__|.git|node_modules" $@
+}
 tsb32()
 {
   tsid base32 $@
@@ -67,21 +96,6 @@ alias vi='nvim'
 alias ys='yarn start'
 alias yt='yarn test -- --verbose'
 alias zlf='zellij -l lightframe'
-
-cat()
-{
-  bat $@
-}
-unalias ll
-ll()
-{
-  eza -la --git -F $@
-}
-alias l='ll'
-tree()
-{
-  eza -la --git -F -T -I ".mypy_cache|.DS_Store|__pycache__|.git|node_modules" $@
-}
 
 if [ -f /usr/local/bin/nvim ]; then
   alias vi='/usr/local/bin/nvim'
