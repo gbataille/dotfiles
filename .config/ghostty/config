@@ -1,0 +1,8 @@
+theme = BlulocoDark
+font-family = Monaco
+fullscreen = true
+clipboard-trim-trailing-spaces = true
+copy-on-select = true
+confirm-close-surface = false
+quit-after-last-window-closed = true
+bold-is-bright = true
