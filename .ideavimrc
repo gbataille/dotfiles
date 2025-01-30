@@ -74,6 +74,7 @@ nmap <leader>rs <Action>(Stop)
 
 # Tests
 nmap <leader>ta = <Action>(RunConfigurationAsAction_Run_AllTestSuite_default_target)
+nmap <leader>tg = <Action>(RunConfigurationAsAction_Run_AllFrontEndTests_default_target)
 nmap <leader>tt = <Action>(RunClass)
 nmap <leader>tf = <Action>(RunConfigurationAsAction_Run_FastTestSuite_default_target)
 nmap <leader>ts = <Action>(RunConfigurationAsAction_Run_SlowTestSuite_default_target)
