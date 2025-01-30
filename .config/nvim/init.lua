@@ -30,7 +30,6 @@ require("lsp_config") -- lsp
 -- require('cmp_config') -- autocompletion module
 
 -- Plugins
-require("plug_better-escape")
 require("plug_close-buffers")
 require("plug_fugitive")
 require("plug_gitsigns")
