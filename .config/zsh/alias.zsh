@@ -23,6 +23,8 @@ gro()
 {
   git fetch && git rebase --onto=origin/main $@
 }
+alias helmup='pushd $GITROOT/helm/cbs; helm upgrade --install --namespace test-gba --wait --values tmp_values.yaml dev .; popd;'
+alias helmdown='helm uninstall --namespace test-gba --wait  dev'
 jjb()
 {
   jj b c -r @- $@
@@ -36,8 +38,9 @@ jjrb()
 {
   jj rebase -d main -b $@
 }
-alias helmup='pushd $GITROOT/helm/cbs; helm upgrade --install --namespace test-gba --wait --values tmp_values.yaml dev .; popd;'
-alias helmdown='helm uninstall --namespace test-gba --wait  dev'
+alias k="kubectl"
+alias kexec_cilium="k -n kube-system exec -ti ds/cilium --"
+alias klog_cilium="k -n kube-system logs ds/cilium -f"
 alias logj='jq -R -r ". as \$line | try (fromjson | \"[\" + .ts + \"][\" + (.level | ascii_upcase) + \"] \" + (if has(\"error\") then (.error + \" - \") else \"\" end)  + .msg + \" \" + (.block_number? | tostring) + \" (\" + .caller + \")\" + \"\\n\\t\" + (\$line|fromjson|del(.msg)|del(.ts)|del(.caller)|del(.level)|del(.block_number)|tostring)) catch \$line"'
 alias l='lazyjj'
 unalias ll
@@ -50,10 +53,10 @@ alias mcc='pushd $GITROOT/back; mvn clean install -DskipTests; popd'
 alias mct='pushd $GITROOT/back; mvn clean test; popd'
 alias mctv='pushd $GITROOT/back; mvn clean test -DredirectTestOutputToFile=false; popd'
 alias mci='pushd $GITROOT/back; mvn clean install; popd'
-alias nrb='pushd $GITROOT/front/cbs; npm run build; popd'
-alias nrd='pushd $GITROOT/front/cbs; npm run dev; popd'
-alias nrdp='pushd $GITROOT/front/cbs; NODE_ENV=production npm run dev; popd'
-alias nrt='pushd $GITROOT/front/cbs; npm run test; popd'
+alias nrb='pushd $GITROOT/front/shift; npm run build; popd'
+alias nrd='pushd $GITROOT/front/shift; npm run dev; popd'
+alias nrdp='pushd $GITROOT/front/shift; NODE_ENV=production npm run dev; popd'
+alias nrt='pushd $GITROOT/front/shift; npm run test; popd'
 alias mergeclean='rm $(find . -name "*BACKUP*");rm $(find . -name "*REMOTE*");rm $(find . -name "*LOCAL*");rm $(find . -name "*BASE*")'
 alias mergedremotebranch='git branch -r --merged | grep origin | grep -v ">" | grep -v master | grep -v staging | grep -v "rc-" | xargs -L1'
 alias nh='ssh nethack@eu.hardfought.org'
