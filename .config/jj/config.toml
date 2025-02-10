@@ -1,0 +1,15 @@
+[user]
+name = "Grégory Bataille"
+email = "gregory.bataille@lightframe.tech"
+[signing]
+sign-all = true
+backend = "gpg"
+key = "16E3480ED00E3E09C7551C25CBD61BDEF9DB4581"
+
+[ui]
+default-command = "log"
+merge-editor = "vimdiff"
+diff-editor = ":builtin"
+
+[merge-tools.vimdiff]
+program = "nvim"
