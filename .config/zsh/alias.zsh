@@ -42,7 +42,6 @@ alias k="kubectl"
 alias kexec_cilium="k -n kube-system exec -ti ds/cilium --"
 alias klog_cilium="k -n kube-system logs ds/cilium -f"
 alias logj='jq -R -r ". as \$line | try (fromjson | \"[\" + .ts + \"][\" + (.level | ascii_upcase) + \"] \" + (if has(\"error\") then (.error + \" - \") else \"\" end)  + .msg + \" \" + (.block_number? | tostring) + \" (\" + .caller + \")\" + \"\\n\\t\" + (\$line|fromjson|del(.msg)|del(.ts)|del(.caller)|del(.level)|del(.block_number)|tostring)) catch \$line"'
-alias l='lazyjj'
 unalias ll
 ll()
 {
@@ -70,6 +69,16 @@ alias pmt='python manage.py test'
 alias pmtk='LOG_LEVEL=WARNING python manage.py test -v 2 --keepdb'
 alias pyclean='rm $(find . -name "*.pyc"); rm -r $(find . -name "__pycache__")'
 alias rgall='rg --hidden --no-ignore'
+
+rot13()
+{
+  echo $1 | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+}
+rot47()
+{
+  echo $1 | tr '\!-~' 'P-~\!-O'
+}
+
 alias sshadd='ssh-add ~/.ssh/id_rsa'
 alias tf='tofu'
 alias tiga='tig --all'

@@ -59,7 +59,9 @@ end
 vim.api.nvim_create_autocmd('BufWrite', {
   pattern = '*',
   callback = function()
-    vim.lsp.buf.format({ async = false })
+    if vim.o.filetype ~= 'python' then
+      vim.lsp.buf.format({ async = false })
+    end
   end
 })
 

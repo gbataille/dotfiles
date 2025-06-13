@@ -13,17 +13,22 @@ with pkgs;
   git
   grc
   httpie
+  ipcalc
+  jjui
+  jujutsu
   jq
   maven
   neovim
   openssh
   opentofu
-  pyenv
   ripgrep
   tig
+  typst
+  uv
   vim
   wget
   yadm
+  yq
   zellij
   # zig
 ]

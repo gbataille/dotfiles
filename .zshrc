@@ -95,3 +95,5 @@ fpath+=~/.config/zsh/completions
 [ -f ~/.config/zsh/zellij.zsh ] && source ~/.config/zsh/zellij.zsh
 
 [ -f ~/.config/zsh/lightframe.zsh ] && source ~/.config/zsh/lightframe.zsh
+
+. "$HOME/.local/bin/env"

@@ -22,7 +22,6 @@
       environment.shellAliases.cdp = "cd ~/Documents/Prog";
 
       # Auto upgrade nix package and the daemon service.
-      services.nix-daemon.enable = true;
       # nix.package = pkgs.nix;
 
       # Necessary for using flakes on this system.
@@ -38,11 +37,12 @@
       programs.direnv.enable = true;
 
       # Sudo with touchId
-      security.pam.enableSudoTouchIdAuth = true;
+      security.pam.services.sudo_local.touchIdAuth = true;
 
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
 
+      system.primaryUser = "gbataille";
       # Set Git commit hash for darwin-version.
       system.configurationRevision = self.rev or self.dirtyRev or null;
 

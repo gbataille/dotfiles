@@ -31,10 +31,10 @@ layout {
             }
         }
     }
-    decorated name="2. backend" focus=true cwd="/Users/gbataille/Documents/Prog/LightFrame/Shift" {
-        workdir
+    decorated name="2. jj" focus=true cwd="/Users/gbataille/Documents/Prog/LightFrame/Shift" {
+        pane
     }
-    decorated name="3. front" cwd="/Users/gbataille/Documents/Prog/LightFrame/Shift/front/shift" {
+    decorated name="3. Shift" cwd="/Users/gbataille/Documents/Prog/LightFrame/Shift" {
         workdir
     }
 }

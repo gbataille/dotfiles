@@ -2,7 +2,7 @@
 name = "Grégory Bataille"
 email = "gregory.bataille@lightframe.tech"
 [signing]
-sign-all = true
+behavior = "own"
 backend = "gpg"
 key = "16E3480ED00E3E09C7551C25CBD61BDEF9DB4581"
 
@@ -10,6 +10,11 @@ key = "16E3480ED00E3E09C7551C25CBD61BDEF9DB4581"
 default-command = "log"
 merge-editor = "vimdiff"
 diff-editor = ":builtin"
+conflict-marker-style = "snapshot"
 
 [merge-tools.vimdiff]
 program = "nvim"
+
+[git]
+subprocess = true
+push-new-bookmarks = true
