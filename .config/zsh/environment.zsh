@@ -15,6 +15,7 @@ export GOBIN=$GOPATH/bin
 export GOPATH=$HOME/go
 export GOPRIVATE=
 export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=true
+export JJUI_CONFIG_DIR=$HOME/.config/jjui
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export LDFLAGS="-I$(xcrun --show-sdk-path)/usr/include"
