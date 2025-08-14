@@ -32,7 +32,10 @@ layout {
         }
     }
     decorated name="2. jj" focus=true cwd="/Users/gbataille/Documents/Prog/LightFrame/Shift" {
-        pane
+        pane split_direction="vertical" {
+            pane
+            pane
+        }
     }
     decorated name="3. Shift" cwd="/Users/gbataille/Documents/Prog/LightFrame/Shift" {
         workdir

@@ -7,15 +7,20 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
+
   outputs = inputs@{ self, nix-darwin, nixpkgs }:
   let
     pkgListFn = import ./systemPkgs.nix;
     aliases = import ./aliases.nix;
 
-    configuration = { pkgs, ... }: {
+    configuration = { pkgs, lib, ... }: {
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages = pkgListFn { inherit pkgs; } ;
+
+      nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+        "1password-cli"
+      ];
 
       # environment.variables.FOO = "BAR";
 

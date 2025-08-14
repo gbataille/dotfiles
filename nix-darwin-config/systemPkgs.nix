@@ -2,12 +2,14 @@
 
 with pkgs;
 [
+  _1password-cli
   awscli2
   bat
   btop
   curl
   direnv
   difftastic
+  docker-compose
   eza
   fzf
   git
@@ -17,11 +19,12 @@ with pkgs;
   jjui
   jujutsu
   jq
+  libpq
   maven
   neovim
   openssh
-  opentofu
   ripgrep
+  tenv
   tig
   typst
   uv

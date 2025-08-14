@@ -13,6 +13,8 @@ nmap [<Space> O<Esc>
 nmap ]<Space> o<Esc>
 nmap ]d <Action>(GotoNextError)
 nmap [d <Action>(GotoPreviousError)
+nmap [[ <Action>(MethodUp)
+nmap ]] <Action>(MethodDown)
 nmap <Space> <Action>(ExpandCollapseToggleAction)
 
 # Change
@@ -73,7 +75,7 @@ nmap <leader>rr <Action>(ChooseRunConfiguration)
 nmap <leader>rs <Action>(Stop)
 
 # Tests
-nmap <leader>ta = <Action>(RunConfigurationAsAction_Run_AllTestSuite_default_target)
+nmap <leader>ta = <Action>(RunConfigurationAsAction_Run_AllCoreTestSuite_default_target)
 nmap <leader>tg = <Action>(RunConfigurationAsAction_Run_AllFrontEndTests_default_target)
 nmap <leader>tt = <Action>(RunClass)
 nmap <leader>tf = <Action>(RunConfigurationAsAction_Run_FastTestSuite_default_target)
@@ -84,5 +86,6 @@ nmap <leader>yp = <Action>(CopyAbsolutePath)
 
 # Folds
 nmap zA <Action>(ExpandRegionRecursively)
+nmap <leader>zz <Action>(ChangeIdeScale)
 " nmap <leader>zM <Action>(CollapseAll) # Already mapped like that
 " nmap <leader>zR <Action>(ExpandAll) # Already mapped like that

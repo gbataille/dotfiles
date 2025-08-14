@@ -2,6 +2,12 @@
 export LF_DIR="/Users/gbataille/Documents/Prog/LightFrame/Shift"
 export LF_DATA_DIR="/Users/gbataille/Documents/Data/Postgres/LightFrame_Dev"
 
+alias dcu='pushd $GITROOT/back; docker compose up; popd'
+alias dcud='pushd $GITROOT/back; docker compose up -d; popd'
+alias dcd='pushd $GITROOT/back; docker compose down; popd'
+alias dcl='pushd $GITROOT/back; docker compose logs; popd'
+alias dcr='pushd $GITROOT/back; docker compose down && docker compose up -d; popd'
+
 alias mcc='pushd $GITROOT/back; mvn clean install -DskipTests; popd'
 alias mct='pushd $GITROOT/back; mvn clean test; popd'
 alias mctv='pushd $GITROOT/back; mvn clean test -DredirectTestOutputToFile=false; popd'

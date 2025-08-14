@@ -7,6 +7,7 @@ cat()
 }
 alias cdg='cd ~/Documents/Prog/GregsSandbox/'
 alias cdm='cd ~/Documents/Prog/MyConfig'
+
 alias ghpr='gh pr checkout'
 
 alias gg='/Applications/gg.app/Contents/MacOS/gg'
