@@ -1,3 +1,5 @@
+export XDG_CONFIG_HOME=$HOME/.config
+
 export ALGORAND_DATA=$ALGORAND_HOME/testnetdata
 export ALGORAND_HOME=$HOME/Documents/Prog/Cryptos/AlgoNode
 export AWS_ASSUME_ROLE_TTL=4h
@@ -9,6 +11,7 @@ export BUF_USER=gbataille
 export CC=clang
 export CFLAGS="-I$(xcrun --show-sdk-path)/usr/include"
 export CPPFLAGS="-I$(xcrun --show-sdk-path)/usr/include"
+export DIRENV_CONFIG=$XDG_CONFIG_HOME/direnv
 export EDITOR=nvim
 export GITHUD_DEBUG=TRUE
 export GOBIN=$GOPATH/bin

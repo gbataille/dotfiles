@@ -2,11 +2,14 @@
 export LF_DIR="/Users/gbataille/Documents/Prog/LightFrame/Shift"
 export LF_DATA_DIR="/Users/gbataille/Documents/Data/Postgres/LightFrame_Dev"
 
-alias dcu='pushd $GITROOT/back; docker compose up; popd'
-alias dcud='pushd $GITROOT/back; docker compose up -d; popd'
-alias dcd='pushd $GITROOT/back; docker compose down; popd'
-alias dcl='pushd $GITROOT/back; docker compose logs; popd'
-alias dcr='pushd $GITROOT/back; docker compose down && docker compose up -d; popd'
+alias dbu='pushd $GITROOT/devlocal; docker compose up -d shiftdb; popd'
+alias dbd='pushd $GITROOT/devlocal; docker compose down -v shiftdb; popd'
+alias dbr='pushd $GITROOT/devlocal; docker compose down -v shiftdb && docker compose up -d shiftdb; popd'
+alias dcu='pushd $GITROOT/devlocal; docker compose up; popd'
+alias dcud='pushd $GITROOT/devlocal; docker compose up -d; popd'
+alias dcd='pushd $GITROOT/devlocal; docker compose down; popd'
+alias dcl='pushd $GITROOT/devlocal; docker compose logs; popd'
+alias dcr='pushd $GITROOT/devlocal; docker compose down && docker compose up -d; popd'
 
 alias mcc='pushd $GITROOT/back; mvn clean install -DskipTests; popd'
 alias mct='pushd $GITROOT/back; mvn clean test; popd'

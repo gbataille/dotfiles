@@ -3,6 +3,7 @@ require("neodev").setup({
   -- add any options here, or leave empty to use the default settings
 })
 
+local fn = vim.fn
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
@@ -20,19 +21,19 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'ga', '<Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<Cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<Cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   -- buf_set_keymap('n', 'cwa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   -- buf_set_keymap('n', 'cwr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   -- buf_set_keymap('n', 'cwl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', 'cD', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', 'crn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', 'gee', '<cmd>lua vim.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', 'gel', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-  buf_set_keymap('n', 'geq', '<cmd>lua vim.diagnostic.setqflist()<CR>', opts)
+  buf_set_keymap('n', 'cD', '<Cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', 'crn', '<Cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', 'gee', '<Cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  buf_set_keymap('n', '[d', '<Cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<Cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', 'gel', '<Cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+  buf_set_keymap('n', 'geq', '<Cmd>lua vim.diagnostic.setqflist()<CR>', opts)
 
   -- Set some keybinds conditional on server capabilities
   if client.server_capabilities.documentFormattingProvider then
@@ -78,11 +79,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end
 })
 
-local nvim_lsp = require('lspconfig')
-
 -- ############## GO #################
 
-nvim_lsp.gopls.setup {
+vim.lsp.config['gopls'] = {
   cmd = { 'gopls' },
   -- for postfix snippets and analyzers
   capabilities = capabilities,
@@ -109,44 +108,68 @@ nvim_lsp.gopls.setup {
   on_attach = on_attach,
 }
 
-nvim_lsp.golangci_lint_ls.setup {
+vim.lsp.config['golangci_lint_ls'] = {
   cmd = { "golangci-lint-langserver" },
   filetypes = { "go", "gomod" },
+  root_markers = {
+    'go.mod', 
+    '.golangci.yml', 
+    '.golangci.yaml', 
+    '.git',
+  },
   init_options = {
     command = { "golangci-lint", "run", "--out-format", "json" },
   },
-  root_dir = nvim_lsp.util.root_pattern('go.mod', '.golangci.yml', '.golangci.yaml', '.git'),
 }
 
 -- ############## Python #################
 
-require 'lspconfig'.pylsp.setup {
+vim.lsp.config['pylsp'] = {
   on_attach = on_attach,
   settings = {
     pylsp = {
       plugins = {
+        pycodestyle = { enabled = true},
         ruff = {
-          enabled = true,
-          extendSelect = { "I" },
+            enabled = true,
+            extendSelect = { "I" },
         },
-      }
+        rope = { enabled = false },
+        mccabe = { enabled = false },
+        flake8 = {enabled = false },
+        pyflakes = {enabled = true },
+        pylint = {enabled = true },
+        isort = { enabled = true },
+        yapf = { enabled = true },
+        black = { enabled = false },
+        jedi_completion = { fuzzy = true },
+      },
     }
   },
 }
 
+vim.lsp.config['pyright'] = {
+  on_attach = on_attach,
+}
+
 -- ############## C #################
 
-require 'lspconfig'.ccls.setup {}
+-- require 'lspconfig'.ccls.setup {}
 -- require'lspconfig'.clangd.setup{}
 
 -- ############# Zig ################
-require 'lspconfig'.zls.setup {}
+-- nvim_lsp.zls.setup {}
 
 -- ############## Rust #################
 
-require 'lspconfig'.rust_analyzer.setup {
+vim.lsp.config['rust_analyzer'] = {
   cmd = { "rust-analyzer" },
-  root_dir = nvim_lsp.util.root_pattern("Cargo.toml", "rust-project.json", ".git", ".root"),
+  root_markers = {
+    "Cargo.toml", 
+    "rust-project.json", 
+    ".git", 
+    ".root",
+  },
   cargo = {
     buildScripts = {
       enable = true,
@@ -185,3 +208,23 @@ require 'lspconfig'.rust_analyzer.setup {
 --   on_attach = on_attach,
 -- }
 
+-- global config for diagnostic
+vim.diagnostic.config {
+  underline = true,
+  virtual_text = false,
+  signs = { 
+    text = { 
+      [vim.diagnostic.severity.ERROR] = '🆇',
+      [vim.diagnostic.severity.WARN] = '⚠️',
+      [vim.diagnostic.severity.INFO] = 'ℹ️',
+      [vim.diagnostic.severity.HINT] = '',
+    },
+  },
+  severity_sort = true,
+  float = {
+    show_header = true,
+    source = 'always',
+    border = 'rounded',
+    focusable = false,
+  },
+}

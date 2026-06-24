@@ -2,7 +2,7 @@
 -- Make sure mason is setup before lsp config
 require("mason").setup()
 require('mason-lspconfig').setup({
-  ensure_installed = { "pylsp" }
+  ensure_installed = { "pylsp", "pyright", "ruff" }
 })
 require("mason-nvim-dap").setup({
   -- A list of adapters to install if they're not already installed.

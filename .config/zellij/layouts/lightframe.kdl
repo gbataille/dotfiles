@@ -1,4 +1,15 @@
 layout {
+    default_tab_template {
+        // the default zellij tab-bar and status bar plugins
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        children
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+
     tab_template name="decorated" {
         pane size=1 borderless=true {
             plugin location="zellij:tab-bar"
@@ -32,12 +43,12 @@ layout {
         }
     }
     decorated name="2. jj" focus=true cwd="/Users/gbataille/Documents/Prog/LightFrame/Shift" {
-        pane split_direction="vertical" {
-            pane
-            pane
-        }
+        pane
     }
     decorated name="3. Shift" cwd="/Users/gbataille/Documents/Prog/LightFrame/Shift" {
         workdir
+    }
+    decorated name="4. AI" cwd="/Users/gbataille/Documents/Prog/LightFrame/Shift" {
+        pane
     }
 }

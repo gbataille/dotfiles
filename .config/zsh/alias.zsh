@@ -1,4 +1,8 @@
 alias ..='cd ..'
+awslocal()
+{
+  aws --profile floci $@
+}
 alias branchclean='git branch --merged | grep -v "\*" | grep -v master | grep -v staging | xargs -n 1 git branch -d'
 alias c='clear'
 cat()
@@ -62,6 +66,7 @@ alias mergedremotebranch='git branch -r --merged | grep origin | grep -v ">" | g
 alias nh='ssh nethack@eu.hardfought.org'
 alias npmr='npm run'
 alias npmrs='npm run -s'
+alias oc='opencode'
 alias origclean='find . -name "*.orig" -exec rm {} \;'
 alias pm='python manage.py'
 alias pmr='python manage.py runserver 0.0.0.0:8000'

@@ -82,6 +82,8 @@
 
       system.keyboard.enableKeyMapping = true;
       system.keyboard.remapCapsLockToControl = true;
+
+      networking.hostName = "GregM3Pro";
     };
   in
   {

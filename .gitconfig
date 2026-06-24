@@ -19,7 +19,6 @@
 	mt = mergetool
 [core]
 	excludesfile = ~/.gitignore_global
-	hooksPath = /Users/gbataille/.git_hooks
 [push]
 	default = simple
 [github]

@@ -33,5 +33,4 @@ with pkgs;
   yadm
   yq
   zellij
-  # zig
 ]

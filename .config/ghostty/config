@@ -1,4 +1,4 @@
-theme = BlulocoDark
+theme = Bluloco Dark
 font-family = Monaco
 fullscreen = true
 clipboard-trim-trailing-spaces = true
@@ -7,3 +7,4 @@ confirm-close-surface = false
 quit-after-last-window-closed = true
 bold-is-bright = true
 macos-non-native-fullscreen = visible-menu
+keybind = shift+enter=text:\x1b\r

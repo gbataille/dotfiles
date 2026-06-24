@@ -62,6 +62,7 @@ nmap <leader>gt <Action>(GotoTest)
 nmap <leader>gu <Action>(FindUsages)
 
 # Mvn
+nmap <leader>ms <Action>(Maven.SyncAllSplitAction)
 nmap <leader>rm <Action>(RunConfigurationAsAction_Run_MvnCleanInstallNoTests_default_target)
 
 # Buffer closing
