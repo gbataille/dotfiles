@@ -1,5 +1,5 @@
 function shorter_path {
-    echo `variable_lenght_path.py` 2>/dev/null
+    echo $(variable_lenght_path.py) 2>/dev/null
 }
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1

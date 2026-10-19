@@ -1,2 +1,33 @@
 [ui]
 theme = "base16-nord"
+
+[[actions]]
+name = "fetch-main"
+lua = '''
+  jj_async("git", "fetch", "-b", "main")
+  revisions.refresh()
+'''
+
+[[bindings]]
+action = "fetch-main"
+seq = ["F", "F"]
+scope = "revisions"
+desc = "jj git fetch -b main"
+
+[[actions]]
+name = "resolve"
+lua = '''
+  local change_id = context.change_id()
+  if not change_id or change_id == "" then
+    flash({ text = "No revision selected", error = true })
+    return
+  end
+  exec_shell(string.format("jj resolve -r %q", change_id))
+  revisions.refresh()
+'''
+
+[[bindings]]
+action = "resolve"
+seq = ["R", "R"]
+scope = "revisions"
+desc = "jj resolve"

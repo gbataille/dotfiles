@@ -20,3 +20,13 @@ subprocess = true
 
 [remotes.origin]
 auto-track-bookmarks = "main"
+
+[aliases]
+landed = ["util", "exec", "--", "bash", "-c", '''
+set -e
+merged="${1:?usage: jj landed <bookmark>}"
+jj git fetch --branch main
+jj rebase -s \"${merged}+\" -d main
+jj git fetch
+jj bookmark delete \"$merged\" || true
+''', "jj-landed"]

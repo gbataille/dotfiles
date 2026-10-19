@@ -20,6 +20,14 @@ alias nrd='pushd $GITROOT/front/shift; npm run dev; popd'
 alias nrdp='pushd $GITROOT/front/shift; NODE_ENV=production npm run dev; popd'
 alias nrt='pushd $GITROOT/front/shift; npm run test; popd'
 
+alias nonoc='nono run --profile shift-opencode --allow-cwd -v --log-file nono.log opencode'
+nonomvn()
+{
+  pushd $GITROOT/back
+  mvn dependency:go-offline
+  popd
+}
+
 pgup()
 {
   docker run --rm -it -d -p 5433:5432 \

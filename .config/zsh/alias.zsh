@@ -50,7 +50,7 @@ alias logj='jq -R -r ". as \$line | try (fromjson | \"[\" + .ts + \"][\" + (.lev
 unalias ll
 ll()
 {
-  eza -la --git -F $@
+  eza -la --git -F auto $@
 }
 alias ls='ls -Gh'
 alias mcc='pushd $GITROOT/back; mvn clean install -DskipTests; popd'
@@ -87,8 +87,31 @@ rot47()
 
 alias sshadd='ssh-add ~/.ssh/id_rsa'
 alias tf='tofu'
+alias tg='terragrunt'
 alias tiga='tig --all'
 
+testShift() {
+  if [ "$#" -ne 1 ]; then
+    echo "Usage: shift_build <revision>" >&2
+    return 1
+  fi
+
+  local rev="$1"
+
+  # Resolve "@" in the current repo, before changing folders
+  if [ "$rev" = "@" ]; then
+    rev=$(jj log -r @ --no-graph -T 'commit_id') || return 1
+  fi
+
+  pushd "$HOME/Documents/Prog/LightFrame/shift-test-runner/back" >/dev/null || return 1
+
+  jj workspace update-stale
+  jj new "$rev" && ./mvnw clean install -pl shared,core -am
+  local rc=$?
+
+  popd >/dev/null
+  return $rc
+}
 tree()
 {
   eza -la --git -F -T -I ".mypy_cache|.DS_Store|__pycache__|.git|node_modules" $@

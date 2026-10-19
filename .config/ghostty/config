@@ -8,3 +8,5 @@ quit-after-last-window-closed = true
 bold-is-bright = true
 macos-non-native-fullscreen = visible-menu
 keybind = shift+enter=text:\x1b\r
+desktop-notifications = true
+

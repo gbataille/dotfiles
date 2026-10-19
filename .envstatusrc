@@ -1,7 +1,7 @@
-output_template: [venv: {{virtualenv}}] [rbenv: {{rbenv}}] [node: {{node}}] [tf: {{tf}}] [kctl: {{kctl}}]
+output_template: [venv: {{virtualenv}}] [rbenv: {{rbenv}}] [tgenv: {{tgenv}}] [node: {{node}}] [kctl: {{kctl}}]
 
 virtualenv: /bin/zsh -c "basename $VIRTUAL_ENV"
 rbenv: rbenv version-name
 node: /bin/zsh -c "echo $NVM_BIN | sed -r 's/.*v(([[:digit:]]+\.)+[[:digit:]]+)\/.*$/\1/g'"
-tf: tofu workspace show
 kctl: /bin/zsh -c "kubectl config current-context | awk -F'/' '{print $NF}'"
+tgenv: /bin/zsh -c "find .terragrunt-cache -name environment -exec cat {} \; 2>/dev/null || echo 'no terragrunt'"

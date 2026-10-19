@@ -61,9 +61,24 @@ nmap <leader>gi <Action>(GotoImplementation)
 nmap <leader>gt <Action>(GotoTest)
 nmap <leader>gu <Action>(FindUsages)
 
+# Bookmark
+" Toggle a regular bookmark (similar to `mm`)
+nnoremap mm :action ToggleBookmark<CR>
+
+" Toggle a mnemonic bookmark with a letter/number (similar to `mi`)
+nnoremap mi :action ToggleBookmarkWithMnemonic<CR>
+
+" Show the bookmarks tool window list (similar to `ma`)
+nnoremap ma :action ShowBookmarks<CR>
+
+" Go to the next/previous bookmark
+nnoremap ]b :action GotoNextBookmark<CR>
+nnoremap [b :action GotoPreviousBookmark<CR>
+
+
 # Mvn
 nmap <leader>ms <Action>(Maven.SyncAllSplitAction)
-nmap <leader>rm <Action>(RunConfigurationAsAction_Run_MvnCleanInstallNoTests_default_target)
+nmap <leader>rm <Action>(RunConfigurationAsAction_Run_MvnCleanInstallCore_default_target)
 
 # Buffer closing
 nmap <leader>Q <Action>(CloseAllEditorsButActive)
