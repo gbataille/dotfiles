@@ -1,0 +1,733 @@
+{
+  "extends": [
+    "nolabs-ai/opencode"
+  ],
+  "meta": {
+    "name": "shift-opencode",
+    "version": "1.0.0",
+    "description": null,
+    "author": null
+  },
+  "security": {
+    "signal_mode": null,
+    "process_info_mode": null,
+    "ipc_mode": null,
+    "capability_elevation": null,
+    "approval_backends": {},
+    "approval_defaults": null,
+    "wsl2_proxy_policy": null
+  },
+  "groups": {
+    "include": [],
+    "exclude": []
+  },
+  "commands": {
+    "allow": [],
+    "deny": []
+  },
+  "filesystem": {
+    "allow": [
+      "$HOME/.m2/repository/tech/lightframe/shift",
+      "$HOME/Library/Application Support/JetBrains",
+      "$WORKDIR/.git",
+      "$WORKDIR/.jj",
+      "$HOME/.local/share/uv",
+      "$HOME/.config/opencode"
+    ],
+    "read": [
+      "$HOME/.local/bin/",
+      "$HOME/.m2/repository",
+      "$WORKDIR/.idea",
+      "$HOME/.m2/wrapper",
+      "$HOME/.docker/config.json",
+      "$HOME/Library/Application Support/rtk",
+      "$HOME/.config",
+      "/opt/homebrew/bin/python",
+      "$HOME/.config/nono",
+      "$HOME/.local/share/direnv/allow",
+      "~/.opencode",
+      "~/Documents/Prog/LightFrame"
+    ],
+    "write": [],
+    "allow_file": [
+      "/sandbox error"
+    ],
+    "read_file": [
+      "$HOME/.gitconfig",
+      "$HOME/.bashrc",
+      "$HOME/.condarc",
+      "$HOME/.zshrc",
+      "$HOME/.m2/settings.xml",
+      "$HOME/.rtk/filters.toml",
+      "$HOME/.npmrc",
+      "/opt/homebrew/bin/python",
+      "/usr/local/sessionmanagerplugin/bin/session-manager-plugin",
+      "~/.gitconfig-lightframe"
+    ],
+    "write_file": [],
+    "unix_socket": [],
+    "unix_socket_bind": [],
+    "unix_socket_dir": [],
+    "unix_socket_dir_bind": [],
+    "unix_socket_subtree": [],
+    "unix_socket_subtree_bind": [],
+    "deny": [
+      "$WORKDIR/devlocal/.secrets.txt"
+    ],
+    "bypass_protection": [
+      "$HOME/.bashrc",
+      "$HOME/.config/fish",
+      "$HOME/.zshrc",
+      "$HOME/.docker/config.json"
+    ],
+    "suppress_save_prompt": [
+      "$HOME/.gem/ruby/3.3.10/bin",
+      "$HOME/.rd/bin",
+      "/System",
+      "~/Documents",
+      "~/Documents/Prog"
+    ]
+  },
+  "network": {
+    "block": false,
+    "allow_http2": false,
+    "network_profile": "opencode",
+    "allow_domain": [
+      "mcp-tools.lightframe.cloud",
+      "mcp.context7.com",
+      "api.githubcopilot.com",
+      "models.opencode.ai",
+      "portal.sso.eu-central-2.amazonaws.com",
+      "portal.sso.eu-central-1.amazonaws.com",
+      "bedrock-runtime.eu-central-1.amazonaws.com",
+      "bedrock-runtime.eu-central-2.amazonaws.com",
+      "bedrock-runtime.eu-north-1.amazonaws.com",
+      "bedrock-runtime.eu-south-1.amazonaws.com",
+      "bedrock-runtime.eu-south-2.amazonaws.com",
+      "bedrock-runtime.eu-west-1.amazonaws.com",
+      "bedrock-runtime.eu-west-3.amazonaws.com",
+      "docs.aws.amazon.co",
+      "opencode.ai",
+      "auth.x.ai",
+      "mui.com",
+      {
+        "domain": "raw.githubusercontent.com",
+        "endpoints": [
+          {
+            "method": "GET",
+            "path": "/mui/**"
+          }
+        ]
+      },
+      {
+        "domain": "github.com",
+        "endpoints": [
+          {
+            "method": "GET",
+            "path": "/mui/**"
+          }
+        ]
+      },
+      {
+        "domain": "api.github.com",
+        "endpoints": [
+          {
+            "method": "GET",
+            "path": "/search/code/**"
+          }
+        ]
+      }
+    ],
+    "deny_domain": [],
+    "open_port": [
+      0,
+      64342,
+      8000,
+      8080,
+      8090
+    ],
+    "open_port_range": [
+      [
+        5173,
+        5178
+      ]
+    ],
+    "listen_port": [],
+    "listen_port_range": [],
+    "connect_port": [],
+    "no_proxy": [],
+    "custom_credentials": {},
+    "tls_intercept": null,
+    "upstream_proxy": null,
+    "upstream_bypass": []
+  },
+  "diagnostics": {
+    "suppress_system_services": [],
+    "redaction": {
+      "extra_env_vars": []
+    },
+    "network_denial_audit": {}
+  },
+  "linux": {
+    "af_unix_mediation": null,
+    "sandbox_policy": null
+  },
+  "env_credentials": {},
+  "command_policies": {
+    "executable_dirs": [],
+    "allow_writable_executables": false,
+    "entrypoint": null,
+    "approval_backends": {},
+    "approval_defaults": {
+      "backend": null,
+      "timeout_secs": null
+    },
+    "credentials": {},
+    "commands": {
+      "aws": {
+        "executable": "/opt/homebrew/bin/aws",
+        "allow_writable_executable": false,
+        "can_use": [],
+        "export_env": [],
+        "sandbox": null,
+        "from": {
+          "session": {
+            "sandbox": {
+              "fs_read": [
+                "$HOME/.aws",
+                "/opt/homebrew/Cellar",
+                "/opt/homebrew/opt",
+                "."
+              ],
+              "fs_read_file": [],
+              "fs_write": [
+                "$HOME/.aws",
+                "$TMPDIR",
+                "."
+              ],
+              "fs_write_file": [],
+              "use_credentials": [],
+              "credentials": [],
+              "argv_prepend": [],
+              "network": {
+                "allow_all": false,
+                "allow_domain": [
+                  "*.amazonaws.com",
+                  "*.awsapps.com"
+                ],
+                "tcp_connect_ports": [],
+                "tcp_bind_ports": [],
+                "open_port": [],
+                "open_port_range": []
+              },
+              "environment": {
+                "allow_vars": [
+                  "PATH",
+                  "HOME",
+                  "USER",
+                  "LOGNAME",
+                  "LANG",
+                  "LC_*",
+                  "TMPDIR",
+                  "HTTP_PROXY",
+                  "HTTPS_PROXY",
+                  "http_proxy",
+                  "https_proxy",
+                  "ALL_PROXY",
+                  "all_proxy",
+                  "NO_PROXY",
+                  "no_proxy",
+                  "SSL_CERT_FILE",
+                  "SSL_CERT_DIR",
+                  "REQUESTS_CA_BUNDLE",
+                  "CURL_CA_BUNDLE",
+                  "NODE_EXTRA_CA_CERTS",
+                  "NODE_USE_ENV_PROXY",
+                  "AWS_PROFILE",
+                  "AWS_REGION",
+                  "AWS_DEFAULT_REGION",
+                  "AWS_DEFAULT_OUTPUT",
+                  "AWS_PAGER",
+                  "AWS_CONFIG_FILE",
+                  "AWS_SHARED_CREDENTIALS_FILE",
+                  "AWS_SDK_LOAD_CONFIG",
+                  "AWS_CA_BUNDLE",
+                  "AWS_EC2_METADATA_DISABLED",
+                  "AWS_MAX_ATTEMPTS",
+                  "AWS_RETRY_MODE"
+                ],
+                "set_vars": {}
+              },
+              "allow_raw_file_credentials_in_chained_policy": false,
+              "resources": null,
+              "stdio": null,
+              "open_urls": null,
+              "allow_launch_services": false
+            },
+            "invocation_policy": {
+              "default": "allow",
+              "deny": [
+                {
+                  "argv": {
+                    "exact": null,
+                    "prefix": [
+                      "configure",
+                      "export-credentials"
+                    ],
+                    "contains": null
+                  },
+                  "env": {},
+                  "backend": null,
+                  "reason": "would print cached credentials to the agent",
+                  "timeout_secs": null
+                }
+              ],
+              "approve": [],
+              "allow": []
+            }
+          }
+        },
+        "allow_direct_exec_bypass": [],
+        "allow_direct_exec_bypass_with_credentials": false
+      },
+      "gws": {
+        "executable": "/opt/homebrew/bin/gws",
+        "allow_writable_executable": false,
+        "can_use": [],
+        "export_env": [],
+        "sandbox": null,
+        "from": {
+          "session": {
+            "sandbox": {
+              "fs_read": [
+                "$HOME/.config/gws",
+                "$HOME/Library/Keychains",
+                "."
+              ],
+              "fs_read_file": [
+                "$HOME/Library/Keychains/login.keychain-db"
+              ],
+              "fs_write": [
+                "$HOME/.config/gws",
+                "."
+              ],
+              "fs_write_file": [],
+              "use_credentials": [],
+              "credentials": [],
+              "argv_prepend": [],
+              "network": {
+                "allow_all": false,
+                "allow_domain": [
+                  "*.googleapis.com",
+                  "*.google.com"
+                ],
+                "tcp_connect_ports": [],
+                "tcp_bind_ports": [],
+                "open_port": [],
+                "open_port_range": []
+              },
+              "environment": {
+                "allow_vars": [
+                  "PATH",
+                  "HOME",
+                  "USER",
+                  "LOGNAME",
+                  "LANG",
+                  "LC_*",
+                  "TMPDIR",
+                  "HTTP_PROXY",
+                  "HTTPS_PROXY",
+                  "http_proxy",
+                  "https_proxy",
+                  "ALL_PROXY",
+                  "all_proxy",
+                  "NO_PROXY",
+                  "no_proxy",
+                  "SSL_CERT_FILE",
+                  "SSL_CERT_DIR",
+                  "REQUESTS_CA_BUNDLE",
+                  "CURL_CA_BUNDLE",
+                  "NODE_EXTRA_CA_CERTS",
+                  "NODE_USE_ENV_PROXY"
+                ],
+                "set_vars": {
+                  "GOOGLE_WORKSPACE_CLI_CONFIG_DIR": "$HOME/.config/gws"
+                }
+              },
+              "allow_raw_file_credentials_in_chained_policy": false,
+              "resources": null,
+              "stdio": null,
+              "open_urls": null,
+              "allow_launch_services": false
+            },
+            "invocation_policy": {
+              "default": "allow",
+              "deny": [
+                {
+                  "argv": {
+                    "exact": null,
+                    "prefix": [
+                      "auth",
+                      "export"
+                    ],
+                    "contains": null
+                  },
+                  "env": {},
+                  "backend": null,
+                  "reason": "would print decrypted credentials to the agent",
+                  "timeout_secs": null
+                }
+              ],
+              "approve": [],
+              "allow": []
+            }
+          }
+        },
+        "allow_direct_exec_bypass": [],
+        "allow_direct_exec_bypass_with_credentials": false
+      },
+      "kubectl": {
+        "executable": "/usr/local/bin/kubectl",
+        "allow_writable_executable": false,
+        "can_use": [
+          "aws"
+        ],
+        "export_env": [
+          "AWS_PROFILE",
+          "AWS_REGION",
+          "AWS_DEFAULT_REGION",
+          "AWS_CONFIG_FILE",
+          "AWS_SHARED_CREDENTIALS_FILE",
+          "KUBECONFIG"
+        ],
+        "sandbox": null,
+        "from": {
+          "session": {
+            "sandbox": {
+              "fs_read": [
+                "$HOME/.kube",
+                "."
+              ],
+              "fs_read_file": [],
+              "fs_write": [
+                "$HOME/.kube",
+                "$TMPDIR",
+                "."
+              ],
+              "fs_write_file": [],
+              "use_credentials": [],
+              "credentials": [],
+              "argv_prepend": [],
+              "network": {
+                "allow_all": false,
+                "allow_domain": [
+                  "*.eks.amazonaws.com"
+                ],
+                "tcp_connect_ports": [],
+                "tcp_bind_ports": [],
+                "open_port": [
+                  6443
+                ],
+                "open_port_range": []
+              },
+              "environment": {
+                "allow_vars": [
+                  "PATH",
+                  "HOME",
+                  "USER",
+                  "LOGNAME",
+                  "LANG",
+                  "LC_*",
+                  "TMPDIR",
+                  "HTTP_PROXY",
+                  "HTTPS_PROXY",
+                  "http_proxy",
+                  "https_proxy",
+                  "ALL_PROXY",
+                  "all_proxy",
+                  "NO_PROXY",
+                  "no_proxy",
+                  "SSL_CERT_FILE",
+                  "SSL_CERT_DIR",
+                  "REQUESTS_CA_BUNDLE",
+                  "CURL_CA_BUNDLE",
+                  "KUBECONFIG",
+                  "AWS_PROFILE",
+                  "AWS_REGION",
+                  "AWS_DEFAULT_REGION"
+                ],
+                "set_vars": {}
+              },
+              "allow_raw_file_credentials_in_chained_policy": false,
+              "resources": null,
+              "stdio": null,
+              "open_urls": null,
+              "allow_launch_services": false
+            },
+            "invocation_policy": {
+              "default": "allow",
+              "deny": [
+                {
+                  "argv": {
+                    "exact": null,
+                    "prefix": null,
+                    "contains": [
+                      "--raw"
+                    ]
+                  },
+                  "env": {},
+                  "backend": null,
+                  "reason": "kubectl config view --raw prints kubeconfig credentials",
+                  "timeout_secs": null
+                }
+              ],
+              "approve": [],
+              "allow": []
+            }
+          }
+        },
+        "allow_direct_exec_bypass": [],
+        "allow_direct_exec_bypass_with_credentials": false
+      },
+      "kubectx": {
+        "executable": "/opt/homebrew/bin/kubectx",
+        "allow_writable_executable": false,
+        "can_use": [],
+        "export_env": [],
+        "sandbox": null,
+        "from": {
+          "session": {
+            "sandbox": {
+              "fs_read": [
+                "$HOME/.kube"
+              ],
+              "fs_read_file": [],
+              "fs_write": [
+                "$HOME/.kube"
+              ],
+              "fs_write_file": [],
+              "use_credentials": [],
+              "credentials": [],
+              "argv_prepend": [],
+              "network": null,
+              "environment": {
+                "allow_vars": [
+                  "PATH",
+                  "HOME",
+                  "USER",
+                  "KUBECONFIG"
+                ],
+                "set_vars": {}
+              },
+              "allow_raw_file_credentials_in_chained_policy": false,
+              "resources": null,
+              "stdio": null,
+              "open_urls": null,
+              "allow_launch_services": false
+            },
+            "invocation_policy": null
+          }
+        },
+        "allow_direct_exec_bypass": [],
+        "allow_direct_exec_bypass_with_credentials": false
+      },
+      "kubens": {
+        "executable": "/opt/homebrew/bin/kubens",
+        "allow_writable_executable": false,
+        "can_use": [],
+        "export_env": [],
+        "sandbox": null,
+        "from": {
+          "session": {
+            "sandbox": {
+              "fs_read": [
+                "$HOME/.kube"
+              ],
+              "fs_read_file": [],
+              "fs_write": [
+                "$HOME/.kube"
+              ],
+              "fs_write_file": [],
+              "use_credentials": [],
+              "credentials": [],
+              "argv_prepend": [],
+              "network": null,
+              "environment": {
+                "allow_vars": [
+                  "PATH",
+                  "HOME",
+                  "USER",
+                  "KUBECONFIG"
+                ],
+                "set_vars": {}
+              },
+              "allow_raw_file_credentials_in_chained_policy": false,
+              "resources": null,
+              "stdio": null,
+              "open_urls": null,
+              "allow_launch_services": false
+            },
+            "invocation_policy": null
+          }
+        },
+        "allow_direct_exec_bypass": [],
+        "allow_direct_exec_bypass_with_credentials": false
+      },
+      "op": {
+        "executable": "/Users/fblaise/.local/bin/op-service-account-exec",
+        "allow_writable_executable": false,
+        "can_use": [
+          "security"
+        ],
+        "export_env": [],
+        "sandbox": null,
+        "from": {
+          "session": {
+            "sandbox": {
+              "fs_read": [
+                "$HOME/.config/op",
+                "$HOME/Library/Keychains",
+                "/opt/homebrew/Caskroom/1password-cli",
+                "/opt/homebrew/bin",
+                "."
+              ],
+              "fs_read_file": [
+                "/opt/homebrew/bin/op",
+                "/usr/bin/security"
+              ],
+              "fs_write": [
+                "$HOME/.config/op",
+                "$TMPDIR",
+                "/tmp",
+                "/private/tmp"
+              ],
+              "fs_write_file": [],
+              "use_credentials": [],
+              "credentials": [],
+              "argv_prepend": [],
+              "network": {
+                "allow_all": false,
+                "allow_domain": [
+                  "*.1password.com",
+                  "*.1password.eu"
+                ],
+                "tcp_connect_ports": [],
+                "tcp_bind_ports": [],
+                "open_port": [],
+                "open_port_range": []
+              },
+              "environment": {
+                "allow_vars": [
+                  "PATH",
+                  "HOME",
+                  "USER",
+                  "LOGNAME",
+                  "LANG",
+                  "LC_*",
+                  "TMPDIR",
+                  "HTTP_PROXY",
+                  "HTTPS_PROXY",
+                  "http_proxy",
+                  "https_proxy",
+                  "ALL_PROXY",
+                  "all_proxy",
+                  "NO_PROXY",
+                  "no_proxy",
+                  "SSL_CERT_FILE",
+                  "SSL_CERT_DIR"
+                ],
+                "set_vars": {}
+              },
+              "allow_raw_file_credentials_in_chained_policy": false,
+              "resources": null,
+              "stdio": null,
+              "open_urls": null,
+              "allow_launch_services": false,
+              "unsafe_macos_seatbelt_rules": [
+                "(allow process-exec* (subpath \"/opt/homebrew/Caskroom/1password-cli\"))"
+              ]
+            },
+            "invocation_policy": {
+              "default": "allow",
+              "deny": [
+                {
+                  "argv": {
+                    "exact": null,
+                    "prefix": [
+                      "run"
+                    ],
+                    "contains": null
+                  },
+                  "env": {},
+                  "backend": null,
+                  "reason": "op run can print OP_SERVICE_ACCOUNT_TOKEN to the agent",
+                  "timeout_secs": null
+                }
+              ],
+              "approve": [],
+              "allow": []
+            }
+          }
+        },
+        "allow_direct_exec_bypass": [],
+        "allow_direct_exec_bypass_with_credentials": false
+      },
+      "security": {
+        "executable": null,
+        "allow_writable_executable": false,
+        "can_use": [],
+        "export_env": [],
+        "sandbox": null,
+        "from": {
+          "op": {
+            "fs_read": [],
+            "fs_read_file": [
+              "$HOME/Library/Keychains/login.keychain-db"
+            ],
+            "fs_write": [],
+            "fs_write_file": [],
+            "use_credentials": [],
+            "credentials": [],
+            "argv_prepend": [],
+            "network": null,
+            "environment": {
+              "allow_vars": [
+                "PATH",
+                "HOME",
+                "USER"
+              ],
+              "set_vars": {}
+            },
+            "allow_raw_file_credentials_in_chained_policy": false,
+            "resources": null,
+            "stdio": null,
+            "open_urls": null,
+            "allow_launch_services": false
+          },
+          "session": "deny"
+        },
+        "allow_direct_exec_bypass": [],
+        "allow_direct_exec_bypass_with_credentials": false
+      }
+    },
+    "deny_direct_exec_bypass": [],
+    "session_export_env": []
+  },
+  "credential_capture": {},
+  "credential_providers": {},
+  "credential_routes": [],
+  "workdir": {
+    "access": "none"
+  },
+  "hooks": {},
+  "session_hooks": {},
+  "rollback": {
+    "exclude_patterns": [],
+    "exclude_globs": []
+  },
+  "allow_launch_services": true,
+  "skipdirs": [],
+  "packs": [],
+  "command_args": [],
+  "unsafe_macos_seatbelt_rules": []
+}

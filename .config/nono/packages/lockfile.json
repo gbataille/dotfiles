@@ -1,0 +1,64 @@
+{
+  "lockfile_version": 4,
+  "registry": "https://registry.nono.sh",
+  "packages": {
+    "nolabs-ai/opencode": {
+      "version": "0.4.0",
+      "installed_at": "2026-10-19T06:16:22.369101+00:00",
+      "pinned": false,
+      "provenance": {
+        "signer_identity": "https://github.com/nolabs-ai/nono-packs/.github/workflows/publish-opencode.yml@refs/tags/opencode-v0.4.0",
+        "repository": "nolabs-ai/nono-packs",
+        "workflow": ".github/workflows/publish-opencode.yml",
+        "ref": "refs/tags/opencode-v0.4.0",
+        "rekor_log_index": 3231025067,
+        "signed_at": "2026-10-12T16:16:07.035418+00:00"
+      },
+      "artifacts": {
+        "README.md": {
+          "sha256": "82d3a1966458d1f18f7e60fd3a83dcf6b75aa7d8c9dc638cbce9227653083f39",
+          "type": "plugin"
+        },
+        "assets/logo.png": {
+          "sha256": "133ebc3baa697b38bfb4e64a2aa463b067cfc40ec9f03ca593a1564080c644f2",
+          "type": "plugin"
+        },
+        "bin/ensure-dirs.sh": {
+          "sha256": "1bb7d5a89fe98b2113da9fd8e1ee865cf21c098be9bf6e621d38b699369d4441",
+          "type": "plugin"
+        },
+        "plugin/nono-sandbox.ts": {
+          "sha256": "710a41a06a8c92d781724583abd6ca557300408058c8043e07977843cff79b91",
+          "type": "plugin"
+        },
+        "profiles/opencode.json": {
+          "sha256": "bbcb549e57df8c86c261018071943c1da239ce0be036a83132af8a24b82fc40b",
+          "type": "profile"
+        },
+        "skills/nono-sandbox/SKILL.md": {
+          "sha256": "3711f3b5f7efa0773cb1ef4679e6cbec850a5300a5f4713d93e9a179244f22a5",
+          "type": "plugin"
+        },
+        "wiring/profile-drafts-dir-marker": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "type": "plugin"
+        }
+      },
+      "wiring_record": [
+        {
+          "type": "write_file",
+          "dest": "/Users/gbataille/.config/nono/profile-drafts/.nono-opencode-pack-marker",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "type": "symlink",
+          "link": "/Users/gbataille/.config/opencode/plugins/nono-sandbox.ts"
+        },
+        {
+          "type": "symlink",
+          "link": "/Users/gbataille/.config/opencode/skills/nono-sandbox"
+        }
+      ]
+    }
+  }
+}
