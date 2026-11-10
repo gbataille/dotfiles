@@ -20,6 +20,7 @@ alias nrd='pushd $GITROOT/front/shift; npm run dev; popd'
 alias nrdp='pushd $GITROOT/front/shift; NODE_ENV=production npm run dev; popd'
 alias nrt='pushd $GITROOT/front/shift; npm run test; popd'
 
+alias mcplog='opencode mcp auth lf-mcp-portal'
 alias nonoc='nono run --profile shift-opencode --allow-cwd -v --log-file nono.log opencode'
 nonomvn()
 {
@@ -76,8 +77,8 @@ function rds-connect-choice() {
     return 1
   fi
   # Selection (fzf or manual).  We still need to select the *RDS* instance.
-  if command -v fzf >/dev/null; then
-    local selected_instance=$(echo "$instances" | fzf --prompt="Select RDS instance: " --header="Instance Identifier (Status) (Endpoint)" --layout=reverse --border --height 40%  --preview 'aws rds describe-db-instances --db-instance-identifier {1} --output text' --preview-window=right:60%)
+  if command -v /run/current-system/sw/bin/fzf >/dev/null; then
+    local selected_instance=$(echo "$instances" | /run/current-system/sw/bin/fzf --prompt="Select RDS instance: " --header="Instance Identifier (Status) (Endpoint)" --layout=reverse --border --height 40%  --preview 'aws rds describe-db-instances --db-instance-identifier {1} --output text' --preview-window=right:60%)
     if [[ -z "$selected_instance" ]]; then
       echo "No RDS instance selected."
       return 1

@@ -27,10 +27,11 @@
   },
   "filesystem": {
     "allow": [
+      "~/Documents/Prog/LightFrame/Shift/.git",
+      "~/Documents/Prog/LightFrame/Shift/.jj",
+      "~/Documents/Prog/LightFrame/Shift/.opencode",
       "$HOME/.m2/repository/tech/lightframe/shift",
       "$HOME/Library/Application Support/JetBrains",
-      "$WORKDIR/.git",
-      "$WORKDIR/.jj",
       "$HOME/.local/share/uv",
       "$HOME/.config/opencode"
     ],
@@ -39,6 +40,7 @@
       "$HOME/.m2/repository",
       "$WORKDIR/.idea",
       "$HOME/.m2/wrapper",
+      "$HOME/.npmrc",
       "$HOME/.docker/config.json",
       "$HOME/Library/Application Support/rtk",
       "$HOME/.config",
@@ -46,6 +48,7 @@
       "$HOME/.config/nono",
       "$HOME/.local/share/direnv/allow",
       "~/.opencode",
+      "~/.gnupg/",
       "~/Documents/Prog/LightFrame"
     ],
     "write": [],
@@ -65,7 +68,13 @@
       "~/.gitconfig-lightframe"
     ],
     "write_file": [],
-    "unix_socket": [],
+    "unix_socket": [
+      "~/.gnupg/S.gpg-agent",
+      "~/.gnupg/S.gpg-agent.browser",
+      "~/.gnupg/S.gpg-agent.extra",
+      "~/.gnupg/S.gpg-agent.ssh",
+      "~/.gnupg/S.keyboxd"
+    ],
     "unix_socket_bind": [],
     "unix_socket_dir": [],
     "unix_socket_dir_bind": [],
